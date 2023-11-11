@@ -9,6 +9,7 @@
             Console.WriteLine("Salut ceci est un test");
             Console.WriteLine("coucou");
             Console.WriteLine("Jure ?");
+            Console.WriteLine("WTF");
         }
     }
 }
