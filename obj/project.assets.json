@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mbard\\source\\repos\\ProjetInfoMotsCroises\\ProjetInfoMotsCroises.csproj",
+      "projectUniqueName": "C:\\Users\\mbard\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
       "projectName": "ProjetInfoMotsCroises",
-      "projectPath": "C:\\Users\\mbard\\source\\repos\\ProjetInfoMotsCroises\\ProjetInfoMotsCroises.csproj",
+      "projectPath": "C:\\Users\\mbard\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
       "packagesPath": "C:\\Users\\mbard\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mbard\\source\\repos\\ProjetInfoMotsCroises\\obj\\",
+      "outputPath": "C:\\Users\\mbard\\Documents\\GitHub\\ProjetInfoMotsGlisses\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
