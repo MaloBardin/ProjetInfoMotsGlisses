@@ -1,0 +1,14 @@
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\ProjetInfoMotsCroises.exe
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\ProjetInfoMotsCroises.deps.json
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\ProjetInfoMotsCroises.runtimeconfig.json
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\ProjetInfoMotsCroises.dll
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\ProjetInfoMotsCroises.pdb
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.AssemblyInfoInputs.cache
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.AssemblyInfo.cs
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.csproj.CoreCompileInputs.cache
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.dll
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\refint\ProjetInfoMotsCroises.dll
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.pdb
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.genruntimeconfig.cache
+C:\Users\mbard\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ref\ProjetInfoMotsCroises.dll
