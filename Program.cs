@@ -6,11 +6,13 @@
         {
             Console.WriteLine("Hello, World!");
 
-            
+
             //GEN MAP
+            //FONCTION AFFICHAGE
+            Affichage Plateau = new Affichage();
+            Plateau.ToRead("Test1");
 
-
-
+            
 
 
         }
