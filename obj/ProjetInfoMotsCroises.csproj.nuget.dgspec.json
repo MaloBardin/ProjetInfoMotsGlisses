@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj": {}
+    "C:\\Users\\mbard\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj": {
+    "C:\\Users\\mbard\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
+        "projectUniqueName": "C:\\Users\\mbard\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
         "projectName": "ProjetInfoMotsCroises",
-        "projectPath": "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
-        "packagesPath": "C:\\Users\\Pierre-Antoine\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\ProjetInfoMotsGlisses\\obj\\",
+        "projectPath": "C:\\Users\\mbard\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
+        "packagesPath": "C:\\Users\\mbard\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mbard\\Documents\\GitHub\\ProjetInfoMotsGlisses\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Pierre-Antoine\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mbard\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
