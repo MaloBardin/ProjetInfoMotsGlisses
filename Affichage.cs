@@ -76,7 +76,7 @@ namespace ProjetInfoMotsCroises
                 this.tailleY = lines.Length;
 
 
-
+                //TEST
 
             }
 
