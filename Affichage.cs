@@ -27,6 +27,51 @@ namespace ProjetInfoMotsCroises
             ToRead(filename);
         }
        
+        public void AffichageConsole()
+        {
+            //AFFICHAGE
+            for (int u = 0; u < tailleY; u++)
+            {
+                Console.Write("- - ");
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < tailleX; i++)
+            {
+
+
+                for (int j = 0; j < tailleY; j++)
+                {
+                    if (i == tailleX - 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    Console.Write(this.plateau[i, j]);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" | ");
+                }
+                Console.WriteLine("");
+                if (i < tailleX - 1)
+                {
+                    for (int u = 0; u < tailleY; u++)
+                    {
+                        Console.Write("- + ");
+                    }
+                    Console.WriteLine();
+                }
+
+
+
+            }
+
+
+            for (int u = 0; u < tailleY; u++)
+            {
+                Console.Write("- - ");
+            }
+            Console.WriteLine();
+
+        }
 
         public void RandomGen()
         {
@@ -59,14 +104,6 @@ namespace ProjetInfoMotsCroises
                     posLigne++;
                 }
 
-
-
-                for (int i = 0; i < tabProba.Length; i++)
-                {
-
-                    Console.WriteLine(tabLettre[i] + " : " + tabProba[i]);
-                }
-
                 int compteur = 0;
 
                 for (int i = 0; i < tailleX; i++)
@@ -76,13 +113,9 @@ namespace ProjetInfoMotsCroises
                         int stop = 0;
                         do
                         {
-                            Console.WriteLine("Boucle une fois");
-                            int randomChar = random.Next(97, 122);
-                            Console.WriteLine(" random :" + randomChar);
                             
-                            Console.WriteLine("on est dedans");
-                            Console.WriteLine(" omg : " + randomChar);
-                            Console.WriteLine(" random proba :" + tabProba[randomChar-97]);
+                            int randomChar = random.Next(97, 122);
+                           
                             if (tabProba[randomChar - 97] > 0)
                             {
                                 tabProba[randomChar - 97] = tabProba[randomChar - 97] - 1;
@@ -94,27 +127,15 @@ namespace ProjetInfoMotsCroises
                             
                         } while (stop==0);
 
-                        Console.WriteLine("Boucle réussie");
+                        
 
 
                     }
                 }
-                for (int i = 0; i < tabProba.Length; i++)
-                {
-                    Console.WriteLine((i + 97) + " " + tabProba[i]);
-                }
 
-                Console.WriteLine("compteur : " + compteur);
+                AffichageConsole();
 
-                for (int i = 0; i < tailleX; i++)
-                {
-                    for (int j=0;j< tailleY; j++)
-                    {
-                        Console.Write(this.plateau[i, j] + " ");
-                    }
-                    Console.WriteLine("");
-                }
-
+                
 
 
             }
@@ -141,29 +162,38 @@ namespace ProjetInfoMotsCroises
         {
             try
             {
-                string[] lines = File.ReadAllLines(filename + ".csdv");
+                //SETUP TAILLE X TAILLE Y
+                string[] lines = File.ReadAllLines(filename + ".csv");
                 //string cheminFichier = filename + ".csv";
+                this.tailleY = lines.Length;
+                foreach (string line in lines)
+                {
+                    string[] TabTemp = line.Split(';');
+                    this.tailleX = TabTemp.Length;  
+                }
 
+                this.plateau = new char[tailleX, tailleY];
+
+
+                int x = 0; //position x tab
                 foreach (string line in lines)
                 {
 
                     string[] TabTemp = line.Split(';');
-                   
+                    
                     for (int i = 0; i < TabTemp.Length; i++)// 
                     {
-                        Console.Write(TabTemp[i]+ " "); 
+                        this.plateau[x, i] = TabTemp[i][0];
 
                     }
 
-                    Console.WriteLine("");
-                    this.tailleX = TabTemp.Length;
+                    x++;
                 }
 
-                
-                this.tailleY = lines.Length;
+                AffichageConsole();
 
 
-                this.plateau = new char[tailleX, tailleY];
+
 
             }
 
