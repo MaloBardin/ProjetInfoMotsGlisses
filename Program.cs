@@ -9,8 +9,8 @@
 
             //GEN MAP
             //FONCTION AFFICHAGE
-            Affichage Plateau = new Affichage();
-            Plateau.ToRead("Test1");
+            Affichage Plateau = new Affichage("Test1");
+           
 
             
 

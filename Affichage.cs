@@ -13,12 +13,18 @@ namespace ProjetInfoMotsCroises
         int tailleY;
         char[,] plateau;
 
-        public Affichage()
+        public Affichage(int x, int y)
         {
-            this.tailleX = 0;
-            this.tailleY = 0;
+            this.tailleX = x;
+            this.tailleY = y ;
+            this.plateau = new char[tailleX, tailleY];
 
-            
+
+        }
+
+        public Affichage(string filename)
+        {
+            ToRead(filename);
         }
        
 
@@ -27,21 +33,102 @@ namespace ProjetInfoMotsCroises
 
             this.tailleX = 8;
             this.tailleY = 8; //TAILLE PAR DEFAUT A SAVOIR SI ELLE DOIT ETRE RANDOM OU NOM
+            this.plateau = new char[tailleX, tailleY];
+            int[] tabProba = new int[26];
+            char[] tabLettre = new char[26];
 
-            
+
             Random random = new Random();
-
-
-
-            for (int i=0; i < tailleX; i++)
+            string filename = "Lettre";
+            try
             {
-                for (int j=0; j < tailleY; j++)
+                string[] lines = File.ReadAllLines(filename + ".txt");
+                //string cheminFichier = filename + ".txt";
+                
+                int posLigne = 0;
+                foreach (string line in lines)
                 {
 
-                    //this.plateau[i, j] = char.Parse(random.Next(97, 122));
-                    Console.WriteLine(random.Next(97,122));//gen parmi 97 et 122 (nombre en ascii)
+                    string[] TabTemp = line.Split(',');
+                    tabLettre[posLigne] = char.Parse(TabTemp[0]);
+                    tabProba[posLigne] = int.Parse(TabTemp[1]);
+                    
+                    
+
+                    
+                    posLigne++;
                 }
+
+
+
+                for (int i = 0; i < tabProba.Length; i++)
+                {
+
+                    Console.WriteLine(tabLettre[i] + " : " + tabProba[i]);
+                }
+
+                int compteur = 0;
+
+                for (int i = 0; i < tailleX; i++)
+                {
+                    for (int j = 0; j < tailleY; j++)
+                    {
+                        int stop = 0;
+                        do
+                        {
+                            Console.WriteLine("Boucle une fois");
+                            int randomChar = random.Next(97, 122);
+                            Console.WriteLine(" random :" + randomChar);
+                            
+                            Console.WriteLine("on est dedans");
+                            Console.WriteLine(" omg : " + randomChar);
+                            Console.WriteLine(" random proba :" + tabProba[randomChar-97]);
+                            if (tabProba[randomChar - 97] > 0)
+                            {
+                                tabProba[randomChar - 97] = tabProba[randomChar - 97] - 1;
+                                this.plateau[i, j] = tabLettre[randomChar - 97];
+                                stop = 1;
+                                compteur++;
+                            }
+                            
+                            
+                        } while (stop==0);
+
+                        Console.WriteLine("Boucle réussie");
+
+
+                    }
+                }
+                for (int i = 0; i < tabProba.Length; i++)
+                {
+                    Console.WriteLine((i + 97) + " " + tabProba[i]);
+                }
+
+                Console.WriteLine("compteur : " + compteur);
+
+                for (int i = 0; i < tailleX; i++)
+                {
+                    for (int j=0;j< tailleY; j++)
+                    {
+                        Console.Write(this.plateau[i, j] + " ");
+                    }
+                    Console.WriteLine("");
+                }
+
+
+
             }
+
+            catch (FileNotFoundException f)
+            {
+                Console.WriteLine("Le fichier de pondération n'existe pas " + f.Message);
+                Console.WriteLine("Nous allons procéder à la génération aléatoire pondérée du plateau");
+                
+
+            }
+            finally { Console.WriteLine(""); };
+
+
 
 
 
@@ -76,7 +163,7 @@ namespace ProjetInfoMotsCroises
                 this.tailleY = lines.Length;
 
 
-                //TEST
+                this.plateau = new char[tailleX, tailleY];
 
             }
 
@@ -85,6 +172,7 @@ namespace ProjetInfoMotsCroises
                 Console.WriteLine("Le fichier n'existe pas " + f.Message);
                 Console.WriteLine("Nous allons procéder à la génération aléatoire pondérée du plateau");
                 RandomGen();
+
 
             }
             finally { Console.WriteLine(""); };
