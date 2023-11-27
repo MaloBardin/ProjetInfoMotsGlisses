@@ -15,7 +15,9 @@
             //Affichage cs (to read (stringname))
             Affichage AffichageJeu = new Affichage(InstanceDeJeu,"Test1");
 
-            //-> renvoie automatiquement tout ce qu'il faut ( matrice gen dans jeu)           
+            //-> renvoie automatiquement tout ce qu'il faut ( matrice gen dans jeu)
+            //
+            //salut c pa
 
 
 
