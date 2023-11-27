@@ -8,52 +8,41 @@ namespace ProjetInfoMotsCroises
 {
     internal class Affichage
     {
+        Jeu jeu;
 
-        int tailleX;
-        int tailleY;
-        char[,] plateau;
-
-        public Affichage(int x, int y)
+        public Affichage(Jeu jeu, string filename)
         {
-            this.tailleX = x;
-            this.tailleY = y ;
-            this.plateau = new char[tailleX, tailleY];
-
-
-        }
-
-        public Affichage(string filename)
-        {
+            this.jeu = jeu;
             ToRead(filename);
         }
        
         public void AffichageConsole()
         {
             //AFFICHAGE
-            for (int u = 0; u < tailleY; u++)
+            for (int u = 0; u < jeu.TailleY; u++)
             {
                 Console.Write("- - ");
             }
             Console.WriteLine();
 
-            for (int i = 0; i < tailleX; i++)
+            for (int i = 0; i < jeu.TailleX; i++)
             {
 
 
-                for (int j = 0; j < tailleY; j++)
+                for (int j = 0; j < jeu.TailleY; j++)
                 {
-                    if (i == tailleX - 1)
+                    if (i == jeu.TailleX - 1)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
-                    Console.Write(this.plateau[i, j]);
+                    Console.Write(jeu.Plateau[i, j]);
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write(" | ");
                 }
                 Console.WriteLine("");
-                if (i < tailleX - 1)
+                if (i < jeu.TailleX - 1)
                 {
-                    for (int u = 0; u < tailleY; u++)
+                    for (int u = 0; u < jeu.TailleY; u++)
                     {
                         Console.Write("- + ");
                     }
@@ -65,7 +54,7 @@ namespace ProjetInfoMotsCroises
             }
 
 
-            for (int u = 0; u < tailleY; u++)
+            for (int u = 0; u < jeu.TailleY; u++)
             {
                 Console.Write("- - ");
             }
@@ -76,9 +65,10 @@ namespace ProjetInfoMotsCroises
         public void RandomGen()
         {
 
-            this.tailleX = 8;
-            this.tailleY = 8; //TAILLE PAR DEFAUT A SAVOIR SI ELLE DOIT ETRE RANDOM OU NOM
-            this.plateau = new char[tailleX, tailleY];
+
+            jeu.TailleX = 8;
+            jeu.TailleY = 8; //TAILLE PAR DEFAUT A SAVOIR SI ELLE DOIT ETRE RANDOM OU NOM
+            jeu.Plateau = new char[jeu.TailleX, jeu.TailleY];
             int[] tabProba = new int[26];
             char[] tabLettre = new char[26];
 
@@ -109,12 +99,17 @@ namespace ProjetInfoMotsCroises
 
                 char[] TabLettrePonderée = new char[compteursommetab] ;
 
+
+                // A TERMINER  //
                 //création du tab Lettre pondérée avec A*pondération B*Pondération etc
-                for (int i = 0; i < compteursommetab; i=i+tabProba[i])
+                int sommeposporba = 0; // il sert à décaler 
+                
+                for (int i = 0; i < 26; i++)
                 {
-                    for (int pos = 0; pos < tabProba[i]-1; pos++)
+                    for (int pos = 0; pos < tabProba[i]; pos++)
                     {
-                        TabLettrePonderée[pos + i] = tabLettre[i];
+                        TabLettrePonderée[sommeposporba] = tabLettre[i];
+                        sommeposporba++;
                     }
                     
                 }
@@ -122,8 +117,8 @@ namespace ProjetInfoMotsCroises
 
 
 
-
-                int compteur = 0;
+                // RANDOM PAS RANDOM//
+                /*int compteur = 0;
 
                 for (int i = 0; i < tailleX; i++)
                 {
@@ -150,9 +145,23 @@ namespace ProjetInfoMotsCroises
 
 
                     }
+                }*/
+
+                //Affichage pondéré en prenant les stats du tableau : TabLettrePonderée
+                for (int i = 0; i < jeu.TailleX; i++)
+                {
+                    for (int j = 0; j < jeu.TailleY; j++)
+                    {
+                        int randomChar = random.Next(0, compteursommetab);
+                        jeu.Plateau[i, j] = TabLettrePonderée[randomChar];
+                        Console.WriteLine(TabLettrePonderée[randomChar]);
+                     }
                 }
 
-                AffichageConsole();
+
+
+
+                        AffichageConsole();
 
                 
 
@@ -184,14 +193,14 @@ namespace ProjetInfoMotsCroises
                 //SETUP TAILLE X TAILLE Y
                 string[] lines = File.ReadAllLines(filename + ".ccsv");
                 //string cheminFichier = filename + ".csv";
-                this.tailleY = lines.Length;
+                jeu.TailleY = lines.Length;
                 foreach (string line in lines)
                 {
                     string[] TabTemp = line.Split(';');
-                    this.tailleX = TabTemp.Length;  
+                    jeu.TailleX = TabTemp.Length;  
                 }
 
-                this.plateau = new char[tailleX, tailleY];
+                jeu.Plateau = new char[jeu.TailleX, jeu.TailleY];
 
 
                 int x = 0; //position x tab
@@ -202,7 +211,7 @@ namespace ProjetInfoMotsCroises
                     
                     for (int i = 0; i < TabTemp.Length; i++)// 
                     {
-                        this.plateau[x, i] = TabTemp[i][0];
+                        jeu.Plateau [x, i] = TabTemp[i][0];
 
                     }
 

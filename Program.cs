@@ -7,12 +7,16 @@
             Console.WriteLine("Hello, World!");
 
 
-            //GEN MAP
-            //FONCTION AFFICHAGE
-            Affichage Plateau = new Affichage("Test1");
-           
 
-            
+
+            //initialisation d'un plateau via jeu.cs
+            Jeu InstanceDeJeu = new Jeu();
+
+            //Affichage cs (to read (stringname))
+            Affichage AffichageJeu = new Affichage(InstanceDeJeu,"Test1");
+
+            //-> renvoie automatiquement tout ce qu'il faut ( matrice gen dans jeu)           
+
 
 
         }
