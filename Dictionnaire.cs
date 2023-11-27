@@ -8,23 +8,27 @@ namespace ProjetInfoMotsCroises
 {
     internal class Dictionnaire
     {
+        List<string> dico = new List<string>();
 
 
-
-        public void Begin()
+        public Dictionnaire(List<string> dico)
         {
-            List<string> Dico = new List<string>();//
-            string[] lines = File.ReadAllLines("Mots_Français.txt");//           
+            this.dico = dico;
+            string[] lines = File.ReadAllLines("Mots_Français.txt");
             Console.WriteLine(toString());//
             foreach (string line in lines)
             {
                 string[] words = line.Split(' ');
-                Dico.AddRange(words);
+                dico.AddRange(words);
             }
-            Tri_XX(Dico);
+            Tri_XX(dico);
+        }
+        public List<string> Dico{
+            get { return this.dico; }
         }
 
 
+        
         //méthode toString : 
         public static string toString()
         {
@@ -91,7 +95,7 @@ namespace ProjetInfoMotsCroises
 
         }
         //méthode de vérification du mot
-        static bool verification(string mot, List<string> Dico)
+        public static bool verification(string mot, List<string> Dico)
         {
             bool rep = false;
             foreach (string word in Dico)

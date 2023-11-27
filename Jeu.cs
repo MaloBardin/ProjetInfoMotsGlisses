@@ -11,6 +11,8 @@ namespace ProjetInfoMotsCroises
         int tailleX;
         int tailleY;
         char[,] plateau;
+        List<string> dictionnaire;
+
 
         public Jeu()
         {
