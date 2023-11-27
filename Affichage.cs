@@ -172,7 +172,7 @@ namespace ProjetInfoMotsCroises
             {
                 Console.WriteLine("Le fichier de pondération n'existe pas " + f.Message);
                 Console.WriteLine("Nous allons procéder à la génération aléatoire pondérée du plateau");
-                
+                //A  FINIR !!!!
 
             }
             finally { Console.WriteLine(""); };
