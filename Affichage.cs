@@ -90,19 +90,38 @@ namespace ProjetInfoMotsCroises
                 string[] lines = File.ReadAllLines(filename + ".txt");
                 //string cheminFichier = filename + ".txt";
                 
+
+                //LECTURE FICHIER LETTRE PONDERATION
                 int posLigne = 0;
+                int compteursommetab=0;
                 foreach (string line in lines)
                 {
 
                     string[] TabTemp = line.Split(',');
                     tabLettre[posLigne] = char.Parse(TabTemp[0]);
                     tabProba[posLigne] = int.Parse(TabTemp[1]);
-                    
-                    
 
-                    
+                    compteursommetab += tabProba[posLigne];
+
+
                     posLigne++;
                 }
+
+                char[] TabLettrePonderée = new char[compteursommetab] ;
+
+                //création du tab Lettre pondérée avec A*pondération B*Pondération etc
+                for (int i = 0; i < compteursommetab; i=i+tabProba[i])
+                {
+                    for (int pos = 0; pos < tabProba[i]-1; pos++)
+                    {
+                        TabLettrePonderée[pos + i] = tabLettre[i];
+                    }
+                    
+                }
+
+
+
+
 
                 int compteur = 0;
 
@@ -163,7 +182,7 @@ namespace ProjetInfoMotsCroises
             try
             {
                 //SETUP TAILLE X TAILLE Y
-                string[] lines = File.ReadAllLines(filename + ".csv");
+                string[] lines = File.ReadAllLines(filename + ".ccsv");
                 //string cheminFichier = filename + ".csv";
                 this.tailleY = lines.Length;
                 foreach (string line in lines)
