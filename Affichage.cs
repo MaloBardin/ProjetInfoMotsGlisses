@@ -14,8 +14,9 @@ namespace ProjetInfoMotsCroises
         {
             this.jeu = jeu;
             ToRead(filename);
+            Console.WriteLine(SearchWord("coucou"));
         }
-       
+
         public void AffichageConsole()
         {
             //AFFICHAGE
@@ -79,11 +80,11 @@ namespace ProjetInfoMotsCroises
             {
                 string[] lines = File.ReadAllLines(filename + ".txt");
                 //string cheminFichier = filename + ".txt";
-                
+
 
                 //LECTURE FICHIER LETTRE PONDERATION
                 int posLigne = 0;
-                int compteursommetab=0;
+                int compteursommetab = 0;
                 foreach (string line in lines)
                 {
 
@@ -97,13 +98,13 @@ namespace ProjetInfoMotsCroises
                     posLigne++;
                 }
 
-                char[] TabLettrePonderée = new char[compteursommetab] ;
+                char[] TabLettrePonderée = new char[compteursommetab];
 
 
                 // A TERMINER  //
                 //création du tab Lettre pondérée avec A*pondération B*Pondération etc
                 int sommeposporba = 0; // il sert à décaler 
-                
+
                 for (int i = 0; i < 26; i++)
                 {
                     for (int pos = 0; pos < tabProba[i]; pos++)
@@ -111,41 +112,13 @@ namespace ProjetInfoMotsCroises
                         TabLettrePonderée[sommeposporba] = tabLettre[i];
                         sommeposporba++;
                     }
-                    
+
                 }
 
 
 
 
-                // RANDOM PAS RANDOM//
-                /*int compteur = 0;
 
-                for (int i = 0; i < tailleX; i++)
-                {
-                    for (int j = 0; j < tailleY; j++)
-                    {
-                        int stop = 0;
-                        do
-                        {
-                            
-                            int randomChar = random.Next(97, 122);
-                           
-                            if (tabProba[randomChar - 97] > 0)
-                            {
-                                tabProba[randomChar - 97] = tabProba[randomChar - 97] - 1;
-                                this.plateau[i, j] = tabLettre[randomChar - 97];
-                                stop = 1;
-                                compteur++;
-                            }
-                            
-                            
-                        } while (stop==0);
-
-                        
-
-
-                    }
-                }*/
 
                 //Affichage pondéré en prenant les stats du tableau : TabLettrePonderée
                 for (int i = 0; i < jeu.TailleX; i++)
@@ -154,25 +127,43 @@ namespace ProjetInfoMotsCroises
                     {
                         int randomChar = random.Next(0, compteursommetab);
                         jeu.Plateau[i, j] = TabLettrePonderée[randomChar];
-                        Console.WriteLine(TabLettrePonderée[randomChar]);
-                     }
+                        //Console.WriteLine(TabLettrePonderée[randomChar]);
+                    }
                 }
 
 
 
 
-                        AffichageConsole();
+                AffichageConsole();
 
-                
+
 
 
             }
 
             catch (FileNotFoundException f)
             {
-                Console.WriteLine("Le fichier de pondération n'existe pas " + f.Message);
-                Console.WriteLine("Nous allons procéder à la génération aléatoire pondérée du plateau");
+                Console.WriteLine("Le fichier de lettre n'existe pas " + f.Message);
+                Console.WriteLine("Nous allons ainsi génerer complètement aléatoirement les lettres");
                 //A  FINIR !!!!
+
+                for (int i = 0; i < jeu.TailleX; i++)
+                {
+                    for (int j = 0; j < jeu.TailleY; j++)
+                    {
+
+
+                        int randomChar = random.Next(97, 123);
+                        jeu.Plateau[i, j] = (char)randomChar;
+
+
+
+
+
+
+                    }
+                }
+
 
             }
             finally { Console.WriteLine(""); };
@@ -191,13 +182,13 @@ namespace ProjetInfoMotsCroises
             try
             {
                 //SETUP TAILLE X TAILLE Y
-                string[] lines = File.ReadAllLines(filename + ".ccsv");
+                string[] lines = File.ReadAllLines(filename + ".csv");
                 //string cheminFichier = filename + ".csv";
                 jeu.TailleY = lines.Length;
                 foreach (string line in lines)
                 {
                     string[] TabTemp = line.Split(';');
-                    jeu.TailleX = TabTemp.Length;  
+                    jeu.TailleX = TabTemp.Length;
                 }
 
                 jeu.Plateau = new char[jeu.TailleX, jeu.TailleY];
@@ -208,10 +199,10 @@ namespace ProjetInfoMotsCroises
                 {
 
                     string[] TabTemp = line.Split(';');
-                    
+
                     for (int i = 0; i < TabTemp.Length; i++)// 
                     {
-                        jeu.Plateau [x, i] = TabTemp[i][0];
+                        jeu.Plateau[x, i] = TabTemp[i][0];
 
                     }
 
@@ -235,5 +226,54 @@ namespace ProjetInfoMotsCroises
             }
             finally { Console.WriteLine(""); };
         }
+
+
+        public bool SearchWord(string word, int indiceX = 0, int indiceY = 0, int indiceMot = 0)
+        {
+
+            if (word.Length == 0)
+            {
+                return true;
+            }
+
+
+
+
+            else
+            {
+                if (jeu.Plateau[indiceX + 1, indiceY] == word[0])
+                {
+                    return SearchWord(word.Substring(1), indiceX + 1, indiceY, indiceMot);
+
+                }
+                else if (jeu.Plateau[indiceX + 1, indiceY + 1] == word[0])
+                {
+                    return SearchWord(word.Substring(1), indiceX + 1, indiceY + 1, indiceMot);
+
+                }
+                else if (jeu.Plateau[indiceX, indiceY + 1] == word[0])
+                {
+                    return SearchWord(word.Substring(1), indiceX, indiceY + 1, indiceMot);
+                }
+                else if (jeu.Plateau[indiceX - 1, indiceY + 1] == word[0])
+                {
+                    return SearchWord(word.Substring(1), indiceX - 1, indiceY + 1, indiceMot);
+                }
+                else
+                {
+                    return false;
+                }
+
+
+
+
+
+            }
+
+
+
+
+        }
+
     }
 }
