@@ -14,7 +14,7 @@ namespace ProjetInfoMotsCroises
         {
             this.jeu = jeu;
             ToRead(filename);
-            Console.WriteLine(SearchWord("coucou"));
+            //Console.WriteLine(SearchWord("coucou"));
         }
 
         public void AffichageConsole()
@@ -228,52 +228,181 @@ namespace ProjetInfoMotsCroises
         }
 
 
-        public bool SearchWord(string word, int indiceX = 0, int indiceY = 0, int indiceMot = 0)
+        public int[,] SearchWordTab(string word, int indiceX = 10, int indiceY = 10, int indiceMot = 0, int[,] wordPos = null)//init a 10 pour montrer que c'est le start
         {
-
-            if (word.Length == 0)
+            //init tableau
+            if (indiceX == 10 && indiceY == 10)
             {
-                return true;
+                wordPos = new int[word.Length, 2];
             }
 
-
-
-
-            else
+            bool retour = false;
+            //condition d'arret 
+            if (indiceMot == word.Length)
             {
-                if (jeu.Plateau[indiceX + 1, indiceY] == word[0])
+                retour = true;
+                return wordPos;
+            }
+            else
+            {   //condition de depart
+                if (indiceX == 10 && indiceY == 10)
                 {
-                    return SearchWord(word.Substring(1), indiceX + 1, indiceY, indiceMot);
+                    //balade premiere ligne
+                    for (int i = 0; i < 8; i++)
+                    {
+                        if (retour == false && word[indiceMot] == jeu.Plateau[7, i])
+                        {
+                            wordPos[indiceMot, 0] = 7;
+                            wordPos[indiceMot, 1] = i;
+                          if (SearchWordTab(word, 7, i, indiceMot + 1, wordPos)!=null)
+                            {
+                                retour = true;
+                            }
+                        }
+                    }
 
-                }
-                else if (jeu.Plateau[indiceX + 1, indiceY + 1] == word[0])
-                {
-                    return SearchWord(word.Substring(1), indiceX + 1, indiceY + 1, indiceMot);
 
-                }
-                else if (jeu.Plateau[indiceX, indiceY + 1] == word[0])
-                {
-                    return SearchWord(word.Substring(1), indiceX, indiceY + 1, indiceMot);
-                }
-                else if (jeu.Plateau[indiceX - 1, indiceY + 1] == word[0])
-                {
-                    return SearchWord(word.Substring(1), indiceX - 1, indiceY + 1, indiceMot);
                 }
                 else
                 {
-                    return false;
+
+                    //condition pour regarder a gauche et a droite
+                    if (retour == false && (indiceY - 1) >= 0 && word[indiceMot] == jeu.Plateau[indiceX, indiceY - 1])
+                    {
+                        Console.WriteLine("1");
+                        wordPos[indiceMot, 0] = indiceX;
+                        wordPos[indiceMot, 1] = indiceY;
+                        return SearchWordTab(word, indiceX, indiceY - 1, indiceMot + 1, wordPos);
+                       
+                        //on redscendre l'indice du mot si jamais ça ne marche aps
+                        indiceMot--;
+                    }
+                    else if (retour == false && (indiceX + 1) >= 0 && word[indiceMot] == jeu.Plateau[indiceX + 1, indiceY])
+                    {
+                        Console.WriteLine("2");
+                        wordPos[indiceMot, 0] = indiceX;
+                        wordPos[indiceMot, 1] = indiceY;
+                        return SearchWordTab(word, indiceX + 1, indiceY, indiceMot + 1, wordPos);
+
+                        
+                        //on redscendre l'indice du mot si jamais ça ne marche aps
+                        indiceMot--;
+                    }
+                    else if (retour == false && (indiceY + 1) <= 7 && word[indiceMot] == jeu.Plateau[indiceX, indiceY + 1])
+                    {
+                        Console.WriteLine("3");
+                        wordPos[indiceMot, 0] = indiceX;
+                        wordPos[indiceMot, 1] = indiceY;
+                        return SearchWordTab(word, indiceX, indiceY + 1, indiceMot + 1, wordPos);
+                        
+                        //on redscendre l'indice du mot si jamais ça ne marche aps
+                        indiceMot--;
+                    }
+
+
+
+
+
+                }
+
+                if (retour == true)
+                {
+                    return wordPos;
+                }
+                else
+                {
+                    return null;
                 }
 
 
-
-
-
             }
+
+
+
+
 
 
 
 
         }
+    
+
+
+
+
+    public bool SearchWord(string word, int indiceX = 10, int indiceY = 10, int indiceMot = 0)//init a 10 pour montrer que c'est le start
+        {
+
+            bool retour = false;
+
+            if (indiceMot == word.Length)
+            {
+                retour = true;
+                return retour;
+            } else
+            {
+                if (indiceX == 10 && indiceY == 10)
+                {
+
+                    for (int i = 0; i < 8; i++)
+                    {
+                        if (retour == false && word[indiceMot] == jeu.Plateau[7, i]){
+                            retour = SearchWord(word, 7, i, indiceMot + 1);
+                        }
+                    }
+
+                   
+                } else
+                {
+
+                    //condition pour regarder a gauche et a droite
+                    if (retour == false && (indiceY - 1) >= 0 && word[indiceMot] == jeu.Plateau[indiceX, indiceY - 1])
+                    {
+                        retour = SearchWord(word, indiceX, indiceY - 1, indiceMot + 1);
+                        //on redscendre l'indice du mot si jamais ça ne marche aps
+                        indiceMot--;
+                    } else if (retour == false && (indiceX + 1) >= 8 && word[indiceMot] == jeu.Plateau[indiceX + 1,indiceY]) {
+                        retour = SearchWord(word, indiceX+1, indiceY, indiceMot + 1);
+                        //on redscendre l'indice du mot si jamais ça ne marche aps
+                        indiceMot--;
+                    } else if (retour == false && (indiceY+1)<= 7 && word[indiceMot]== jeu.Plateau[indiceX, indiceY + 1]){
+                        retour = SearchWord(word, indiceX, indiceY + 1, indiceMot + 1);
+                        //on redscendre l'indice du mot si jamais ça ne marche aps
+                        indiceMot--;
+                    }
+
+
+
+
+
+                }
+
+                if (retour == true)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+                 
+
+            }
+
+
+
+
+            
+
+
+
+            }
+        }
+        
+
+
+
+
+        
 
     }
-}
+
