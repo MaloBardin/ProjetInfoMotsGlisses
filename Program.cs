@@ -17,7 +17,7 @@
 
             //-> renvoie automatiquement tout ce qu'il faut ( matrice gen dans jeu)
             Console.WriteLine(AffichageJeu.SearchWord("maison"));
-
+            Dictionnaire.toString();
 /*
             int[,] test=AffichageJeu.SearchWordTab("maison");
 

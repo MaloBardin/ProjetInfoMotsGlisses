@@ -10,9 +10,15 @@ namespace ProjetInfoMotsCroises
     {    
         int tailleX;
         int tailleY;
-        char[,] plateau;
-        List<string> dictionnaire;
-
+        Affichage plateau;
+        Dictionnaire dictionnaire;
+        public Jeu(int tailleX, int tailleY, Affichage plateau, Dictionnaire dictionnaire)
+        {
+            this.tailleX = tailleX;
+            this.tailleY = tailleY;
+            this.plateau = plateau;
+            this.dictionnaire = dictionnaire;
+        }
 
         public Jeu()
         {
