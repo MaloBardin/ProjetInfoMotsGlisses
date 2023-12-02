@@ -8,14 +8,12 @@ namespace ProjetInfoMotsCroises
 {
     internal class Jeu
     {    
-        int tailleX;
-        int tailleY;
-        Affichage plateau;
+        
+        Plateau plateau;
         Dictionnaire dictionnaire;
-        public Jeu(int tailleX, int tailleY, Affichage plateau, Dictionnaire dictionnaire)
+        public Jeu(int tailleX, int tailleY, Plateau plateau, Dictionnaire dictionnaire)
         {
-            this.tailleX = tailleX;
-            this.tailleY = tailleY;
+            
             this.plateau = plateau;
             this.dictionnaire = dictionnaire;
         }
@@ -28,23 +26,8 @@ namespace ProjetInfoMotsCroises
 
 
 
-        public int TailleX
-        {
-            get { return this.tailleX; }
-            set { this.tailleX = value; }
-        }
-
-        public int TailleY
-        {
-            get { return this.tailleY; }
-            set { this.tailleY = value; }
-        }
-
-        public char[,] Plateau
-        {
-            get { return this.plateau; }
-            set { this.plateau = value; }
-        }
+        
+        
 
 
     }

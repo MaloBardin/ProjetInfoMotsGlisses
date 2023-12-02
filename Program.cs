@@ -13,11 +13,11 @@
             Jeu InstanceDeJeu = new Jeu();
 
             //Affichage cs (to read (stringname))
-            Affichage AffichageJeu = new Affichage(InstanceDeJeu,"Test1");
+            Plateau AffichageJeu = new Plateau("Test1");
 
             //-> renvoie automatiquement tout ce qu'il faut ( matrice gen dans jeu)
-            Console.WriteLine(AffichageJeu.SearchWord("maison"));
-            Dictionnaire.toString();
+            //Console.WriteLine(AffichageJeu.SearchWord("maison"));
+            //Dictionnaire.toString();
 /*
             int[,] test=AffichageJeu.SearchWordTab("maison");
 
