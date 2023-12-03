@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -108,6 +109,36 @@ namespace ProjetInfoMotsCroises
                 }
             }
             return rep;
+        }
+        public static bool RechercheDichoRecursif(int debut, int fin, List<string> dico, string mot)
+        {
+            int moitie = (debut + fin) / 2;
+            if (dico == null || debut > fin)
+            {
+                return false;
+            }
+            else
+            {
+                if (mot == dico[moitie])
+                {
+                    return true;
+                }
+                else
+                {
+                    if (mot.CompareTo(dico[moitie])<0)
+                    {
+                        return RechercheDichoRecursif(debut, moitie - 1, dico, mot);
+                    }
+                    if (mot.CompareTo(dico[moitie]) > 0)
+                    {
+                        return RechercheDichoRecursif(moitie + 1, fin, dico, mot);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
         }
     }
 }

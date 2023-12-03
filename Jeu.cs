@@ -10,12 +10,12 @@ namespace ProjetInfoMotsCroises
     {    
         
         Plateau plateau;
-        Dictionnaire dictionnaire;
-        public Jeu(int tailleX, int tailleY, Plateau plateau, Dictionnaire dictionnaire)
+        Dictionnaire dico;
+        public Jeu(Plateau plateau, Dictionnaire dico)
         {
             
             this.plateau = plateau;
-            this.dictionnaire = dictionnaire;
+            this.dico = dico;
         }
 
         public Jeu()
