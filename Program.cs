@@ -18,7 +18,7 @@
             //-> renvoie automatiquement tout ce qu'il faut ( matrice gen dans jeu)
             //Console.WriteLine(AffichageJeu.SearchWord("maison"));
             Console.WriteLine(Dictionnaire.toString());
-            Console.WriteLine(Dictionnaire.RechercheDichoRecursif(0, ));
+            Console.WriteLine(InstanceDeJeu.Dictionnaire.RechercheDichoRecursif(0, 120000, , "MARMOTTE"));
 /*
             int[,] test=AffichageJeu.SearchWordTab("maison");
 

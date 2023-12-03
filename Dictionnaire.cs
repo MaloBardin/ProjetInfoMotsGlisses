@@ -110,7 +110,7 @@ namespace ProjetInfoMotsCroises
             }
             return rep;
         }
-        static bool RechercheDichoRecursif(int debut, int fin, List<string> dico, string mot)
+        public static bool RechercheDichoRecursif(int debut, int fin, List<string> dico, string mot)
         {
             int moitie = (debut + fin) / 2;
             if (dico == null || debut > fin)

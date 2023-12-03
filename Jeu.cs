@@ -11,11 +11,11 @@ namespace ProjetInfoMotsCroises
         
         Plateau plateau;
         Dictionnaire dico;
-        public Jeu(Plateau plateau, Dictionnaire dictionnaire)
+        public Jeu(Plateau plateau, Dictionnaire dico)
         {
             
             this.plateau = plateau;
-            this.dictionnaire = dictionnaire;
+            this.dico = dico;
         }
 
         public Jeu()
