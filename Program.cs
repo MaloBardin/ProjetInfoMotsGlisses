@@ -4,7 +4,27 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+
+
+
+            Console.WriteLine("Bienvenue au jeu des mots croisés !");
+
+
+            Console.WriteLine("\n\n\n\n");
+
+            Console.Write("Combien de joueur êtes vous ? : ");
+            int nombreJoueurs = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("\nParfait, vous serez donc " + nombreJoueurs + " à jouer aujourd'hui. Que le jeu commence !");
+
+
+
+            bool GameIsEnded = false;
+
+
+
+
+
 
 
 
@@ -15,28 +35,14 @@
             //Affichage cs (to read (stringname))
             Plateau AffichageJeu = new Plateau("Test1");
 
-            //-> renvoie automatiquement tout ce qu'il faut ( matrice gen dans jeu)
-            //Console.WriteLine(AffichageJeu.SearchWord("maison"));
-            //Dictionnaire.toString();
-/*
-            int[,] test=AffichageJeu.SearchWordTab("maison");
+            if (AffichageJeu.SearchWordTab("ma") == null)
+            {
 
-            if (test == null)
-            {
-                Console.WriteLine("Pas de mot dans le tab");
-            } else
-            {
-                for (int i = 0; i < test.GetLength(0); i++)
-                {
-                    for (int j = 0; j < 2; j++)
-                    {
-                        Console.Write(test[i, j] + " ");
-                    }
-                    Console.WriteLine();
-                }
+                Console.WriteLine("null");
             }
 
-            */
+
+
 
 
         }

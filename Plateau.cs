@@ -277,10 +277,33 @@ namespace ProjetInfoMotsCroises
                     {
                         
                         wordPos[indiceMot, 0] = indiceX;
+                        wordPos[indiceMot, 1] = indiceY-1;
+                        if (SearchWordTab(word,indiceX,indiceY-1,indiceMot+1,wordPos) != null)
+                        {
+                            return wordPos;
+                        }
+                        indiceMot--;
+                    } 
+                    if (indiceX-1>=0 && word[indiceMot] == plateau[indiceX-1, indiceY])
+                    {
+                        wordPos[indiceMot, 0] = indiceX-1;
                         wordPos[indiceMot, 1] = indiceY;
+                        if (SearchWordTab(word, indiceX-1, indiceY, indiceMot + 1, wordPos) != null)
+                        {
+                            return wordPos;
+                        }
+                        indiceMot--;
                     }
-
-
+                    if (indiceY+1 >= 7 && word[indiceMot] == plateau[indiceX, indiceY+1])
+                    {
+                        wordPos[indiceMot, 0] = indiceX;
+                        wordPos[indiceMot, 1] = indiceY+1;
+                        if (SearchWordTab(word, indiceX, indiceY+1, indiceMot + 1, wordPos) != null)
+                        {
+                            return wordPos;
+                        }
+                        indiceMot--;
+                    }
 
 
 
