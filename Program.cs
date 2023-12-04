@@ -50,9 +50,7 @@
                 else
                 {
                     Console.WriteLine("Ce mot n'existe pas, vous avez perdu la main ");
-                }
-
-                
+                }  
             }
 
 

@@ -23,6 +23,7 @@ namespace ProjetInfoMotsCroises
                 dico.AddRange(words);
             }
             Tri_XX(dico);
+            this.dico = dico;
         }
         public List<string> Dico{
             get { return this.dico; }
@@ -96,20 +97,6 @@ namespace ProjetInfoMotsCroises
 
         }
         //méthode de vérification du mot
-        public static bool verification(string mot, List<string> Dico)
-        {
-            bool rep = false;
-            foreach (string word in Dico)
-            {
-                //Console.WriteLine(word);
-                if (word == mot)
-                {
-                    rep = true;
-                    break;
-                }
-            }
-            return rep;
-        }
         public static bool RechercheDichoRecursif(int debut, int fin, List<string> dico, string mot)
         {
             int moitie = (debut + fin) / 2;
