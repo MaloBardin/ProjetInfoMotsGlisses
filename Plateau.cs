@@ -447,19 +447,27 @@ namespace ProjetInfoMotsCroises
                 AffichageConsole();
 
                 //MODIF GRAVITE MATRICE
-                for (int j = 0; j <= plateau.GetLength(1) - 1; j++)
+                //on le fait 8 fois pour etre sur que tout est bien décaler jusqu'en bas
+                for (int u = 0; u < 8; u++)
                 {
-                    for (int i = 0; i <= plateau.GetLength(0) - 1; i++)
+                    for (int j = 0; j < plateau.GetLength(1); j++)
                     {
-                   
-                       
-
-
+                        for (int i = 0; i < plateau.GetLength(0); i++)
+                        {
+                            if (i + 1 < plateau.GetLength(0) && (plateau[i + 1, j] == 'ç'|| plateau[i + 1, j] == '#'))
+                            {
+                                plateau[i + 1, j] = plateau[i, j];
+                                plateau[i, j] = '#';
+                            }
+                        }
                     }
+
+                    AffichageConsole();
+
                 }
 
 
-                AffichageConsole();
+
 
 
 

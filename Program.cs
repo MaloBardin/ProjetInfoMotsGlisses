@@ -38,7 +38,7 @@
 
             Console.WriteLine("Quel mot voulez vous jouer ?");
             //string Reponse=Console.ReadLine();
-            bool MotFound = AffichageJeu.Recherche_Mot("abcdef");
+            bool MotFound = AffichageJeu.Recherche_Mot("arciupga");
 
             Console.WriteLine(MotFound);
 
