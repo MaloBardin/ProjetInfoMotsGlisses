@@ -10,14 +10,15 @@
             Console.WriteLine("Bienvenue au jeu des mots croisés !");
 
 
-            Console.WriteLine("\n\n\n\n");
-
+            Console.WriteLine("\n\n");
+/*
             Console.Write("Combien de joueur êtes vous ? : ");
             int nombreJoueurs = int.Parse(Console.ReadLine());
 
             Console.WriteLine("\nParfait, vous serez donc " + nombreJoueurs + " à jouer aujourd'hui. Que le jeu commence !");
-
-
+            
+           
+            */
 
             bool GameIsEnded = false;
 
@@ -35,14 +36,14 @@
             //Affichage cs (to read (stringname))
             Plateau AffichageJeu = new Plateau("Test1");
 
-            if (AffichageJeu.SearchWordTab("ma") == null)
-            {
+            Console.WriteLine("Quel mot voulez vous jouer ?");
+            //string Reponse=Console.ReadLine();
+            bool MotFound = AffichageJeu.Recherche_Mot("abcdef");
 
-                Console.WriteLine("null");
-            }
+            Console.WriteLine(MotFound);
 
 
-
+            Console.WriteLine("fin");
 
 
         }

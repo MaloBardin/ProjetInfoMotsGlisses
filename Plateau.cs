@@ -20,6 +20,7 @@ namespace ProjetInfoMotsCroises
 
         public void AffichageConsole()
         {
+            Thread.Sleep(500);
             //AFFICHAGE
             for (int u = 0; u < tailleY; u++)
             {
@@ -37,7 +38,15 @@ namespace ProjetInfoMotsCroises
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
-                    Console.Write(plateau[i, j]);
+                    if (plateau[i, j] == '#')
+                    {
+                        Console.Write(" ");
+                        // ON AFFICHE RIEN CAR CARACTERE NUL
+                    } else
+                    {
+                        Console.Write(plateau[i, j]);
+                    }
+                   
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write(" | ");
                 }
@@ -146,6 +155,7 @@ namespace ProjetInfoMotsCroises
             {
                 Console.WriteLine("Le fichier de lettre n'existe pas " + f.Message);
                 Console.WriteLine("Nous allons ainsi génerer complètement aléatoirement les lettres");
+                
                 //A  FINIR !!!!
 
                 for (int i = 0; i < tailleX; i++)
@@ -237,11 +247,9 @@ namespace ProjetInfoMotsCroises
                 wordPos = new int[word.Length, 2];
             }
 
-            bool retour = false;
             //condition d'arret 
             if (indiceMot == word.Length)
             {
-                retour = true;
                 return wordPos;
             }
             else
@@ -251,19 +259,15 @@ namespace ProjetInfoMotsCroises
                     //balade premiere ligne
                     for (int i = 0; i < 8; i++)
                     {
-                        if (retour == false && word[indiceMot] == plateau[7, i])
+                        if (word[indiceMot] == plateau[7, i])
                         {
                             wordPos[indiceMot, 0] = 7;
                             wordPos[indiceMot, 1] = i;
+
                             if (SearchWordTab(word, 7, i, indiceMot + 1, wordPos)!=null)
-                            {
-                                retour = true;
-                                return wordPos;
-                                
-                            } else if (i == 7)
-                            {
-                                retour = false;
-                            }
+                            { 
+                                return wordPos; 
+                            } 
                         } 
                         
                     }
@@ -272,7 +276,7 @@ namespace ProjetInfoMotsCroises
                 }
                 else
                 {
-
+                    //CAS A GAUCHE
                     if (indiceY-1>=0 && word[indiceMot] == plateau[indiceX, indiceY - 1])
                     {
                         
@@ -282,94 +286,74 @@ namespace ProjetInfoMotsCroises
                         {
                             return wordPos;
                         }
-                        indiceMot--;
-                    } 
-                    if (indiceX-1>=0 && word[indiceMot] == plateau[indiceX-1, indiceY])
+                        
+                    }
+                    //CAS A GAUCHE EN HAUT
+                    if (indiceY - 1 >= 0 && indiceX-1>=0 && word[indiceMot] == plateau[indiceX-1, indiceY -1])
+                    {
+                        wordPos[indiceMot, 0] = indiceX - 1;
+                        wordPos[indiceMot, 1] = indiceY - 1;
+                        if (SearchWordTab(word, indiceX - 1, indiceY - 1, indiceMot + 1, wordPos) != null)
+                        {
+                            return wordPos;
+                        }
+
+                    }
+                    //CAS EN HAUT
+                    if (indiceX - 1 >= 0 && word[indiceMot] == plateau[indiceX - 1, indiceY])
+                    {
+                        wordPos[indiceMot, 0] = indiceX - 1;
+                        wordPos[indiceMot, 1] = indiceY;
+                        if (SearchWordTab(word, indiceX - 1, indiceY, indiceMot + 1, wordPos) != null)
+                        {
+                            return wordPos;
+                        }
+
+                    }
+                    //CAS EN HAUT ET DROITE
+                    if (indiceY+1 <= 7 && indiceX-1>= 0&& word[indiceMot] == plateau[indiceX-1,indiceY+1])
                     {
                         wordPos[indiceMot, 0] = indiceX-1;
-                        wordPos[indiceMot, 1] = indiceY;
-                        if (SearchWordTab(word, indiceX-1, indiceY, indiceMot + 1, wordPos) != null)
+                        wordPos[indiceMot, 1] = indiceY+1;
+                        if (SearchWordTab(word, indiceX-1, indiceY+1, indiceMot + 1, wordPos) != null)
                         {
                             return wordPos;
                         }
-                        indiceMot--;
+                        
                     }
-                    if (indiceY+1 >= 7 && word[indiceMot] == plateau[indiceX, indiceY+1])
+                    //CAS A DROITE
+                    if (indiceY + 1 <= 7 && word[indiceMot] == plateau[indiceX, indiceY + 1])
                     {
                         wordPos[indiceMot, 0] = indiceX;
-                        wordPos[indiceMot, 1] = indiceY+1;
-                        if (SearchWordTab(word, indiceX, indiceY+1, indiceMot + 1, wordPos) != null)
+                        wordPos[indiceMot, 1] = indiceY + 1;
+                        if (SearchWordTab(word, indiceX, indiceY + 1, indiceMot + 1, wordPos) != null)
                         {
                             return wordPos;
                         }
-                        indiceMot--;
+
                     }
+                     
 
 
 
 
                 }
 
-                if (retour == true)
-                {
-                    return wordPos;
-                }
-                else
-                {
-                    return null;
-                }
-
-
+                
             }
 
 
 
 
 
-
+            return null;
 
 
         }
 
 
-
-
-/*
-  
-                    //condition pour regarder a gauche et a droite
-                    if (retour == false && (indiceY - 1) >= 0 && word[indiceMot] == jeu.Plateau[indiceX, indiceY - 1])
-                    {
-                        Console.WriteLine("1");
-                        wordPos[indiceMot, 0] = indiceX;
-                        wordPos[indiceMot, 1] = indiceY;
-                        return SearchWordTab(word, indiceX, indiceY - 1, indiceMot + 1, wordPos);
-                       
-                        //on redscendre l'indice du mot si jamais ça ne marche aps
-                        indiceMot--;
-                    }
-                    else if (retour == false && (indiceX + 1) >= 0 && word[indiceMot] == jeu.Plateau[indiceX + 1, indiceY])
-                    {
-                        Console.WriteLine("2");
-                        wordPos[indiceMot, 0] = indiceX;
-                        wordPos[indiceMot, 1] = indiceY;
-                        return SearchWordTab(word, indiceX + 1, indiceY, indiceMot + 1, wordPos);
-
-                        
-                        //on redscendre l'indice du mot si jamais ça ne marche aps
-                        indiceMot--;
-                    }
-                    else if (retour == false && (indiceY + 1) <= 7 && word[indiceMot] == jeu.Plateau[indiceX, indiceY + 1])
-                    {
-                        Console.WriteLine("3");
-                        wordPos[indiceMot, 0] = indiceX;
-                        wordPos[indiceMot, 1] = indiceY;
-                        return SearchWordTab(word, indiceX, indiceY + 1, indiceMot + 1, wordPos);
-                        
-                        //on redscendre l'indice du mot si jamais ça ne marche aps
-                        indiceMot--;
-                    }
-*/
-    public bool SearchWord(string word, int indiceX = 10, int indiceY = 10, int indiceMot = 0)//init a 10 pour montrer que c'est le start
+        //FONCTION NON UTILISéE
+        public bool SearchWord(string word, int indiceX = 10, int indiceY = 10, int indiceMot = 0)//init a 10 pour montrer que c'est le start
         {
 
             bool retour = false;
@@ -435,6 +419,58 @@ namespace ProjetInfoMotsCroises
 
 
             }
+
+
+
+
+        public bool Recherche_Mot(string mot)
+        {
+            int[,] MatriceCoords = SearchWordTab(mot);
+
+            if (MatriceCoords == null)
+            {
+
+                return false;
+            }
+            else //UN MOT VALIDE EST TROUVé
+            {
+                Console.WriteLine("1");
+                //MODIF PLATEAU
+                for (int i = 0; i < MatriceCoords.GetLength(0); i++)
+                {
+
+                    plateau[MatriceCoords[i, 0], MatriceCoords[i, 1]] = 'ç';
+                    
+                    
+                }
+
+                AffichageConsole();
+
+                //MODIF GRAVITE MATRICE
+                for (int j = 0; j <= plateau.GetLength(1) - 1; j++)
+                {
+                    for (int i = 0; i <= plateau.GetLength(0) - 1; i++)
+                    {
+                   
+                       
+
+
+                    }
+                }
+
+
+                AffichageConsole();
+
+
+
+                return true;
+
+
+            }
+
+        }
+
+
         }
         
 
