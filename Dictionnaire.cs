@@ -1,29 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjetInfoMotsCroises
+﻿namespace ProjetInfoMotsCroises
 {
     internal class Dictionnaire
     {
-        List<string> dico = new List<string>();
+        List<string> dico;
 
 
-        public Dictionnaire(List<string> dico)
+        public Dictionnaire()
         {
+            this.dico = new List<string>();
+            string[] lines = File.ReadAllLines("Mots_Français.txt");
+            Console.WriteLine(toString());//
+            foreach (string line in lines)
+            {
+                string[] words = line.Split(' ');
+                dico.AddRange(words);
+            }
             this.dico = dico;
-            
+            Tri_XX(dico);
+
         }
-        public List<string> Dico{
+        public List<string> Dico
+        {
             get { return this.dico; }
             set { this.dico = value; }
         }
 
 
-        
+
         //méthode toString : 
         public static string toString()
         {
@@ -51,7 +54,7 @@ namespace ProjetInfoMotsCroises
             return s;
         }
         //méthodes pour l'algorithme de tri : 
-        public static void Tri_XX(List<string> liste)
+        public void Tri_XX(List<string> liste)
         {
             if (liste.Count <= 1)
                 return;
@@ -65,7 +68,7 @@ namespace ProjetInfoMotsCroises
 
             Fusionner(liste, gauche, droite);
         }
-        public static void Fusionner(List<string> liste, List<string> gauche, List<string> droite)
+        public void Fusionner(List<string> liste, List<string> gauche, List<string> droite)
         {
             int i = 0;
             int j = 0;
@@ -90,7 +93,7 @@ namespace ProjetInfoMotsCroises
 
         }
         //méthode de vérification du mot
-        public static bool RechercheDichoRecursif(int debut, int fin, string mot)
+        public bool RechercheDichoRecursif(int debut, int fin, string mot)
         {
             int moitie = (debut + fin) / 2;
             if (dico == null || debut > fin)
@@ -105,13 +108,13 @@ namespace ProjetInfoMotsCroises
                 }
                 else
                 {
-                    if (mot.CompareTo(dico[moitie])<0)
+                    if (mot.CompareTo(dico[moitie]) < 0)
                     {
-                        return RechercheDichoRecursif(debut, moitie - 1, dico, mot);
+                        return RechercheDichoRecursif(debut, moitie - 1, mot);
                     }
                     if (mot.CompareTo(dico[moitie]) > 0)
                     {
-                        return RechercheDichoRecursif(moitie + 1, fin, dico, mot);
+                        return RechercheDichoRecursif(moitie + 1, fin, mot);
                     }
                     else
                     {
