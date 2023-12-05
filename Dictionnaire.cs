@@ -19,7 +19,7 @@
             }
             
             Tri_XX(dico);
-            
+
         }
         public List<string> Dico
         {
