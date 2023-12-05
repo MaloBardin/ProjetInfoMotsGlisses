@@ -9,12 +9,12 @@ namespace ProjetInfoMotsCroises
 {
     internal class Dictionnaire
     {
-        List<string> dico = new List<string>();
+        List<string> dico;
 
 
-        public Dictionnaire(List<string> dico)
+        public Dictionnaire()
         {
-            this.dico = dico;
+            
             string[] lines = File.ReadAllLines("Mots_Français.txt");
             Console.WriteLine(toString());//
             foreach (string line in lines)
@@ -22,6 +22,7 @@ namespace ProjetInfoMotsCroises
                 string[] words = line.Split(' ');
                 dico.AddRange(words);
             }
+            this.dico=dico
             Tri_XX(dico);
         }
         public List<string> Dico{
