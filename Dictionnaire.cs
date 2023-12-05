@@ -46,6 +46,7 @@
                     tab[a] += 1;
                 }
             }
+
             s += tab[1] + " mots avec 1 lettre, ";
             for (int i = 2; i < 16; i++)
             {
@@ -97,6 +98,7 @@
         //méthode de vérification du mot
         public bool RechercheDichoRecursif(int debut, int fin, string mot)
         {
+            mot=mot.ToUpper();
             int moitie = (debut + fin) / 2;
             if (dico == null || debut > fin)
             {

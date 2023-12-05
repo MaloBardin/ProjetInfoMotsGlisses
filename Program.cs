@@ -23,14 +23,14 @@
             int temps0 = dateTime.Minute;
 
 
-            while (DateTime.Now.Minute < temps0 + 5)
+            while (DateTime.Now.Minute < temps0 + 1)
             {
                 //tour du joueur 1saisie du mot
                 Console.WriteLine("Joueur 1, saisissez votre mot : ");
                 string motj1 = Console.ReadLine();
                 //Vérification du mot dans le dictionnaire
                 //     Malo    il faudra faire la vérification dans le plateau avec un "&&"
-                if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 120000, motj1) == true)
+                if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 120000, motj1) == true && InstanceDeJeu.PlateauDeJeu.SearchWord(motj1)==true)
                 {
                     joueur1.mots.Add(motj1);
                     Console.WriteLine("Bien joué ! ");
@@ -48,7 +48,7 @@
                 string motj2 = Console.ReadLine();
 
 
-                if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 120000, motj2) == true) // si ça existe dans le dico (mot francais)
+                if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 130557, motj2) == true && InstanceDeJeu.PlateauDeJeu.SearchWord(motj2) == true) // si ça existe dans le dico (mot francais)
                 {
                     joueur2.mots.Add(motj2);
                     Console.WriteLine("Bien joué ! ");
