@@ -11,11 +11,14 @@ namespace ProjetInfoMotsCroises
         
         Plateau plateau;
         Dictionnaire dico;
-        public Jeu(Plateau plateau, Dictionnaire dico)
+        public Jeu(string filename)
         {
-            
-            this.plateau = plateau;
+
+            Dictionnaire dico = new Dictionnaire();
             this.dico = dico;
+            Plateau plateauDeJeu = new Plateau(filename);
+            this.plateau = plateauDeJeu;
+            
         }
 
         public Jeu()
@@ -26,15 +29,22 @@ namespace ProjetInfoMotsCroises
         {
 
             get { return this.dico; }
+            set { this.dico = value; }
         }
 
-        
+        public Plateau PlateauDeJeu
+        {
+
+            get { return this.plateau; }
+            set { this.plateau = value; }
+        }
 
 
 
 
-        
-        
+
+
+
 
 
     }

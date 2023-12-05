@@ -8,6 +8,8 @@
         public Dictionnaire()
         {
             this.dico = new List<string>();
+
+
             string[] lines = File.ReadAllLines("Mots_Français.txt");
             Console.WriteLine(toString());//
             foreach (string line in lines)
@@ -15,7 +17,7 @@
                 string[] words = line.Split(' ');
                 dico.AddRange(words);
             }
-            this.dico = dico;
+            
             Tri_XX(dico);
             
         }
