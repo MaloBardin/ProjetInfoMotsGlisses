@@ -11,7 +11,7 @@ namespace ProjetInfoMotsCroises
     {
         public List<string> mots = new List<string>();
         public int score = 0;
-        public string nom;
+        public string nom; 
         public void Add_Mot(string mot)
         {
             if (mots.Contains(mot) == false)
