@@ -22,6 +22,11 @@ namespace ProjetInfoMotsCroises
         {
             Console.WriteLine("Création d'une instance jeu et d'une matrice");
         }
+        public Dictionnaire Dico
+        {
+
+            get { return this.dico; }
+        }
 
         
 
