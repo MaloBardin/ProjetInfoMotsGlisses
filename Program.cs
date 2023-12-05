@@ -5,7 +5,10 @@
         static void Main(string[] args)
         {
             //ici, on déclare tout, les noms des joueurs, et l'heure pour suivre le temps
+
+
             Jeu InstanceDeJeu = new Jeu();
+            InstanceDeJeu.Dico;
             Joueur joueur1 = new Joueur();
             Joueur joueur2 = new Joueur();
             Console.WriteLine("Entrez le nom du joueur 1 : ");
@@ -38,7 +41,7 @@
                 string motj2 = Console.ReadLine();
 
 
-                if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 120000,  , motj2) == true)
+                if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 120000,  motj2) == true)
                 {
                     joueur2.mots.Add(motj2);
                     Console.WriteLine("Bien joué ! ");

@@ -15,18 +15,11 @@ namespace ProjetInfoMotsCroises
         public Dictionnaire(List<string> dico)
         {
             this.dico = dico;
-            string[] lines = File.ReadAllLines("Mots_Français.txt");
-            Console.WriteLine(toString());//
-            foreach (string line in lines)
-            {
-                string[] words = line.Split(' ');
-                dico.AddRange(words);
-            }
-            Tri_XX(dico);
-            this.dico = dico;
+            
         }
         public List<string> Dico{
             get { return this.dico; }
+            set { this.dico = value; }
         }
 
 
@@ -58,7 +51,7 @@ namespace ProjetInfoMotsCroises
             return s;
         }
         //méthodes pour l'algorithme de tri : 
-        static void Tri_XX(List<string> liste)
+        public static void Tri_XX(List<string> liste)
         {
             if (liste.Count <= 1)
                 return;
@@ -72,7 +65,7 @@ namespace ProjetInfoMotsCroises
 
             Fusionner(liste, gauche, droite);
         }
-        static void Fusionner(List<string> liste, List<string> gauche, List<string> droite)
+        public static void Fusionner(List<string> liste, List<string> gauche, List<string> droite)
         {
             int i = 0;
             int j = 0;
@@ -97,7 +90,7 @@ namespace ProjetInfoMotsCroises
 
         }
         //méthode de vérification du mot
-        public static bool RechercheDichoRecursif(int debut, int fin, List<string> dico, string mot)
+        public static bool RechercheDichoRecursif(int debut, int fin, string mot)
         {
             int moitie = (debut + fin) / 2;
             if (dico == null || debut > fin)
