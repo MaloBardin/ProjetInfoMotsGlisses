@@ -106,7 +106,7 @@
 
         }
         //méthode de vérification du mot
-        public bool RechercheDichoRecursif(int debut, int fin, string mot)
+        public bool RechercheDichoRecursif(string mot, int debut=0, int fin =130557)
         {
             mot=mot.ToUpper();
             int moitie = (debut + fin) / 2;
@@ -124,11 +124,11 @@
                 {
                     if (mot.CompareTo(dico[moitie]) < 0)
                     {
-                        return RechercheDichoRecursif(debut, moitie - 1, mot);
+                        return RechercheDichoRecursif(mot, debut, moitie - 1);
                     }
                     if (mot.CompareTo(dico[moitie]) > 0)
                     {
-                        return RechercheDichoRecursif(moitie + 1, fin, mot);
+                        return RechercheDichoRecursif(mot, moitie + 1, fin);
                     }
                     else
                     {
