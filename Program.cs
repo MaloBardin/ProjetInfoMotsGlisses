@@ -30,7 +30,7 @@
                 string motj1 = Console.ReadLine();
                 //Vérification du mot dans le dictionnaire
                 //     Malo    il faudra faire la vérification dans le plateau avec un "&&"
-                if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 120000, motj1) == true && InstanceDeJeu.PlateauDeJeu.Recherche_Mot(motj1) ==true)
+                if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 130557, motj1) == true && InstanceDeJeu.PlateauDeJeu.Recherche_Mot(motj1) ==true)
                 {
                     joueur1.mots.Add(motj1);
                     Console.WriteLine("Bien joué ! ");
@@ -52,10 +52,12 @@
                         Console.WriteLine("Problème recherche dans le tableau");
                     }
                 }
+
+
+
+
                 Console.WriteLine("Joueur 2, saisissez votre mot : ");
                 string motj2 = Console.ReadLine();
-
-
                 if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 130557, motj2) == true && InstanceDeJeu.PlateauDeJeu.Recherche_Mot(motj2) ==true) // si ça existe dans le dico (mot francais)
                 {
                     
