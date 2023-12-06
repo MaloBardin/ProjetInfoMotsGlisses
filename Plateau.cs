@@ -42,11 +42,12 @@ namespace ProjetInfoMotsCroises
                     {
                         Console.Write(" ");
                         // ON AFFICHE RIEN CAR CARACTERE NUL
-                    } else
+                    }
+                    else
                     {
                         Console.Write(plateau[i, j]);
                     }
-                   
+
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write(" | ");
                 }
@@ -155,7 +156,7 @@ namespace ProjetInfoMotsCroises
             {
                 Console.WriteLine("Le fichier de lettre n'existe pas " + f.Message);
                 Console.WriteLine("Nous allons ainsi génerer complètement aléatoirement les lettres");
-                
+
                 //A  FINIR !!!!
 
                 for (int i = 0; i < tailleX; i++)
@@ -257,19 +258,19 @@ namespace ProjetInfoMotsCroises
                 if (indiceX == 10 && indiceY == 10)
                 {
                     //balade premiere ligne
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < plateau.GetLength(0); i++)
                     {
-                        if (word[indiceMot] == plateau[7, i])
+                        if (word[indiceMot] == plateau[plateau.GetLength(0) - 1, i])
                         {
                             wordPos[indiceMot, 0] = 7;
                             wordPos[indiceMot, 1] = i;
 
-                            if (SearchWordTab(word, 7, i, indiceMot + 1, wordPos)!=null)
-                            { 
-                                return wordPos; 
-                            } 
-                        } 
-                        
+                            if (SearchWordTab(word, plateau.GetLength(0) - 1, i, indiceMot + 1, wordPos) != null)
+                            {
+                                return wordPos;
+                            }
+                        }
+
                     }
 
 
@@ -277,19 +278,19 @@ namespace ProjetInfoMotsCroises
                 else
                 {
                     //CAS A GAUCHE
-                    if (indiceY-1>=0 && word[indiceMot] == plateau[indiceX, indiceY - 1])
+                    if (indiceY - 1 >= 0 && word[indiceMot] == plateau[indiceX, indiceY - 1])
                     {
-                        
+
                         wordPos[indiceMot, 0] = indiceX;
-                        wordPos[indiceMot, 1] = indiceY-1;
-                        if (SearchWordTab(word,indiceX,indiceY-1,indiceMot+1,wordPos) != null)
+                        wordPos[indiceMot, 1] = indiceY - 1;
+                        if (SearchWordTab(word, indiceX, indiceY - 1, indiceMot + 1, wordPos) != null)
                         {
                             return wordPos;
                         }
-                        
+
                     }
                     //CAS A GAUCHE EN HAUT
-                    if (indiceY - 1 >= 0 && indiceX-1>=0 && word[indiceMot] == plateau[indiceX-1, indiceY -1])
+                    if (indiceY - 1 >= 0 && indiceX - 1 >= 0 && word[indiceMot] == plateau[indiceX - 1, indiceY - 1])
                     {
                         wordPos[indiceMot, 0] = indiceX - 1;
                         wordPos[indiceMot, 1] = indiceY - 1;
@@ -311,15 +312,15 @@ namespace ProjetInfoMotsCroises
 
                     }
                     //CAS EN HAUT ET DROITE
-                    if (indiceY+1 <= 7 && indiceX-1>= 0&& word[indiceMot] == plateau[indiceX-1,indiceY+1])
+                    if (indiceY + 1 <= 7 && indiceX - 1 >= 0 && word[indiceMot] == plateau[indiceX - 1, indiceY + 1])
                     {
-                        wordPos[indiceMot, 0] = indiceX-1;
-                        wordPos[indiceMot, 1] = indiceY+1;
-                        if (SearchWordTab(word, indiceX-1, indiceY+1, indiceMot + 1, wordPos) != null)
+                        wordPos[indiceMot, 0] = indiceX - 1;
+                        wordPos[indiceMot, 1] = indiceY + 1;
+                        if (SearchWordTab(word, indiceX - 1, indiceY + 1, indiceMot + 1, wordPos) != null)
                         {
                             return wordPos;
                         }
-                        
+
                     }
                     //CAS A DROITE
                     if (indiceY + 1 <= 7 && word[indiceMot] == plateau[indiceX, indiceY + 1])
@@ -332,14 +333,14 @@ namespace ProjetInfoMotsCroises
                         }
 
                     }
-                     
+
 
 
 
 
                 }
 
-                
+
             }
 
 
@@ -362,20 +363,23 @@ namespace ProjetInfoMotsCroises
             {
                 retour = true;
                 return retour;
-            } else
+            }
+            else
             {
                 if (indiceX == 10 && indiceY == 10)
                 {
 
                     for (int i = 0; i < 8; i++)
                     {
-                        if (retour == false && word[indiceMot] == plateau[7, i]){
+                        if (retour == false && word[indiceMot] == plateau[7, i])
+                        {
                             retour = SearchWord(word, 7, i, indiceMot + 1);
                         }
                     }
 
-                   
-                } else
+
+                }
+                else
                 {
 
                     //condition pour regarder a gauche et a droite
@@ -384,11 +388,15 @@ namespace ProjetInfoMotsCroises
                         retour = SearchWord(word, indiceX, indiceY - 1, indiceMot + 1);
                         //on redscendre l'indice du mot si jamais ça ne marche aps
                         indiceMot--;
-                    } else if (retour == false && (indiceX + 1) >= 8 && word[indiceMot] == plateau[indiceX + 1,indiceY]) {
-                        retour = SearchWord(word, indiceX+1, indiceY, indiceMot + 1);
+                    }
+                    else if (retour == false && (indiceX + 1) >= 8 && word[indiceMot] == plateau[indiceX + 1, indiceY])
+                    {
+                        retour = SearchWord(word, indiceX + 1, indiceY, indiceMot + 1);
                         //on redscendre l'indice du mot si jamais ça ne marche aps
                         indiceMot--;
-                    } else if (retour == false && (indiceY+1)<= 7 && word[indiceMot]== plateau[indiceX, indiceY + 1]){
+                    }
+                    else if (retour == false && (indiceY + 1) <= 7 && word[indiceMot] == plateau[indiceX, indiceY + 1])
+                    {
                         retour = SearchWord(word, indiceX, indiceY + 1, indiceMot + 1);
                         //on redscendre l'indice du mot si jamais ça ne marche aps
                         indiceMot--;
@@ -397,28 +405,29 @@ namespace ProjetInfoMotsCroises
 
 
 
-                    
+
                 }
 
                 if (retour == true)
                 {
                     return true;
-                } else
+                }
+                else
                 {
                     return false;
                 }
-                 
-
-            }
-
-
-
-
-            
-
 
 
             }
+
+
+
+
+
+
+
+
+        }
 
 
 
@@ -440,21 +449,21 @@ namespace ProjetInfoMotsCroises
                 {
 
                     plateau[MatriceCoords[i, 0], MatriceCoords[i, 1]] = 'ç';
-                    
-                    
+
+
                 }
 
                 AffichageConsole();
 
                 //MODIF GRAVITE MATRICE
                 //on le fait 8 fois pour etre sur que tout est bien décaler jusqu'en bas
-                for (int u = 0; u < 8; u++)
+                for (int u = 0; u < plateau.GetLength(0); u++)
                 {
                     for (int j = 0; j < plateau.GetLength(1); j++)
                     {
                         for (int i = 0; i < plateau.GetLength(0); i++)
                         {
-                            if (i + 1 < plateau.GetLength(0) && (plateau[i + 1, j] == 'ç'|| plateau[i + 1, j] == '#'))
+                            if (i + 1 < plateau.GetLength(0) && (plateau[i + 1, j] == 'ç' || plateau[i + 1, j] == '#'))
                             {
                                 plateau[i + 1, j] = plateau[i, j];
                                 plateau[i, j] = '#';
@@ -479,13 +488,13 @@ namespace ProjetInfoMotsCroises
         }
 
 
-        }
-        
-
-
-
-
-        
-
     }
+
+
+
+
+
+
+
+}
 
