@@ -2,8 +2,11 @@
 {
     internal class Program
     {
+        
         static void Main(string[] args)
         {
+
+
             //ici, on déclare tout, les noms des joueurs, et l'heure pour suivre le temps
 
 
@@ -32,9 +35,10 @@
                 //     Malo    il faudra faire la vérification dans le plateau avec un "&&"
                 if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 130557, motj1) == true && InstanceDeJeu.PlateauDeJeu.Recherche_Mot(motj1) ==true)
                 {
+                    int scoremot = joueur1.calculscore(motj1);
                     joueur1.mots.Add(motj1);
                     Console.WriteLine("Bien joué ! ");
-                    joueur1.score += motj1.Length;
+                    joueur1.Add_Score(scoremot);
                     Console.WriteLine("Le score de " + joueur1.nom + " est de " + joueur1.score);
                     Console.WriteLine("Voici le tableau après ce tour : ");
                     InstanceDeJeu.PlateauDeJeu.AffichageConsole();
@@ -74,9 +78,6 @@
                     Console.WriteLine("Ce mot n'existe pas, vous avez perdu la main ");
                 }
             }
-
-
-
         }
     }
 }

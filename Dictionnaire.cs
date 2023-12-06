@@ -4,9 +4,12 @@
     {
         List<string> dico;
 
-
+        /// <summary>
+        /// Voici le constructeur, qui construit un disctionnaire et le retourne directement trié en utilisant la méthode de tri fusion
+        /// </summary>
         public Dictionnaire()
         {
+            
             this.dico = new List<string>();
 
 
@@ -18,7 +21,7 @@
                 dico.AddRange(words);
             }
             
-            Tri_XX(dico);
+            Tri_Fusion(dico);
 
         }
         public List<string> Dico
@@ -29,7 +32,11 @@
 
 
 
-        //méthode toString : 
+        /// <summary>
+        /// la fonction lit tous les mots du dictionnaire et les compte
+        /// </summary>
+        /// <returns>elle retourne une chaine de caractère qui décrit le dictionnaire
+        /// elle retourne donc la langue du dictionnaire et le nombre de mot par lettre</returns>        
         public static string toString()
         {
             string s = "Dans ce dictionnaire de langue française, il y a ";
@@ -57,17 +64,20 @@
             return s;
         }
         //méthodes pour l'algorithme de tri : 
-        public void Tri_XX(List<string> liste)
+        /// <summary>
+        /// On fait un tri fusion en récursif qui a une complexité en temps de nlog(n)
+        /// </summary>
+        /// <param name="liste"> Le paramètre est une liste de strings correspondants aux mots du dictionnaire </param>
+        public void Tri_Fusion(List<string> liste)
         {
             if (liste.Count <= 1)
                 return;
-
             int milieu = liste.Count / 2;
             List<string> gauche = liste.GetRange(0, milieu);
             List<string> droite = liste.GetRange(milieu, liste.Count - milieu);
 
-            Tri_XX(gauche);
-            Tri_XX(droite);
+            Tri_Fusion(gauche);
+            Tri_Fusion(droite);
 
             Fusionner(liste, gauche, droite);
         }
