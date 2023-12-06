@@ -234,13 +234,13 @@ namespace ProjetInfoMotsCroises
             try
             {
                 //SETUP TAILLE X TAILLE Y
-                string[] lines = File.ReadAllLines(filename + ".csgv");
+                string[] lines = File.ReadAllLines(filename + ".csv");
                 //string cheminFichier = filename + ".csv";
-                tailleY = lines.Length;// trouver la tailleX pour notre matrice
+                tailleX = lines.Length;// trouver la tailleX pour notre matrice
                 foreach (string line in lines)
                 {
                     string[] TabTemp = line.Split(';');
-                    tailleX = TabTemp.Length; // trouver la tailleX pour notre matrice
+                    tailleY = TabTemp.Length; // trouver la tailleX pour notre matrice
                 }
 
                 plateau = new char[tailleX, tailleY];
