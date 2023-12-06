@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,13 +12,40 @@ namespace ProjetInfoMotsCroises
         int tailleX;
         int tailleY;
         char[,] plateau;
+
+        /// <summary>
+        /// Constructeur qui appele directement ToRead pour lire/générer notre plateau
+        /// </summary>
+        /// <param name="filename"></param>
         public Plateau(string filename)
         {
 
             ToRead(filename);
-            //Console.WriteLine(SearchWord("coucou"));
+            
         }
 
+        /// <summary>
+        /// Permet de résumer le plateau en un string
+        /// </summary>
+        /// <returns>string décrivant la matrice</returns>
+        public string ToString()
+        {
+            string chaine = "";
+            for (int i = 0; i < tailleX; i++)
+            {
+                for (int j=0;j < tailleY; j++)
+                {
+                    chaine += plateau[i, j] + " ";
+                }
+                chaine += "\n";
+            }
+            return chaine;
+        }
+
+        /// <summary>
+        /// L'affichage console permet un affichage rapide du plateau à l'écran. Il peut-être appelé à n'importe quel instant dans le code 
+        /// et ne nécéssite pas de paramètres.
+        /// </summary>
         public void AffichageConsole()
         {
             Thread.Sleep(500);
@@ -40,7 +68,7 @@ namespace ProjetInfoMotsCroises
                     }
                     if (plateau[i, j] == '#')
                     {
-                        Console.Write(" ");
+                        Console.Write("#");
                         // ON AFFICHE RIEN CAR CARACTERE NUL
                     }
                     else
@@ -72,8 +100,16 @@ namespace ProjetInfoMotsCroises
             }
             Console.WriteLine();
 
+            
+
         }
 
+
+        /// <summary>
+        /// La fonction RandomGen s'occupe de générer aléatoirement une matrice du plateau si jamais il n'existe pas de fichier correspondant.
+        /// Pour cela, elle prends en compte le fichier Lettre.txt qui indique les lettres qui vont-être présente sur la matrice et leur probabilité
+        /// d'apparation (fichier entièrement modulable). Si le fichier n'existe pas, les lettres sont générées aléatoirement sans pondération.
+        /// </summary>
         public void RandomGen()
         {
 
@@ -188,19 +224,23 @@ namespace ProjetInfoMotsCroises
 
         }
 
-
+        /// <summary>
+        /// Fonction qui lit un fichier et aloue et la matrice plateau si celui-ci existe. Si le fichier n'existe pas / une erreur est produite, il s'occupe de créer aléatoirement
+        /// le plateau en suivant les pondérations à l'aide de la fonction RandomGen et du fichier lettre txt
+        /// </summary>
+        /// <param name="filename">Le nom du fichier est en parametre</param>
         public void ToRead(string filename)
         {
             try
             {
                 //SETUP TAILLE X TAILLE Y
-                string[] lines = File.ReadAllLines(filename + ".csv");
+                string[] lines = File.ReadAllLines(filename + ".csgv");
                 //string cheminFichier = filename + ".csv";
-                tailleY = lines.Length;
+                tailleY = lines.Length;// trouver la tailleX pour notre matrice
                 foreach (string line in lines)
                 {
                     string[] TabTemp = line.Split(';');
-                    tailleX = TabTemp.Length;
+                    tailleX = TabTemp.Length; // trouver la tailleX pour notre matrice
                 }
 
                 plateau = new char[tailleX, tailleY];
@@ -239,7 +279,15 @@ namespace ProjetInfoMotsCroises
             finally { Console.WriteLine(""); };
         }
 
-
+        /// <summary>
+        /// Cette fonvtion permet, a partir d'un mot en entrée, de vérifier récursivement si il existe dans notre matrice plateau
+        /// </summary>
+        /// <param name="word">le mot recherché</param>
+        /// <param name="indiceX">la positionX dans le plateau</param>
+        /// <param name="indiceY">la positionY dans le plateau</param>
+        /// <param name="indiceMot">la position dans mot</param>
+        /// <param name="wordPos">le tableau des positions des lettres trouvées</param>
+        /// <returns></returns>
         public int[,] SearchWordTab(string word, int indiceX = 10, int indiceY = 10, int indiceMot = 0, int[,] wordPos = null)//init a 10 pour montrer que c'est le start
         {
             //init tableau
@@ -352,8 +400,65 @@ namespace ProjetInfoMotsCroises
 
         }
 
+        /// <summary>
+        /// La fonction permet de regarder si le mot est dans la matrice. Pour cela elle appelle la fonction SearchWordTab qui lui donne un tableau de coordonées
+        /// Et si jamais ce dernier n'est pas nul, s'occupe de faire descendre les lettres avec une forme de gravité
+        /// </summary>
+        /// <param name="mot">Le parametre est un string qui correspond au mot rentré par le joueur</param>
+        /// <returns>La fonction renvoie un true or false pour savoir si le mot a bel et bien été accepté et la matrice du plateau est modifiée instantanément</returns>
+        public bool Recherche_Mot(string mot)
+        {
+            int[,] MatriceCoords = SearchWordTab(mot);
 
-        //FONCTION NON UTILISéE
+            if (MatriceCoords == null)
+            {
+
+                return false;
+            }
+            else //UN MOT VALIDE EST TROUVé
+            {
+                Console.WriteLine("1");
+                //MODIF PLATEAU
+                for (int i = 0; i < MatriceCoords.GetLength(0); i++)
+                {
+
+                    plateau[MatriceCoords[i, 0], MatriceCoords[i, 1]] = 'ç';
+
+
+                }
+
+
+                //MODIF GRAVITE MATRICE
+                //on le fait 8 fois pour etre sur que tout est bien décaler jusqu'en bas
+                for (int u = 0; u < plateau.GetLength(0); u++)
+                {
+                    for (int j = 0; j < plateau.GetLength(1); j++)
+                    {
+                        for (int i = 0; i < plateau.GetLength(0); i++)
+                        {
+                            if (i + 1 < plateau.GetLength(0) && (plateau[i + 1, j] == 'ç' || plateau[i + 1, j] == '#'))
+                            {
+                                plateau[i + 1, j] = plateau[i, j];
+                                plateau[i, j] = '#';
+                            }
+                        }
+                    }
+                }
+
+
+
+
+
+
+                return true;
+
+
+            }
+
+        }
+
+
+        //FONCTION NON UTILISéE MAIS UTILE POUR MIEUX COMPRENDRE NOTRE RECURSIVITEE
         public bool SearchWord(string word, int indiceX = 10, int indiceY = 10, int indiceMot = 0)//init a 10 pour montrer que c'est le start
         {
 
@@ -426,64 +531,6 @@ namespace ProjetInfoMotsCroises
 
 
 
-
-        }
-
-
-
-
-        public bool Recherche_Mot(string mot)
-        {
-            int[,] MatriceCoords = SearchWordTab(mot);
-
-            if (MatriceCoords == null)
-            {
-
-                return false;
-            }
-            else //UN MOT VALIDE EST TROUVé
-            {
-                Console.WriteLine("1");
-                //MODIF PLATEAU
-                for (int i = 0; i < MatriceCoords.GetLength(0); i++)
-                {
-
-                    plateau[MatriceCoords[i, 0], MatriceCoords[i, 1]] = 'ç';
-
-
-                }
-
-                AffichageConsole();
-
-                //MODIF GRAVITE MATRICE
-                //on le fait 8 fois pour etre sur que tout est bien décaler jusqu'en bas
-                for (int u = 0; u < plateau.GetLength(0); u++)
-                {
-                    for (int j = 0; j < plateau.GetLength(1); j++)
-                    {
-                        for (int i = 0; i < plateau.GetLength(0); i++)
-                        {
-                            if (i + 1 < plateau.GetLength(0) && (plateau[i + 1, j] == 'ç' || plateau[i + 1, j] == '#'))
-                            {
-                                plateau[i + 1, j] = plateau[i, j];
-                                plateau[i, j] = '#';
-                            }
-                        }
-                    }
-
-                    AffichageConsole();
-
-                }
-
-
-
-
-
-
-                return true;
-
-
-            }
 
         }
 
