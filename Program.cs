@@ -2,38 +2,36 @@
 {
     internal class Program
     {
-        
+
         static void Main(string[] args)
         {
+            string fileName = "Test1";
 
+            
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(" ███▄ ▄███▓ ▒█████  ▄▄▄█████▓  ██████                  ▄████  ██▓     ██▓  ██████   ██████ ▓█████   ██████ \r\n▓██▒▀█▀ ██▒▒██▒  ██▒▓  ██▒ ▓▒▒██    ▒                 ██▒ ▀█▒▓██▒    ▓██▒▒██    ▒ ▒██    ▒ ▓█   ▀ ▒██    ▒ \r\n▓██    ▓██░▒██░  ██▒▒ ▓██░ ▒░░ ▓██▄                  ▒██░▄▄▄░▒██░    ▒██▒░ ▓██▄   ░ ▓██▄   ▒███   ░ ▓██▄   \r\n▒██    ▒██ ▒██   ██░░ ▓██▓ ░   ▒   ██▒               ░▓█  ██▓▒██░    ░██░  ▒   ██▒  ▒   ██▒▒▓█  ▄   ▒   ██▒\r\n▒██▒   ░██▒░ ████▓▒░  ▒██▒ ░ ▒██████▒▒               ░▒▓███▀▒░██████▒░██░▒██████▒▒▒██████▒▒░▒████▒▒██████▒▒\r\n░ ▒░   ░  ░░ ▒░▒░▒░   ▒ ░░   ▒ ▒▓▒ ▒ ░                ░▒   ▒ ░ ▒░▓  ░░▓  ▒ ▒▓▒ ▒ ░▒ ▒▓▒ ▒ ░░░ ▒░ ░▒ ▒▓▒ ▒ ░\r\n░  ░      ░  ░ ▒ ▒░     ░    ░ ░▒  ░ ░                 ░   ░ ░ ░ ▒  ░ ▒ ░░ ░▒  ░ ░░ ░▒  ░ ░ ░ ░  ░░ ░▒  ░ ░\r\n░      ░   ░ ░ ░ ▒    ░      ░  ░  ░                 ░ ░   ░   ░ ░    ▒ ░░  ░  ░  ░  ░  ░     ░   ░  ░  ░  \r\n       ░       ░ ░                 ░                       ░     ░  ░ ░        ░        ░     ░  ░      ░  \r\n                                                                                                           ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Ce jeu est jouable à deux, munissez vous d'un compère et préparer vos dictionnaire avant une bataille sanglante pour la victoire !");
+            Console.WriteLine("N'oubliez pas que certains paramètres sont disponible dans la section PARAMETRE du menu principal ! Bon jeu !");
+            //Console.WriteLine("                          ........ \r\n                           ;::;;::;, \r\n                           ;::;;::;;, \r\n                          ;;:::;;::;;, \r\n          .vnmmnv%vnmnv%,.;;;:::;;::;;,  .,vnmnv%vnmnv, \r\n       vnmmmnv%vnmmmnv%vnmmnv%;;;;;;;%nmmmnv%vnmmnv%vnmmnv \r\n     vnmmnv%vnmmmmmnv%vnmmmmmnv%;:;%nmmmmmmnv%vnmmmnv%vnmmmnv \r\n    vnmmnv%vnmmmmmnv%vnmmmmmmmmnv%vnmmmmmmmmnv%vnmmmnv%vnmmmnv \r\n   vnmmnv%vnmmmmmnv%vnmmmmmmmmnv%vnmmmmmmmmmmnv%vnmmmnv%vnmmmnv \r\n  vnmmnv%vnmmmmmnv%vnmm;mmmmmmnv%vnmmmmmmmm;mmnv%vnmmmnv%vnmmmnv, \r\n vnmmnv%vnmmmmmnv%vnmm;' mmmmmnv%vnmmmmmmm;' mmnv%vnmmmnv%vnmmmnv \r\n vnmmnv%vnmmmmmnv%vn;;    mmmmnv%vnmmmmmm;;    nv%vnmmmmnv%vnmmmnv \r\nvnmmnv%vnmmmmmmnv%v;;      mmmnv%vnmmmmm;;      v%vnmmmmmnv%vnmmmnv \r\nvnmmnv%vnmmmmmmnv%vnmmmmmmmmm;;       mmmmmmmmmnv%vnmmmmmmnv%vnmmmnv \r\nvnmmnv%vnmmmmmmnv%vnmmmmmmmmmm;;     mmmmmmmmmmnv%vnmmmmmmnv%vnmmmnv \r\nvnmmnv%vnmmmmm nv%vnmmmmmmmmmmnv;, mmmmmmmmmmmmnv%vn;mmmmmnv%vnmmmnv \r\nvnmmnv%vnmmmmm  nv%vnmmmmmmmmmnv%;nmmmmmmmmmmmnv%vn; mmmmmnv%vnmmmnv \r\n`vnmmnv%vnmmmm,  v%vnmmmmmmmmmmnv%vnmmmmmmmmmmnv%v;  mmmmnv%vnnmmnv' \r\n vnmmnv%vnmmmm;,   %vnmmmmmmmmmnv%vnmmmmmmmmmnv%;'   mmmnv%vnmmmmnv \r\n  vnmmnv%vnmmmm;;,   nmmm;'              mmmm;;'    mmmnv%vnmmmmnv' \r\n  `vnmmnv%vnmmmmm;;,.         mmnv%v;,            mmmmnv%vnmmmmnv' \r\n   `vnmmnv%vnmmmmmmnv%vnmmmmmmmmnv%vnmmmmmmnv%vnmmmmmnv%vnmmmmnv' \r\n     `vnmvn%vnmmmmmmnv%vnmmmmmmmnv%vnmmmmmnv%vnmmmmmnv%vnmmmnv' \r\n         `vn%vnmmmmmmn%:%vnmnmmmmnv%vnmmmnv%:%vnmmnv%vnmnv'");
 
-            //ici, on déclare tout, les noms des joueurs, et l'heure pour suivre le temps
+            Jeu InstanceDeJeu = new Jeu(fileName); // création du jeu
+            Console.WriteLine("Comment s'appellera le premier joueur ?");
+            string namePlayer1 = Console.ReadLine();
+            Console.WriteLine("Et quel est le nom du second protagoniste ?");
+            string namePlayer2 = Console.ReadLine();
 
+            Joueur joueur1 = new Joueur(namePlayer1);
+            Joueur joueur2 = new Joueur(namePlayer2);
 
-            Jeu InstanceDeJeu = new Jeu("Test1");
-            InstanceDeJeu.Dico.ToString();
-          
+            Console.WriteLine("Vous êtes fin prêt à débuter la partie ! Que le grand jeu commence !");
 
+            bool gameIsFinished = false;
 
-            Joueur joueur1 = new Joueur();
-            Joueur joueur2 = new Joueur();
-
-            Console.WriteLine("Entrez le nom du joueur 1 : ");
-            joueur1.nom = Convert.ToString(Console.ReadLine());
-            Console.WriteLine("Entrez le nom du joueur 2 : ");
-            joueur2.nom = Convert.ToString(Console.ReadLine());
-            DateTime dateTime = DateTime.Now;
-            int temps0 = dateTime.Minute;
-
-
-            while (DateTime.Now.Minute < temps0 + 5)
+            while (gameIsFinished == true)
             {
-                //tour du joueur 1saisie du mot
-                Console.WriteLine("Joueur 1, saisissez votre mot : ");
-                string motj1 = Console.ReadLine();
-                //Vérification du mot dans le dictionnaire
-                //     Malo    il faudra faire la vérification dans le plateau avec un "&&"
-                if (InstanceDeJeu.Dico.RechercheDichoRecursif(motj1) == true && InstanceDeJeu.PlateauDeJeu.Recherche_Mot(motj1) ==true)
+                string motj1 = "maison";
+                if (InstanceDeJeu.Dico.RechercheDichoRecursif(0, 130557, motj1) == true && InstanceDeJeu.PlateauDeJeu.Recherche_Mot(motj1) == true)
                 {
                     int scoremot = joueur1.calculscore(motj1);
                     joueur1.mots.Add(motj1);
@@ -44,40 +42,13 @@
                     InstanceDeJeu.PlateauDeJeu.AffichageConsole();
 
                 }
-                else
-                {
-                    Console.WriteLine("Ce mot n'existe pas, vous avez perdu la main ");
-                    if(InstanceDeJeu.Dico.RechercheDichoRecursif(motj1) == false)
-                    {
-                        Console.WriteLine("Problème recherche dico");
-                    }
-                    if(InstanceDeJeu.PlateauDeJeu.SearchWordTab(motj1) ==null)
-                    {
-                        Console.WriteLine("Problème recherche dans le tableau");
-                    }
-                }
+
+                gameIsFinished = false;
 
 
 
-
-                Console.WriteLine("Joueur 2, saisissez votre mot : ");
-                string motj2 = Console.ReadLine();
-                if (InstanceDeJeu.Dico.RechercheDichoRecursif(motj2) == true && InstanceDeJeu.PlateauDeJeu.Recherche_Mot(motj2) ==true) // si ça existe dans le dico (mot francais)
-                {
-                    
-                    joueur2.mots.Add(motj2);
-                    Console.WriteLine("Bien joué ! ");
-                    joueur2.score += motj2.Length;
-                    Console.WriteLine("Le score de " + joueur2.nom + " est de " + joueur2.score);
-                    Console.WriteLine("Voici le tableau après ce tour : ");
-                    InstanceDeJeu.PlateauDeJeu.AffichageConsole();
-
-                }
-                else
-                {
-                    Console.WriteLine("Ce mot n'existe pas, vous avez perdu la main ");
-                }
             }
+
         }
     }
 }

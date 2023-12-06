@@ -8,9 +8,16 @@ namespace ProjetInfoMotsCroises
 {
     internal class Joueur
     {
-        public List<string> mots = new List<string>();
-        public int score = 0;
+        public List<string> mots;
+        public int score;
         public string nom; 
+
+        public Joueur(string nom)
+        {
+            this.nom = nom;
+            this.score = 0;
+            this.mots = new List<string>();
+        }
         public void Add_Mot(string mot)
         {
             if (mots.Contains(mot) == false)
