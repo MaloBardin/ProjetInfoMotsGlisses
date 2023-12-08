@@ -54,7 +54,7 @@ namespace ProjetInfoMotsCroises
             score += val;
 
         }
-        public int calculscore(string mot)
+        public void CalculScore(string mot)
         {
             int[] tabponderation = new int[26];
             char[] tabLettre = new char[26];
@@ -82,14 +82,14 @@ namespace ProjetInfoMotsCroises
                 {
                     score += tabponderation[mot[i]-97];
                 }
-                return score;
+                Add_Score(score);
             }
             catch (FileNotFoundException f)
             {
                 Console.WriteLine("Le fichier de lettre n'existe pas " + f.Message);
                 Console.WriteLine("Toutes les lettres seront considérées comme égales à 1");
                 score = mot.Length;
-                return score;
+                Add_Score(score);
             }
         }
     }

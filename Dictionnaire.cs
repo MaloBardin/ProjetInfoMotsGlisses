@@ -14,7 +14,7 @@
 
 
             string[] lines = File.ReadAllLines("Mots_Français.txt");
-            Console.WriteLine(toString());//
+            //Console.WriteLine(toString());//
             foreach (string line in lines)
             {
                 string[] words = line.Split(' ');

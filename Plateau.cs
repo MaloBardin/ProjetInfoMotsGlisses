@@ -68,7 +68,7 @@ namespace ProjetInfoMotsCroises
                     }
                     if (plateau[i, j] == '#')
                     {
-                        Console.Write("#");
+                        Console.Write(" ");
                         // ON AFFICHE RIEN CAR CARACTERE NUL
                     }
                     else
@@ -261,7 +261,7 @@ namespace ProjetInfoMotsCroises
                     x++;
                 }
 
-                AffichageConsole();
+                
 
 
 

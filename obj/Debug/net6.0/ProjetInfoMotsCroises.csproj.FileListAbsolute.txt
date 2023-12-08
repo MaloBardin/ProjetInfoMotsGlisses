@@ -27,3 +27,10 @@ C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\refint\Pr
 C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.pdb
 C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.genruntimeconfig.cache
 C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ref\ProjetInfoMotsCroises.dll
+C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\NAudio.dll
+C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\NAudio.Asio.dll
+C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\NAudio.Core.dll
+C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\NAudio.Midi.dll
+C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\NAudio.Wasapi.dll
+C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\bin\Debug\net6.0\NAudio.WinMM.dll
+C:\Users\Malob\Documents\GitHub\ProjetInfoMotsGlisses\obj\Debug\net6.0\ProjetInfoMotsCroises.csproj.CopyComplete
