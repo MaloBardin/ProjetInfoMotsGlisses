@@ -124,6 +124,7 @@
         //méthode de vérification du mot
         /// <summary>
         /// Vérification via recherche récursive d'un mot dans le dictionnaire à l'aide de la méthode de recherche dichotomique.
+        /// Cette recherche est également un algorithme utilisant la stratégie de "diviser pour régner"
         /// </summary>
         /// <param name="mot"> c'est le mot que l'on veut analyser</param>
         /// <param name="debut">position du premier terme du dictionnaire, en l'occurence 0</param>

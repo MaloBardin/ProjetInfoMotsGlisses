@@ -2,22 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace ProjetInfoMotsCroises
 {
     internal class Joueur
     {
+        //On déclare les attributs
         public List<string> mots;
         public int score;
         public string nom; 
 
+        /// <summary>
+        /// Voici le constructeur d'un joueur, défini par son nom, son score et la liste constituée par les mùots qu'il a déjà trouvé 
+        /// </summary>
+        /// <param name="nom">nom du joueur</param>
         public Joueur(string nom)
         {
             this.nom = nom;
             this.score = 0;
             this.mots = new List<string>();
         }
+
+        /// <summary>
+        /// La méthode ajoute le mot dans la liste des mots déjà trouvés par le joueur au cours de la partie
+        /// </summary>
+        /// <param name="mot"></param>
         public void Add_Mot(string mot)
         {
             if (mots.Contains(mot) == false)
@@ -26,6 +37,11 @@ namespace ProjetInfoMotsCroises
             }
 
         }
+        /// <summary>
+        /// Vérifie que le mot en paramètre ne fait pas partie de la liste des mots déjà trouvés par le joueur au cours de la partie
+        /// </summary>
+        /// <param name="mot">mot</param>
+        /// <returns></returns>
         public bool Contient(string mot)
         {
 
@@ -39,6 +55,10 @@ namespace ProjetInfoMotsCroises
             }
             return false;
         }
+        /// <summary>
+        /// retourne une chaîne de caractères qui décrit un joueur. 
+        /// </summary>
+        /// <returns>une chaine de caractère qui décrit ses mots et son score</returns>
         public string toString()
         {
             string description = "nom du joueur : " + nom + "\nmotstrouvés : ";
