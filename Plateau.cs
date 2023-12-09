@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -399,6 +400,28 @@ namespace ProjetInfoMotsCroises
 
 
         }
+
+
+        /// <summary>
+        /// IsTabEmpty permet de regarder l'ensemble de la matrice et de vérifier si la matrice est vide, si oui elle renvoie true, sinon false
+        /// </summary>
+        /// <returns></returns>
+        public bool IsTabEmpty()
+        {
+            for (int i = 0; i < tailleX; i++)
+            {
+                for (int j=0; j< tailleY; j++)
+                {
+                    if (plateau[i, j] != '#')
+                    {
+                        return false; //ON TROUVE UN CARACTERE QUI PERMET DE CONTINUER LA PARTIE
+                    }
+                }
+            }
+
+            return true;
+        }
+
 
         /// <summary>
         /// La fonction permet de regarder si le mot est dans la matrice. Pour cela elle appelle la fonction SearchWordTab qui lui donne un tableau de coordonées
