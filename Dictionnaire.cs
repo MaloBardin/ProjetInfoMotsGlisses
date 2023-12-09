@@ -1,4 +1,6 @@
-﻿namespace ProjetInfoMotsCroises
+﻿using NAudio.Wave.SampleProviders;
+
+namespace ProjetInfoMotsCroises
 {
     internal class Dictionnaire
     {
@@ -9,19 +11,27 @@
         /// </summary>
         public Dictionnaire()
         {
-            
+            //on crée 
             this.dico = new List<string>();
 
-
-            string[] lines = File.ReadAllLines("Mots_Français.txt");
-            //Console.WriteLine(toString());//
-            foreach (string line in lines)
+            try
             {
-                string[] words = line.Split(' ');
-                dico.AddRange(words);
+                string[] lines = File.ReadAllLines("Mots_Français.txt");
+                foreach (string line in lines)
+                {
+                    string[] words = line.Split(' ');
+                    dico.AddRange(words);
+                }
+
+                Tri_Fusion(dico);
             }
-            
-            Tri_Fusion(dico);
+            catch (FileNotFoundException f)
+            {
+                Console.WriteLine("Le fichier n'existe pas " + f.Message);
+            }
+
+            //Console.WriteLine(toString());//
+
 
         }
         public List<string> Dico

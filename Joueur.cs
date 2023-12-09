@@ -12,7 +12,7 @@ namespace ProjetInfoMotsCroises
         //On déclare les attributs
         public List<string> mots;
         public int score;
-        public string nom; 
+        public string nom;
 
         /// <summary>
         /// Voici le constructeur d'un joueur, défini par son nom, son score et la liste constituée par les mùots qu'il a déjà trouvé 
@@ -28,7 +28,7 @@ namespace ProjetInfoMotsCroises
         /// <summary>
         /// La méthode ajoute le mot dans la liste des mots déjà trouvés par le joueur au cours de la partie
         /// </summary>
-        /// <param name="mot"></param>
+        /// <param name="mot">mot entré par le joeur</param>
         public void Add_Mot(string mot)
         {
             if (mots.Contains(mot) == false)
@@ -41,7 +41,7 @@ namespace ProjetInfoMotsCroises
         /// Vérifie que le mot en paramètre ne fait pas partie de la liste des mots déjà trouvés par le joueur au cours de la partie
         /// </summary>
         /// <param name="mot">mot</param>
-        /// <returns></returns>
+        /// <returns>un booléen</returns>
         public bool Contient(string mot)
         {
 
@@ -56,7 +56,7 @@ namespace ProjetInfoMotsCroises
             return false;
         }
         /// <summary>
-        /// retourne une chaîne de caractères qui décrit un joueur. 
+        /// retourne une chaîne de caractères qui décrit un joueur.
         /// </summary>
         /// <returns>une chaine de caractère qui décrit ses mots et son score</returns>
         public string toString()
@@ -69,12 +69,22 @@ namespace ProjetInfoMotsCroises
             description += "score : " + score + "\n";
             return description;
         }
+        /// <summary>
+        /// Ajoute une valeur au score du joueur
+        /// </summary>
+        /// <param name="val"> entre la valeur à ajouter, qui va dépendre de la méthode calculscore quand ça va être utilisé dasn le main </param>
         public void Add_Score(int val)
         {
             score += val;
 
         }
-        public void CalculScore(string mot)
+        /// <summary>
+        /// Calcule le score d'un mot entré par un joueur 
+        /// Réutilisation du même principe que pour le code de la méthode RandomGen()
+        /// </summary>
+        /// <param name="mot">mot entré</param>
+        /// <returns>score associé au mot</returns>
+        public int CalculScore(string mot)
         {
             int[] tabponderation = new int[26];
             char[] tabLettre = new char[26];
@@ -89,7 +99,7 @@ namespace ProjetInfoMotsCroises
 
                 //LECTURE FICHIER LETTRE PONDERATION
                 int posLigne = 0;
-                
+
                 foreach (string line in lines)
                 {
 
@@ -100,16 +110,16 @@ namespace ProjetInfoMotsCroises
                 }
                 for (int i = 0; i < mot.Length; i++)
                 {
-                    score += tabponderation[mot[i]-97];
+                    score += tabponderation[mot[i] - 97];
                 }
-                Add_Score(score);
+                return score;
             }
             catch (FileNotFoundException f)
             {
                 Console.WriteLine("Le fichier de lettre n'existe pas " + f.Message);
                 Console.WriteLine("Toutes les lettres seront considérées comme égales à 1");
                 score = mot.Length;
-                Add_Score(score);
+                return score;
             }
         }
     }
