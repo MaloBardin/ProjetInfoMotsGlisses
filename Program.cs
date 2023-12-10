@@ -86,7 +86,7 @@
                     {
 
 
-                        Console.WriteLine(joueur1.nom + ", merci de rentrer votre mot !");
+                        Console.WriteLine(joueur1.nom + " , merci de rentrer votre mot !");
                         player1Word = Console.ReadLine();
 
 
@@ -95,9 +95,9 @@
                         {
                             Console.WriteLine("Votre mot n'est ni dans le plateau ni dans le dictionnaire c'est pitoyable");
                         }
-                        else if (joueur2.Contient(player1Word) == true)
+                        else if (joueur1.Contient(player1Word) == true)
                         {
-                            Console.WriteLine("Vous avez déja joué le mot : " + player2Word + ", merci de jouer un autre mot");
+                            Console.WriteLine("Vous avez déja joué le mot : " + player1Word + ", merci de jouer un autre mot");
                         }
                         else if (InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) == false)
                         {
@@ -106,7 +106,7 @@
                         else if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player1Word) == null)
                         {
                             Console.WriteLine(player1Word + " n'est pas dans le jeu !");
-                        }
+                        } 
 
                     } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) != true || joueur1.Contient(player1Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player1Word) != true);//bouger la detection de la matrice en bas
 
@@ -160,7 +160,7 @@
                         else if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player2Word) == null)
                         {
                             Console.WriteLine(player2Word + " n'est pas dans le jeu !");
-                        }
+                        } 
 
                     } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player2Word) != true || joueur2.Contient(player2Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player2Word) != true);//bouger la detection de la matrice en bas
 
@@ -193,6 +193,11 @@
             }
             
             Console.Clear();
+
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("\r\n ▄▄▄▄    ██▀███   ▄▄▄    ██▒   █▓ ▒█████                                 ▐██▌ \r\n▓█████▄ ▓██ ▒ ██▒▒████▄ ▓██░   █▒▒██▒  ██▒                               ▐██▌ \r\n▒██▒ ▄██▓██ ░▄█ ▒▒██  ▀█▄▓██  █▒░▒██░  ██▒                               ▐██▌ \r\n▒██░█▀  ▒██▀▀█▄  ░██▄▄▄▄██▒██ █░░▒██   ██░                               ▓██▒ \r\n░▓█  ▀█▓░██▓ ▒██▒ ▓█   ▓██▒▒▀█░  ░ ████▓▒░                               ▒▄▄  \r\n░▒▓███▀▒░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ▐░  ░ ▒░▒░▒░                                ░▀▀▒ \r\n▒░▒   ░   ░▒ ░ ▒░  ▒   ▒▒ ░░ ░░    ░ ▒ ▒░                                ░  ░ \r\n ░    ░   ░░   ░   ░   ▒     ░░  ░ ░ ░ ▒                                    ░ \r\n ░         ░           ░  ░   ░      ░ ░                                 ░    \r\n      ░                      ░                                                \r\n");
+            Console.ForegroundColor= ConsoleColor.White;
             Console.SetCursorPosition(10, 20);
             if (joueur1.score > joueur2.score)
             {
@@ -230,7 +235,7 @@
         {
 
 
-            string fileName = "Test1";
+            string fileName = "Test2";
             Console.SetCursorPosition(10, 20);
             Console.WriteLine("Ce jeu est jouable à deux, munissez vous d'un compère et préparez vos dictionnaires avant de mener une bataille sanglante pour la victoire !");
             Console.SetCursorPosition(10, 21);
@@ -265,29 +270,41 @@
             {
                 outputDevice.Init(audioFile);
                 outputDevice.Play();
-                int selection = 0;
+                string selection = "";
+
                 do
                 {
                     Console.SetCursorPosition(40, 28);
                     Console.WriteLine("Dans quel menu voulez-vous aller ?");
 
                     Console.SetCursorPosition(40, 30);
-                    selection = int.Parse(Console.ReadLine());//FIX LE INT EN STRING PRB
-                } while (selection < 1 || selection > 3);
+                    selection = Console.ReadLine();
 
-                if (selection == 1)
+                    if (selection != "1" && selection != "2" && selection != "3")
+                    {
+                        Console.SetCursorPosition(40, 32);
+                        Console.WriteLine("Saisie incorrecte. Veuillez entrer 1, 2 ou 3.");
+                    }
+
+                } while (selection != "1" && selection != "2" && selection != "3");
+
+                switch (selection)
                 {
-                    Console.Clear();
-                    Play(fileName);
-                } else if (selection == 2){
-                    Console.Clear();
-                    Settings();
-                }  else 
-                {
-                
-                    Quit();
-                } 
-                
+                    case "1":
+                        Console.Clear();
+                        Play(fileName);
+                        break;
+
+                    case "2":
+                        Console.Clear();
+                        Settings();
+                        break;
+
+                    case "3":
+                        Quit();
+                        break;
+                }
+
             }
 
 
