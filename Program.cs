@@ -11,10 +11,9 @@
 
     internal class Program
     {
-
-  
-
+        
         bool sound = true;
+
 
         static void Settings()
         {
@@ -71,7 +70,7 @@
                 
 
 
-                //verif qu'il existe au moins 1 mot
+                //verif qu'il existe au moins 1 mot dans la matrice
 
 
                 string player1Word = "";
