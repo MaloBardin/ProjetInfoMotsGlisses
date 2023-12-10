@@ -28,21 +28,34 @@
         static void Play()
         {
 
-
-
+            
+            
             string fileName = "Test1";
 
             Jeu InstanceDeJeu = new Jeu(fileName); // création du jeu
 
 
-
+            Console.SetCursorPosition(40, 20);
             Console.WriteLine("Comment s'appellera le premier joueur ?");
+            Console.SetCursorPosition(40, 21);
             string namePlayer1 = Console.ReadLine();
+            Console.SetCursorPosition(40, 22);
             Console.WriteLine("Et quel est le nom du second protagoniste ?");
+            Console.SetCursorPosition(40, 23);
             string namePlayer2 = Console.ReadLine();
 
-            Joueur joueur1 = new Joueur(namePlayer1);
-            Joueur joueur2 = new Joueur(namePlayer2);
+            Random random = new Random();
+            int randomPlayer = random.Next(1, 3);
+
+            if (randomPlayer == 1)
+            {
+                Joueur joueur1 = new Joueur(namePlayer1);
+                Joueur joueur2 = new Joueur(namePlayer2);
+            } else
+            {
+                Joueur joueur1 = new Joueur(namePlayer2);
+                Joueur joueur2 = new Joueur(namePlayer1);
+            }
 
             Console.WriteLine("Vous êtes fin prêt à débuter la partie ! Que le grand jeu commence !");
 
@@ -59,17 +72,41 @@
                 string player1Word = "";
                 string player2Word = "";
 
+                gameIsFinished = InstanceDeJeu.PlateauDeJeu.IsTabEmpty();
+                Console.Clear();
+                InstanceDeJeu.PlateauDeJeu.AffichageConsole();
                 do
                 {
-                    Console.Clear();
-                    InstanceDeJeu.PlateauDeJeu.AffichageConsole();
+
+
                     Console.WriteLine(joueur1.nom + ", merci de rentrer votre mot !");
                     player1Word = Console.ReadLine();
 
-                } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) != true || joueur1.Contient(player1Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player1Word) != true);
+
+
+                    if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player1Word) == null && InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) == false)
+                    {
+                        Console.WriteLine("Votre mot n'est ni dans le plateau ni dans le dictionnaire c'est pitoyable");
+                    }
+                    else if (joueur2.Contient(player1Word) == true)
+                    {
+                        Console.WriteLine("Vous avez déja joué le mot : " + player2Word + ", merci de jouer un autre mot");
+                    }
+                    else if (InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) == false)
+                    {
+                        Console.WriteLine(player1Word + " n'est pas dans le dictionnaire français !");
+                    }
+                    else if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player1Word) == null)
+                    {
+                        Console.WriteLine(player1Word + " n'est pas dans le jeu !");
+                    }
+
+                } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) != true || joueur1.Contient(player1Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player1Word) != true || gameIsFinished == true);//bouger la detection de la matrice en bas
 
                 joueur1.CalculScore(player1Word);
                 joueur1.Add_Mot(player1Word);
+
+
                 string mp3FilePathClapping = "clap.mp3";
                 using (var audioFile = new AudioFileReader(mp3FilePathClapping))
                 using (var outputDevice = new WaveOutEvent())
@@ -77,9 +114,12 @@
                     outputDevice.Init(audioFile);
                     Console.WriteLine("Mot validé votre score est désormais de : " + joueur1.score + " !");
                     outputDevice.Play();
-                    Thread.Sleep(700);
+                    Thread.Sleep(1000);
                    
                 }
+
+
+
 
 
                 //TOUR DU JOUEUR 2
@@ -93,32 +133,39 @@
                     Console.WriteLine(joueur2.nom + ", merci de rentrer votre mot !");
                     player2Word = Console.ReadLine();
 
-                    bool isInMatrice=
-
-                    if (joueur1.Contient(player2Word) == true)
+                    
+                    if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player2Word) == null && InstanceDeJeu.Dico.RechercheDichoRecursif(player2Word) == false)
+                    {
+                        Console.WriteLine("Votre mot n'est ni dans le plateau ni dans le dictionnaire c'est pitoyable");
+                    }
+                      else if (joueur2.Contient(player2Word) == true)
                     {
                         Console.WriteLine("Vous avez déja joué le mot : "+player2Word + ", merci de jouer un autre mot");
                     } else if (InstanceDeJeu.Dico.RechercheDichoRecursif(player2Word) == false)
                     {
                         Console.WriteLine(player2Word + " n'est pas dans le dictionnaire français !");
-                    } else if 
+                    } else if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player2Word) ==null)
+                    {
+                        Console.WriteLine(player2Word + " n'est pas dans le jeu !");
+                    } 
 
-                } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player2Word) != true || joueur1.Contient(player2Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player2Word) != true|| gameIsFinished==true);//bouger la detection de la matrice en bas
+                } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player2Word) != true || joueur2.Contient(player2Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player2Word) != true|| gameIsFinished==true);//bouger la detection de la matrice en bas
 
                 joueur2.CalculScore(player2Word);
                 joueur2.Add_Mot(player2Word);
 
-                
                 using (var audioFile = new AudioFileReader(mp3FilePathClapping))
                 using (var outputDevice = new WaveOutEvent())
                 {
                     outputDevice.Init(audioFile);
                     Console.WriteLine("Mot validé votre score est désormais de : " + joueur2.score + " !");
                     outputDevice.Play();
-                    Thread.Sleep(700);
+                    Thread.Sleep(1000);
+
                 }
+              
 
-
+            
 
                 gameIsFinished = InstanceDeJeu.PlateauDeJeu.IsTabEmpty();
 
@@ -166,6 +213,8 @@
         static void Main(string[] args)
         {
 
+            
+
             Console.SetCursorPosition(10, 20);
             Console.WriteLine("Ce jeu est jouable à deux, munissez vous d'un compère et préparez vos dictionnaires avant de mener une bataille sanglante pour la victoire !");
             Console.SetCursorPosition(10, 21);
@@ -195,11 +244,11 @@
             string mp3FilePath = "introCR.mp3"; // Replace this with the actual path to your MP3 file
 
           
-                using (var audioFile = new AudioFileReader(mp3FilePath))
+            using (var audioFile = new AudioFileReader(mp3FilePath))
             using (var outputDevice = new WaveOutEvent())
             {
                 outputDevice.Init(audioFile);
-                outputDevice.Play();
+                //outputDevice.Play();
                 int selection = 0;
                 do
                 {

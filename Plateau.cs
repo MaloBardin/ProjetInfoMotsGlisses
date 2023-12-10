@@ -307,11 +307,11 @@ namespace ProjetInfoMotsCroises
                 if (indiceX == 10 && indiceY == 10)
                 {
                     //balade premiere ligne
-                    for (int i = 0; i < plateau.GetLength(0); i++)
+                    for (int i = 0; i < plateau.GetLength(1); i++)
                     {
                         if (word[indiceMot] == plateau[plateau.GetLength(0) - 1, i])
                         {
-                            wordPos[indiceMot, 0] = 7;
+                            wordPos[indiceMot, 0] = plateau.GetLength(0)-1;
                             wordPos[indiceMot, 1] = i;
 
                             if (SearchWordTab(word, plateau.GetLength(0) - 1, i, indiceMot + 1, wordPos) != null)
@@ -322,12 +322,12 @@ namespace ProjetInfoMotsCroises
 
                     }
 
-
+                    //ADD UNE CONDITION POUR NE PAS AVOIR A RETOURNBER EN ARRIERE
                 }
                 else
                 {
                     //CAS A GAUCHE
-                    if (indiceY - 1 >= 0 && word[indiceMot] == plateau[indiceX, indiceY - 1])
+                    if (indiceY - 1 >= 0 && word[indiceMot] == plateau[indiceX, indiceY - 1] && (indiceY - 1) != wordPos[indiceMot-2,1])//la derniere condition évite de retourner sur une lettre déja utilisée
                     {
 
                         wordPos[indiceMot, 0] = indiceX;
@@ -372,7 +372,7 @@ namespace ProjetInfoMotsCroises
 
                     }
                     //CAS A DROITE
-                    if (indiceY + 1 <= 7 && word[indiceMot] == plateau[indiceX, indiceY + 1])
+                    if (indiceY + 1 <= 7 && word[indiceMot] == plateau[indiceX, indiceY + 1] && (indiceY+1) != wordPos[indiceMot - 2, 1])//la derniere condition évite de retourner sur une lettre déja utilisée
                     {
                         wordPos[indiceMot, 0] = indiceX;
                         wordPos[indiceMot, 1] = indiceY + 1;
@@ -403,16 +403,16 @@ namespace ProjetInfoMotsCroises
 
 
         /// <summary>
-        /// IsTabEmpty permet de regarder l'ensemble de la matrice et de vérifier si la matrice est vide, si oui elle renvoie true, sinon false
+        /// IsTabEmpty permet de regarder l'ensemble de la matrice et de vérifier si celle-ci est vide
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true si la matrice de jeu est vide false sinon</returns>
         public bool IsTabEmpty()
         {
             for (int i = 0; i < tailleX; i++)
             {
                 for (int j=0; j< tailleY; j++)
                 {
-                    if (plateau[i, j] != '#')
+                    if (plateau[i, j] != '#' && plateau[i,j]!=' ')
                     {
                         return false; //ON TROUVE UN CARACTERE QUI PERMET DE CONTINUER LA PARTIE
                     }
@@ -440,7 +440,7 @@ namespace ProjetInfoMotsCroises
             }
             else //UN MOT VALIDE EST TROUVé
             {
-                Console.WriteLine("1");
+                
                 //MODIF PLATEAU
                 for (int i = 0; i < MatriceCoords.GetLength(0); i++)
                 {

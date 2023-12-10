@@ -112,6 +112,7 @@ namespace ProjetInfoMotsCroises
                 {
                     score += tabponderation[mot[i] - 97];
                 }
+                Add_Score(score);
                 return score;
             }
             catch (FileNotFoundException f)
@@ -119,6 +120,7 @@ namespace ProjetInfoMotsCroises
                 Console.WriteLine("Le fichier de lettre n'existe pas " + f.Message);
                 Console.WriteLine("Toutes les lettres seront considérées comme égales à 1");
                 score = mot.Length;
+                Add_Score(score);
                 return score;
             }
         }
