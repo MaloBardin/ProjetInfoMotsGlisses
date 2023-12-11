@@ -157,7 +157,14 @@
                     
                     //Boucle a faire tant que le mot n'est pas valide /
                     do
-                    {   //Le tour commence et le joueur1 commence a rentrer son mot
+                    {
+                        TimeSpan differenceTour = DateTime.Now - HeureDuDebutDeTour; // la diff entre le temps actuel et le début
+                        TimeSpan tempsRestantTour = ChronoFinTour - differenceTour; // diff entre temps avant fin du tour et l'écart actuel
+                        Console.SetCursorPosition(100, 6); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre tour : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantTour); Console.ForegroundColor = ConsoleColor.White;// affichage horloge
+
+
+
+                        //Le tour commence et le joueur1 commence a rentrer son mot
                         Console.SetCursorPosition(0, 38);
                         Console.WriteLine(InstanceDeJeu.Joueur1.nom + " , merci de rentrer votre mot !");
                         Console.SetCursorPosition(0, 39);
@@ -267,6 +274,9 @@
 
                     do
                     {
+                        TimeSpan differenceTour = DateTime.Now - HeureDuDebutDeTour; // la diff entre le temps actuel et le début
+                        TimeSpan tempsRestantTour = ChronoFinTour - differenceTour; // diff entre temps avant fin du tour et l'écart actuel
+                        Console.SetCursorPosition(100, 6); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre tour : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantTour); Console.ForegroundColor = ConsoleColor.White;// affichage horloge
                         Console.SetCursorPosition(0, 38);
                         Console.WriteLine(InstanceDeJeu.Joueur2.nom + " , merci de rentrer votre mot !");
                         Console.SetCursorPosition(0, 39);
@@ -329,7 +339,31 @@
             Console.Clear();
 
             //Affichage du bravo & écran de fin
-            Console.ForegroundColor = ConsoleColor.Cyan; Console.Write("\r\n ▄▄▄▄    ██▀███   ▄▄▄    ██▒   █▓ ▒█████                                 ▐██▌ \r\n▓█████▄ ▓██ ▒ ██▒▒████▄ ▓██░   █▒▒██▒  ██▒                               ▐██▌ \r\n▒██▒ ▄██▓██ ░▄█ ▒▒██  ▀█▄▓██  █▒░▒██░  ██▒                               ▐██▌ \r\n▒██░█▀  ▒██▀▀█▄  ░██▄▄▄▄██▒██ █░░▒██   ██░                               ▓██▒ \r\n░▓█  ▀█▓░██▓ ▒██▒ ▓█   ▓██▒▒▀█░  ░ ████▓▒░                               ▒▄▄  \r\n░▒▓███▀▒░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ▐░  ░ ▒░▒░▒░                                ░▀▀▒ \r\n▒░▒   ░   ░▒ ░ ▒░  ▒   ▒▒ ░░ ░░    ░ ▒ ▒░                                ░  ░ \r\n ░    ░   ░░   ░   ░   ▒     ░░  ░ ░ ░ ▒                                    ░ \r\n ░         ░           ░  ░   ░      ░ ░                                 ░    \r\n      ░                      ░                                                \r\n"); Console.ForegroundColor= ConsoleColor.White; Console.SetCursorPosition(10, 20);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(25, 15);
+            Console.WriteLine(" ▄▄▄▄    ██▀███   ▄▄▄    ██▒   █▓ ▒█████         ▐██▌ ");
+            Console.SetCursorPosition(25, 16);
+            Console.WriteLine("▓█████▄ ▓██ ▒ ██▒▒████▄ ▓██░   █▒▒██▒  ██▒       ▐██▌ ");
+            Console.SetCursorPosition(25, 17);
+            Console.WriteLine("▒██▒ ▄██▓██ ░▄█ ▒▒██  ▀█▄▓██  █▒░▒██░  ██▒       ▐██▌ ");
+            Console.SetCursorPosition(25, 18);
+            Console.WriteLine("▒██░█▀  ▒██▀▀█▄  ░██▄▄▄▄██▒██ █░░▒██   ██░       ▓██▒ ");
+            Console.SetCursorPosition(25, 19);
+            Console.WriteLine("░▓█  ▀█▓░██▓ ▒██▒ ▓█   ▓██▒▒▀█░  ░ ████▓▒░       ▒▄▄  ");
+            Console.SetCursorPosition(25, 20);
+            Console.WriteLine("░▒▓███▀▒░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ▐░  ░ ▒░▒░▒░        ░▀▀▒ ");
+            Console.SetCursorPosition(25, 21);
+            Console.WriteLine("▒░▒   ░   ░▒ ░ ▒░  ▒   ▒▒ ░░ ░░    ░ ▒ ▒░        ░  ░ ");
+            Console.SetCursorPosition(25, 22);
+            Console.WriteLine(" ░    ░   ░░   ░   ░   ▒     ░░  ░ ░ ░ ▒            ░ ");
+            Console.SetCursorPosition(25, 23);
+            Console.WriteLine(" ░         ░           ░  ░   ░      ░ ░         ░    ");
+            Console.SetCursorPosition(25, 24);
+            Console.WriteLine("      ░                      ░                        ");
+
+
+
+
             if (InstanceDeJeu.Joueur1.score > InstanceDeJeu.Joueur2.score)
             {
                 Console.WriteLine("Le gagnant de cette glaciale partie est : " + InstanceDeJeu.Joueur1.nom + " et son score est de : " + InstanceDeJeu.Joueur1.score);
@@ -384,8 +418,29 @@
 
             //Nom du jeu en ASCII
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.SetCursorPosition(0, 10); Console.WriteLine(" ███▄ ▄███▓ ▒█████  ▄▄▄█████▓  ██████                  ▄████  ██▓    ▄▄▄       ▄████▄   ██▓ ▄▄▄       ██▓ ██▀███  ▓█████   ██████    \r\n▓██▒▀█▀ ██▒▒██▒  ██▒▓  ██▒ ▓▒▒██    ▒                 ██▒ ▀█▒▓██▒   ▒████▄    ▒██▀ ▀█  ▓██▒▒████▄    ▓██▒▓██ ▒ ██▒▓█   ▀ ▒██    ▒    \r\n▓██    ▓██░▒██░  ██▒▒ ▓██░ ▒░░ ▓██▄                  ▒██░▄▄▄░▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▒██▒▒██  ▀█▄  ▒██▒▓██ ░▄█ ▒▒███   ░ ▓██▄      \r\n▒██    ▒██ ▒██   ██░░ ▓██▓ ░   ▒   ██▒               ░▓█  ██▓▒██░   ░██▄▄▄▄██ ▒▓▓▄ ▄██▒░██░░██▄▄▄▄██ ░██░▒██▀▀█▄  ▒▓█  ▄   ▒   ██▒   \r\n▒██▒   ░██▒░ ████▓▒░  ▒██▒ ░ ▒██████▒▒               ░▒▓███▀▒░██████▒▓█   ▓██▒▒ ▓███▀ ░░██░ ▓█   ▓██▒░██░░██▓ ▒██▒░▒████▒▒██████▒▒   \r\n░ ▒░   ░  ░░ ▒░▒░▒░   ▒ ░░   ▒ ▒▓▒ ▒ ░                ░▒   ▒ ░ ▒░▓  ░▒▒   ▓▒█░░ ░▒ ▒  ░░▓   ▒▒   ▓▒█░░▓  ░ ▒▓ ░▒▓░░░ ▒░ ░▒ ▒▓▒ ▒ ░   \r\n░  ░      ░  ░ ▒ ▒░     ░    ░ ░▒  ░ ░                 ░   ░ ░ ░ ▒  ░ ▒   ▒▒ ░  ░  ▒    ▒ ░  ▒   ▒▒ ░ ▒ ░  ░▒ ░ ▒░ ░ ░  ░░ ░▒  ░ ░   \r\n░      ░   ░ ░ ░ ▒    ░      ░  ░  ░                 ░ ░   ░   ░ ░    ░   ▒   ░         ▒ ░  ░   ▒    ▒ ░  ░░   ░    ░   ░  ░  ░     \r\n       ░       ░ ░                 ░                       ░     ░  ░     ░  ░░ ░       ░        ░  ░ ░     ░        ░  ░      ░     \r\n                                                                              ░                                                      "); Console.ForegroundColor = ConsoleColor.White; Console.WriteLine("\n\n");
+            Console.ForegroundColor = ConsoleColor.Blue; Console.SetCursorPosition(0, 10);
+            Console.SetCursorPosition(20, 5);
+            Console.WriteLine(" ███▄ ▄███▓ ▒█████  ▄▄▄█████▓  ██████      ▄████  ██▓    ▄▄▄       ▄████▄   ██▓ ▄▄▄       ██▓ ██▀███  ▓█████   ██████ ");
+            Console.SetCursorPosition(20, 6);
+            Console.WriteLine("▓██▒▀█▀ ██▒▒██▒  ██▒▓  ██▒ ▓▒▒██    ▒     ██▒ ▀█▒▓██▒   ▒████▄    ▒██▀ ▀█  ▓██▒▒████▄    ▓██▒▓██ ▒ ██▒▓█   ▀ ▒██    ▒ ");
+            Console.SetCursorPosition(20, 7);
+            Console.WriteLine("▓██    ▓██░▒██░  ██▒▒ ▓██░ ▒░░ ▓██▄      ▒██░▄▄▄░▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▒██▒▒██  ▀█▄  ▒██▒▓██ ░▄█ ▒▒███   ░ ▓██▄   ");
+            Console.SetCursorPosition(20, 8);
+            Console.WriteLine("▒██    ▒██ ▒██   ██░░ ▓██▓ ░   ▒   ██▒   ░▓█  ██▓▒██░   ░██▄▄▄▄██ ▒▓▓▄ ▄██▒░██░░██▄▄▄▄██ ░██░▒██▀▀█▄  ▒▓█  ▄   ▒   ██▒");
+            Console.SetCursorPosition(20, 9);
+            Console.WriteLine("▒██▒   ░██▒░ ████▓▒░  ▒██▒ ░ ▒██████▒▒   ░▒▓███▀▒░██████▒▓█   ▓██▒▒ ▓███▀ ░░██░ ▓█   ▓██▒░██░░██▓ ▒██▒░▒████▒▒██████▒▒");
+            Console.SetCursorPosition(20, 10);
+            Console.WriteLine("░ ▒░   ░  ░░ ▒░▒░▒░   ▒ ░░   ▒ ▒▓▒ ▒ ░    ░▒   ▒ ░ ▒░▓  ░▒▒   ▓▒█░░ ░▒ ▒  ░░▓   ▒▒   ▓▒█░░▓  ░ ▒▓ ░▒▓░░░ ▒░ ░▒ ▒▓▒ ▒ ░");
+            Console.SetCursorPosition(20, 11);
+            Console.WriteLine("░  ░      ░  ░ ▒ ▒░     ░    ░ ░▒  ░ ░     ░   ░ ░ ░ ▒  ░ ▒   ▒▒ ░  ░  ▒    ▒ ░  ▒   ▒▒ ░ ▒ ░  ░▒ ░ ▒░ ░ ░  ░░ ░▒  ░ ░");
+            Console.SetCursorPosition(20, 12);
+            Console.WriteLine("░      ░   ░ ░ ░ ▒    ░      ░  ░  ░     ░ ░   ░   ░ ░    ░   ▒   ░         ▒ ░  ░   ▒    ▒ ░  ░░   ░    ░   ░  ░  ░  ");
+            Console.SetCursorPosition(20, 13);
+            Console.WriteLine("        ░       ░ ░                 ░           ░     ░  ░     ░  ░░ ░       ░        ░  ░ ░     ░        ░  ░      ░ ");
+            Console.SetCursorPosition(20, 14);
+            Console.WriteLine("                                                                  ░                                                   ");
 
+            Console.ForegroundColor = ConsoleColor.White;
             //MENU
             Console.SetCursorPosition(60, 22);
             Console.WriteLine("1)    JOUER ");
