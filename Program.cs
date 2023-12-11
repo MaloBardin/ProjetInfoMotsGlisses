@@ -35,6 +35,7 @@
 
             Jeu InstanceDeJeu = new Jeu(fileName); // création du jeu
 
+            
 
             Console.SetCursorPosition(40, 20);
             Console.WriteLine("Comment s'appellera le premier joueur ?");
@@ -51,6 +52,7 @@
             Joueur joueur1;
             Joueur joueur2;
 
+           
             if (randomPlayer == 1) //permet de savoir qui va commencer a jouer de façon aléatoire
             {
                  joueur1 = new Joueur(namePlayer1);

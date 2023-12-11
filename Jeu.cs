@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 
 namespace ProjetInfoMotsCroises
 {
-    internal class Jeu
+    /// <summary>
+    /// La classe jeu contient les joueurs mais également le plateau et l'instance de dictionnaire
+    /// </summary>
+    public class Jeu
     {    
         
         Plateau plateau;
         Dictionnaire dico;
+        Joueur joueur1;
+        Joueur joueur2;
+
+        /// <summary>
+        /// Le constructeur du jeu qui permet de créer un jeu, un plateau, une instance de dico 
+        /// </summary>
+        /// <param name="filename">le nom du fichier à lire </param>
         public Jeu(string filename)
         {
 
@@ -25,6 +35,9 @@ namespace ProjetInfoMotsCroises
         {
             Console.WriteLine("Création d'une instance jeu et d'une matrice");
         }
+        /// <summary>
+        /// Propriété pour communiquer avec le main
+        /// </summary>
         public Dictionnaire Dico
         {
 
@@ -32,6 +45,9 @@ namespace ProjetInfoMotsCroises
             set { this.dico = value; }
         }
 
+        /// <summary>
+        /// Propriété pour communiquer avec le main
+        /// </summary>
         public Plateau PlateauDeJeu
         {
 
@@ -39,7 +55,17 @@ namespace ProjetInfoMotsCroises
             set { this.plateau = value; }
         }
 
+        public Joueur Joueur1
+        {
+            get { return this.joueur1; }
+            set { this.joueur1 = value; }
+        }
 
+        public Joueur Joueur2
+        {
+            get { return this.joueur2; }
+            set { this.joueur2 = value; }
+        }
 
 
 

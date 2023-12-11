@@ -1,12 +1,15 @@
 -> fleches vers le haut pour montrer le sens de jeu
- -> decaler au centre la matrice affichage
+-> decaler au centre la matrice affichage
+-> Ecrire la valeur de lettre a droite du plateau
+
 
 -> TIMER
 
 -> PARAMETRE
 
-->  COMMENTAIRES
+-> COMMENTAIRES
 
 -> FICHIER RECAP OMG
 
--> Ecrire la valeur de lettre a droite du plateau
+
+

@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace ProjetInfoMotsCroises
 {
-    internal class Joueur
+    /// <summary>
+    /// La classe joueur possède tous les attributs et les méthodes utiles pour 
+    /// </summary>
+    public class Joueur
     {
         //On déclare les attributs
         public List<string> mots;
