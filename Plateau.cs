@@ -21,7 +21,7 @@ namespace ProjetInfoMotsCroises
         /// <summary>
         /// Constructeur qui appelle directement ToRead pour lire/générer notre plateau
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="filename">Le nom du fichier</param>
         public Plateau(string filename)
         {
 
@@ -36,16 +36,16 @@ namespace ProjetInfoMotsCroises
         public void ToFile(string SaveFileName)
         {
 
-            using (StreamWriter writer = new StreamWriter(SaveFileName+".txt"))
+            using (StreamWriter writer = new StreamWriter(SaveFileName+".txt")) // créé le fichier en utilisant l'extension txt et le filename en parametre
 
-            for (int i=0;i < plateau.GetLength(0); i++)
+            for (int i=0;i < plateau.GetLength(0); i++) // boucle pour se balader dans la matrice
                     {
-                for (int j=0;j < plateau.GetLength(1); j++)
+                for (int j=0;j < plateau.GetLength(1); j++) // ''
                 {
-                        Console.WriteLine("oui");
-                    writer.Write(plateau[i, j]+";");
+                        
+                    writer.Write(plateau[i, j]+";"); //ecrit et sépare chaque caractère par un espace
                 }
-                writer.WriteLine();
+                writer.WriteLine(); //saut de ligne a chaque fin de ligne dans la matrice
             }
         }
 

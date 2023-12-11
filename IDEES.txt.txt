@@ -3,11 +3,11 @@
 -> Ecrire la valeur de lettre a droite du plateau
 
 
--> TIMER !!
+-> TIMER FAIT
 
--> TO FILE !!
+-> TO FILE FAIT
 
--> PARAMETRE !
+-> PARAMETRE FAIT
 
 
 
@@ -17,6 +17,6 @@
 
 
 => Préciser que la valeur max des lettres est enfait une proba car sinon injouable
-
+=> Formule pour le calcul du score = SommeLettre*Mot.Length/3
 
 

@@ -90,7 +90,6 @@ namespace ProjetInfoMotsCroises
         public int CalculScore(string mot)
         {
             int[] tabponderation = new int[26];
-            char[] tabLettre = new char[26];
             int score = 0;
             string filename = "Lettre";
             try
@@ -103,22 +102,22 @@ namespace ProjetInfoMotsCroises
                 //LECTURE FICHIER LETTRE PONDERATION
                 int posLigne = 0;
 
-                foreach (string line in lines)
+                foreach (string line in lines) // on split pour lire la valeur de chaque lettre sur le fichier
                 {
 
                     string[] TabTemp = line.Split(',');
-                    tabLettre[posLigne] = char.Parse(TabTemp[0]);
                     tabponderation[posLigne] = int.Parse(TabTemp[2]);
                     posLigne++;
                 }
                 for (int i = 0; i < mot.Length; i++)
                 {
-                    score += tabponderation[mot[i] - 97];
+                    score += tabponderation[mot[i] - 97]; 
                 }
-                Add_Score(score);
+
+                Add_Score((score*mot.Length)/3); // formule pour le calcul du score
                 return score;
             }
-            catch (FileNotFoundException f)
+            catch (FileNotFoundException f) // si le fichier n'existe pas
             {
                 Console.WriteLine("Le fichier de lettre n'existe pas " + f.Message);
                 Console.WriteLine("Toutes les lettres seront considérées comme égales à 1");

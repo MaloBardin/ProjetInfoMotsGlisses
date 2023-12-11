@@ -36,7 +36,9 @@ namespace ProjetInfoMotsCroises
             this.sound = true; //son de base activé
             
         }
-
+        /// <summary>
+        /// Constructeur pas défaut 
+        /// </summary>
         public Jeu()
         {
             Console.WriteLine("Création d'une instance jeu et d'une matrice");
@@ -60,13 +62,17 @@ namespace ProjetInfoMotsCroises
             get { return this.plateau; }
             set { this.plateau = value; }
         }
-
+        /// <summary>
+        /// Propriété pour communiquer avec le main
+        /// </summary>
         public Joueur Joueur1
         {
             get { return this.joueur1; }
             set { this.joueur1 = value; }
         }
-
+        /// <summary>
+        /// Propriété pour communiquer avec le main
+        /// </summary>
         public Joueur Joueur2
         {
             get { return this.joueur2; }
