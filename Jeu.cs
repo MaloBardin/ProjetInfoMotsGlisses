@@ -9,7 +9,7 @@ namespace ProjetInfoMotsCroises
     /// <summary>
     /// La classe jeu contient les joueurs mais également le plateau et l'instance de dictionnaire
     /// </summary>
-    public class Jeu
+    internal class Jeu
     {    
         
         Plateau plateau;
