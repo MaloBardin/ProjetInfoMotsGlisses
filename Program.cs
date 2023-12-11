@@ -107,6 +107,8 @@
                 
                 TimeSpan ChronoFinTour = TimeSpan.FromSeconds(tempoTimeTour); // 60sec de BASE
 
+               
+
                 //verif qu'il existe au moins 1 mot dans la matrice
                 gameIsFinished = InstanceDeJeu.PlateauDeJeu.IsTabEmpty();
 
@@ -171,7 +173,13 @@
                         player1Word = Console.ReadLine().ToLower(); //blindage pour éviter les erreurs de frappe avec le ToLower()
                         
 
-
+                        if (player1Word == "quit") // ARRET FORCE PAR LE JOUEUR!
+                        {
+                            gameIsFinished = true;
+                            sortieImmediate = true; // pour ne pas compter les points
+                            
+                            break;
+                        }
                         //Conditions pour afficher la cause de l'erreur
                         if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player1Word) == null && InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) == false)
                         {
@@ -243,7 +251,10 @@
                 Console.SetCursorPosition(0, 6); Console.ForegroundColor = ConsoleColor.White; Console.Write("Le score de " + InstanceDeJeu.Joueur2.nom + " est de : "); Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write(InstanceDeJeu.Joueur2.score); Console.WriteLine("");
                 Console.ForegroundColor = ConsoleColor.White;
 
-
+                if (gameIsFinished == true)
+                {
+                    break; //condition pour la sortie avec le mot d'urgence
+                }
 
                 // vérification si le tab est vide & affichage console
                 gameIsFinished = InstanceDeJeu.PlateauDeJeu.IsTabEmpty();
@@ -282,6 +293,13 @@
                         Console.SetCursorPosition(0, 39);
                         player2Word = Console.ReadLine().ToLower(); //blindage pour éviter les erreurs de frappe
 
+
+                        if (player2Word == "quit") // ARRET FORCE PAR LE JOUEUR!
+                        {
+                            gameIsFinished = true;
+                            sortieImmediate = true; // pour ne pas compter les points
+                            break;
+                        }
 
                         //Conditions pour afficher la cause de l'erreur
                         if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player2Word) == null && InstanceDeJeu.Dico.RechercheDichoRecursif(player2Word) == false)
@@ -334,46 +352,53 @@
 
                     
                 } // fin du if du tour 2
+
+                if (gameIsFinished == true)
+                {
+                    break; // sortie avec le mot d'urgence
+                }
                 gameIsFinished = InstanceDeJeu.PlateauDeJeu.IsTabEmpty(); // on vérifie si le tab est vide avant de relancer la partie
             }
             Console.Clear();
 
             //Affichage du bravo & écran de fin
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.SetCursorPosition(25, 15);
+            Console.SetCursorPosition(55, 5);
             Console.WriteLine(" ▄▄▄▄    ██▀███   ▄▄▄    ██▒   █▓ ▒█████         ▐██▌ ");
-            Console.SetCursorPosition(25, 16);
+            Console.SetCursorPosition(55, 6);
             Console.WriteLine("▓█████▄ ▓██ ▒ ██▒▒████▄ ▓██░   █▒▒██▒  ██▒       ▐██▌ ");
-            Console.SetCursorPosition(25, 17);
+            Console.SetCursorPosition(55, 7);
             Console.WriteLine("▒██▒ ▄██▓██ ░▄█ ▒▒██  ▀█▄▓██  █▒░▒██░  ██▒       ▐██▌ ");
-            Console.SetCursorPosition(25, 18);
+            Console.SetCursorPosition(55, 8);
             Console.WriteLine("▒██░█▀  ▒██▀▀█▄  ░██▄▄▄▄██▒██ █░░▒██   ██░       ▓██▒ ");
-            Console.SetCursorPosition(25, 19);
+            Console.SetCursorPosition(55, 9);
             Console.WriteLine("░▓█  ▀█▓░██▓ ▒██▒ ▓█   ▓██▒▒▀█░  ░ ████▓▒░       ▒▄▄  ");
-            Console.SetCursorPosition(25, 20);
+            Console.SetCursorPosition(55, 10);
             Console.WriteLine("░▒▓███▀▒░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ▐░  ░ ▒░▒░▒░        ░▀▀▒ ");
-            Console.SetCursorPosition(25, 21);
+            Console.SetCursorPosition(55, 11);
             Console.WriteLine("▒░▒   ░   ░▒ ░ ▒░  ▒   ▒▒ ░░ ░░    ░ ▒ ▒░        ░  ░ ");
-            Console.SetCursorPosition(25, 22);
+            Console.SetCursorPosition(55, 12);
             Console.WriteLine(" ░    ░   ░░   ░   ░   ▒     ░░  ░ ░ ░ ▒            ░ ");
-            Console.SetCursorPosition(25, 23);
+            Console.SetCursorPosition(55, 13);
             Console.WriteLine(" ░         ░           ░  ░   ░      ░ ░         ░    ");
-            Console.SetCursorPosition(25, 24);
+            Console.SetCursorPosition(55, 14);
             Console.WriteLine("      ░                      ░                        ");
 
 
 
-
+            Console.ForegroundColor = ConsoleColor.White;
             if (InstanceDeJeu.Joueur1.score > InstanceDeJeu.Joueur2.score)
             {
+                Console.SetCursorPosition(50, 30);
                 Console.WriteLine("Le gagnant de cette glaciale partie est : " + InstanceDeJeu.Joueur1.nom + " et son score est de : " + InstanceDeJeu.Joueur1.score);
             } else
             {
+                Console.SetCursorPosition(50, 30);
                 Console.WriteLine("Le gagnant de cette glaciale partie est : " + InstanceDeJeu.Joueur2.nom + " et son score est de : " + InstanceDeJeu.Joueur2.score);
             }
 
             //rejouer une partie/parametre/quitter
-            Console.SetCursorPosition(10, 25);  Console.WriteLine("Voulez-vous rejouer ? 1 = Oui |  2 = Parametre | 3 = Non"); Console.SetCursorPosition(10, 27);
+            Console.SetCursorPosition(50, 34); Console.WriteLine("Voulez-vous rejouer ? 1 = Oui |  2 = Parametre | 3 = Non"); Console.SetCursorPosition(60, 35);
             int selectionReturn = int.Parse(Console.ReadLine());
 
             //menu
@@ -412,41 +437,41 @@
             string fileName = "Test1"; // par défaut
 
             //Règles
-            Console.SetCursorPosition(10, 20); Console.WriteLine("Ce jeu est jouable à deux, munissez vous d'un compère et préparez vos dictionnaires avant de mener une bataille sanglante pour la victoire !"); Console.SetCursorPosition(10, 21); Console.WriteLine("N'oubliez pas que certains paramètres sont disponible dans la section PARAMETRES du menu principal ! Bon jeu !"); Console.SetCursorPosition(30, 24);
+            Console.SetCursorPosition(10, 20); Console.WriteLine("Ce jeu est jouable à deux, munissez vous d'un compère et préparez vos dictionnaires avant de mener une bataille sanglante pour la victoire !"); Console.SetCursorPosition(10, 21); Console.WriteLine("N'oubliez pas que certains paramètres sont disponible dans la section PARAMETRES du menu principal !"); Console.SetCursorPosition(10, 22);Console.WriteLine("Si a un moment de la partie vous êtes bloqué, merci de rentrer le mot 'QUIT' ! Bon jeu !"); Console.SetCursorPosition(30, 24);
             Console.WriteLine("Merci d'appuyer sur une touche une fois la lecture des règles terminées."); Console.SetCursorPosition(30, 26); Console.ReadKey();
 
 
             //Nom du jeu en ASCII
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Blue; Console.SetCursorPosition(0, 10);
-            Console.SetCursorPosition(20, 5);
+            Console.SetCursorPosition(25, 5);
             Console.WriteLine(" ███▄ ▄███▓ ▒█████  ▄▄▄█████▓  ██████      ▄████  ██▓    ▄▄▄       ▄████▄   ██▓ ▄▄▄       ██▓ ██▀███  ▓█████   ██████ ");
-            Console.SetCursorPosition(20, 6);
+            Console.SetCursorPosition(25, 6);
             Console.WriteLine("▓██▒▀█▀ ██▒▒██▒  ██▒▓  ██▒ ▓▒▒██    ▒     ██▒ ▀█▒▓██▒   ▒████▄    ▒██▀ ▀█  ▓██▒▒████▄    ▓██▒▓██ ▒ ██▒▓█   ▀ ▒██    ▒ ");
-            Console.SetCursorPosition(20, 7);
+            Console.SetCursorPosition(25, 7);
             Console.WriteLine("▓██    ▓██░▒██░  ██▒▒ ▓██░ ▒░░ ▓██▄      ▒██░▄▄▄░▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▒██▒▒██  ▀█▄  ▒██▒▓██ ░▄█ ▒▒███   ░ ▓██▄   ");
-            Console.SetCursorPosition(20, 8);
+            Console.SetCursorPosition(25, 8);
             Console.WriteLine("▒██    ▒██ ▒██   ██░░ ▓██▓ ░   ▒   ██▒   ░▓█  ██▓▒██░   ░██▄▄▄▄██ ▒▓▓▄ ▄██▒░██░░██▄▄▄▄██ ░██░▒██▀▀█▄  ▒▓█  ▄   ▒   ██▒");
-            Console.SetCursorPosition(20, 9);
+            Console.SetCursorPosition(25, 9);
             Console.WriteLine("▒██▒   ░██▒░ ████▓▒░  ▒██▒ ░ ▒██████▒▒   ░▒▓███▀▒░██████▒▓█   ▓██▒▒ ▓███▀ ░░██░ ▓█   ▓██▒░██░░██▓ ▒██▒░▒████▒▒██████▒▒");
-            Console.SetCursorPosition(20, 10);
+            Console.SetCursorPosition(25, 10);
             Console.WriteLine("░ ▒░   ░  ░░ ▒░▒░▒░   ▒ ░░   ▒ ▒▓▒ ▒ ░    ░▒   ▒ ░ ▒░▓  ░▒▒   ▓▒█░░ ░▒ ▒  ░░▓   ▒▒   ▓▒█░░▓  ░ ▒▓ ░▒▓░░░ ▒░ ░▒ ▒▓▒ ▒ ░");
-            Console.SetCursorPosition(20, 11);
+            Console.SetCursorPosition(25, 11);
             Console.WriteLine("░  ░      ░  ░ ▒ ▒░     ░    ░ ░▒  ░ ░     ░   ░ ░ ░ ▒  ░ ▒   ▒▒ ░  ░  ▒    ▒ ░  ▒   ▒▒ ░ ▒ ░  ░▒ ░ ▒░ ░ ░  ░░ ░▒  ░ ░");
-            Console.SetCursorPosition(20, 12);
+            Console.SetCursorPosition(25, 12);
             Console.WriteLine("░      ░   ░ ░ ░ ▒    ░      ░  ░  ░     ░ ░   ░   ░ ░    ░   ▒   ░         ▒ ░  ░   ▒    ▒ ░  ░░   ░    ░   ░  ░  ░  ");
-            Console.SetCursorPosition(20, 13);
+            Console.SetCursorPosition(25, 13);
             Console.WriteLine("        ░       ░ ░                 ░           ░     ░  ░     ░  ░░ ░       ░        ░  ░ ░     ░        ░  ░      ░ ");
-            Console.SetCursorPosition(20, 14);
+            Console.SetCursorPosition(25, 14);
             Console.WriteLine("                                                                  ░                                                   ");
 
             Console.ForegroundColor = ConsoleColor.White;
             //MENU
-            Console.SetCursorPosition(60, 22);
+            Console.SetCursorPosition(65, 22);
             Console.WriteLine("1)    JOUER ");
-            Console.SetCursorPosition(60, 24);
+            Console.SetCursorPosition(65, 24);
             Console.WriteLine("2)    PARAMETRES ");
-            Console.SetCursorPosition(60, 26);
+            Console.SetCursorPosition(65, 26);
             Console.WriteLine("3)    QUITTER ");
 
 
@@ -462,10 +487,10 @@
                 //selection
                 do
                 {
-                    Console.SetCursorPosition(60, 30);
+                    Console.SetCursorPosition(62, 30);
                     Console.WriteLine("Dans quel menu voulez-vous aller ?");
 
-                    Console.SetCursorPosition(60, 32);
+                    Console.SetCursorPosition(65, 32);
                     selection = Console.ReadLine();
 
                     if (selection != "1" && selection != "2" && selection != "3")
