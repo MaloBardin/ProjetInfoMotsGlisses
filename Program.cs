@@ -28,7 +28,7 @@
             Console.Clear(); Console.SetCursorPosition(55, 12); Console.Write("Travail effectué par "); Console.ForegroundColor = ConsoleColor.DarkGreen; Console.Write("Pierre-Antoine"); Console.ForegroundColor = ConsoleColor.White; Console.Write(" et "); Console.ForegroundColor = ConsoleColor.DarkGreen; Console.Write("Malo !");  Console.ForegroundColor = ConsoleColor.White;
 
             //Affichage du fichier actuel matrice + pour changer le chemin
-            Console.SetCursorPosition(57, 17); Console.Write("Le fichier actuel de la matrice est "+fileName); Console.SetCursorPosition(35, 18); Console.Write("Quel est le chemin de votre fichier matrice ? (un .csv sera ajouté à la fin de votre fichier, si vous souhaitez une génération aléatoire, merci de simplement mettre n'importe quoi)"); Console.SetCursorPosition(55, 19);
+            Console.SetCursorPosition(57, 17); Console.Write("Le fichier actuel de la matrice est "+fileName); Console.SetCursorPosition(0, 18); Console.Write("Quel est le chemin de votre fichier matrice ? (un .csv sera ajouté à la fin, si vous souhaitez une génération aléatoire, merci de simplement mettre n'importe quoi)"); Console.SetCursorPosition(55, 19);
             fileName = Console.ReadLine();
 
             //Son !
@@ -120,13 +120,13 @@
                 if (DateTime.Now - HeureDuDebutDeTour > ChronoFinTour || sortieImmediate == true)
                 {
                     //longue ligne pour afficher que le joueur a perdu a cause du temps
-                    Console.ForegroundColor = ConsoleColor.DarkRed; Console.SetCursorPosition(0, 2); Console.Write("Votre temps a écoulé ! C'est à " + InstanceDeJeu.Joueur1.nom + " de jouer !"); Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.DarkRed; Console.SetCursorPosition(45, 2); Console.Write("Votre temps a écoulé ! C'est à " + InstanceDeJeu.Joueur1.nom + " de jouer !"); Console.ForegroundColor = ConsoleColor.White;
                     sortieImmediate = false;
                 }
 
                 //AFFICHAGE DES SCORES
-                Console.SetCursorPosition(0, 3); Console.ForegroundColor = ConsoleColor.White; Console.Write("Le score de " + InstanceDeJeu.Joueur1.nom + " est de : "); Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write(InstanceDeJeu.Joueur1.score);
-                Console.SetCursorPosition(0, 4); Console.ForegroundColor = ConsoleColor.White; Console.Write("Le score de " + InstanceDeJeu.Joueur2.nom + " est de : "); Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write(InstanceDeJeu.Joueur2.score);
+                Console.SetCursorPosition(0, 4); Console.ForegroundColor = ConsoleColor.White; Console.Write("Le score de " + InstanceDeJeu.Joueur1.nom + " est de : "); Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write(InstanceDeJeu.Joueur1.score);
+                Console.SetCursorPosition(0, 6); Console.ForegroundColor = ConsoleColor.White; Console.Write("Le score de " + InstanceDeJeu.Joueur2.nom + " est de : "); Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write(InstanceDeJeu.Joueur2.score);
                 Console.ForegroundColor = ConsoleColor.White;
 
 
@@ -139,16 +139,16 @@
                 HeureDuDebutDeTour = DateTime.Now;
                 TimeSpan differenceJeu = DateTime.Now - HeureDuDebutDeJeu; // la diff entre le temps actuel et le début
                 TimeSpan tempsRestantJeu = ChronoFinJeu - differenceJeu; // diff entre temps avant fin du tour et l'écart actuel
-                Console.SetCursorPosition(40, 4); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre jeu : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantJeu); Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(100, 4); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre jeu : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantJeu); Console.ForegroundColor = ConsoleColor.White;
 
                 
                 //permet de vérifier et de compter le temps
-                while (Console.KeyAvailable==false && DateTime.Now -HeureDuDebutDeTour < ChronoFinTour)
+                while (Console.KeyAvailable==false && DateTime.Now -HeureDuDebutDeTour < ChronoFinTour && gameIsFinished==false)
                 {
                     Thread.Sleep(100); //on temporise 0.1 sec pour éviter d'overclocker le proco
                     TimeSpan differenceTour = DateTime.Now - HeureDuDebutDeTour; // la diff entre le temps actuel et le début
                     TimeSpan tempsRestantTour = ChronoFinTour - differenceTour; // diff entre temps avant fin du tour et l'écart actuel
-                    Console.SetCursorPosition(0, 6);Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre tour : "); Console.ForegroundColor = ConsoleColor.Red ;Console.Write(tempsRestantTour); Console.ForegroundColor = ConsoleColor.White;
+                    Console.SetCursorPosition(100, 6);Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre tour : "); Console.ForegroundColor = ConsoleColor.Red ;Console.Write(tempsRestantTour); Console.ForegroundColor = ConsoleColor.White;
 
                 }
                 // Condition pour écrire, soit le jeu est fini car matrice vide, soit le tour est fini ou alors la partie est finie !
@@ -158,7 +158,9 @@
                     //Boucle a faire tant que le mot n'est pas valide /
                     do
                     {   //Le tour commence et le joueur1 commence a rentrer son mot
+                        Console.SetCursorPosition(0, 38);
                         Console.WriteLine(InstanceDeJeu.Joueur1.nom + " , merci de rentrer votre mot !");
+                        Console.SetCursorPosition(0, 39);
                         player1Word = Console.ReadLine().ToLower(); //blindage pour éviter les erreurs de frappe avec le ToLower()
                         
 
@@ -224,14 +226,14 @@
                 if (DateTime.Now - HeureDuDebutDeTour > ChronoFinTour||sortieImmediate==true)
                 {
                     //longue ligne pour afficher que le joueur a perdu a cause du temps
-                    Console.ForegroundColor = ConsoleColor.DarkRed; Console.SetCursorPosition(0, 2); Console.Write("Votre temps a écoulé ! C'est à " + InstanceDeJeu.Joueur2.nom + " de jouer !"); Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.DarkRed; Console.SetCursorPosition(45, 2); Console.Write("Votre temps est écoulé ! C'est à " + InstanceDeJeu.Joueur2.nom + " de jouer !"); Console.ForegroundColor = ConsoleColor.White;
                     sortieImmediate = false;
                 }
 
 
                 //Affichage des scores
-                Console.SetCursorPosition(0, 3); Console.ForegroundColor = ConsoleColor.White; Console.Write("Le score de " + InstanceDeJeu.Joueur1.nom + " est de : "); Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write(InstanceDeJeu.Joueur1.score);
-                Console.SetCursorPosition(0, 4); Console.ForegroundColor = ConsoleColor.White; Console.Write("Le score de " + InstanceDeJeu.Joueur2.nom + " est de : "); Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write(InstanceDeJeu.Joueur2.score); Console.WriteLine("");
+                Console.SetCursorPosition(0, 4); Console.ForegroundColor = ConsoleColor.White; Console.Write("Le score de " + InstanceDeJeu.Joueur1.nom + " est de : "); Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write(InstanceDeJeu.Joueur1.score);
+                Console.SetCursorPosition(0, 6); Console.ForegroundColor = ConsoleColor.White; Console.Write("Le score de " + InstanceDeJeu.Joueur2.nom + " est de : "); Console.ForegroundColor = ConsoleColor.DarkYellow; Console.Write(InstanceDeJeu.Joueur2.score); Console.WriteLine("");
                 Console.ForegroundColor = ConsoleColor.White;
 
 
@@ -240,31 +242,34 @@
                 gameIsFinished = InstanceDeJeu.PlateauDeJeu.IsTabEmpty();
                 
                 InstanceDeJeu.PlateauDeJeu.AffichageConsole();
+                Console.WriteLine(""); Console.WriteLine("C'est à " + InstanceDeJeu.Joueur2.nom + " de jouer !");
+
 
                 HeureDuDebutDeTour = DateTime.Now;
                 differenceJeu = DateTime.Now - HeureDuDebutDeJeu; // la diff entre le temps actuel et le début
                 tempsRestantJeu = ChronoFinJeu - differenceJeu; // diff entre temps avant fin du tour et l'écart actuel
-                Console.SetCursorPosition(40 , 4); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre jeu : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantJeu); Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(100 , 4); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre jeu : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantJeu); Console.ForegroundColor = ConsoleColor.White;
 
 
 
                 // Affichage du tour
-                Console.WriteLine(""); Console.WriteLine("C'est à " + InstanceDeJeu.Joueur2.nom + " de jouer !");
-                while (Console.KeyAvailable == false && DateTime.Now - HeureDuDebutDeTour < ChronoFinTour)
+               
+                while (Console.KeyAvailable == false && DateTime.Now - HeureDuDebutDeTour < ChronoFinTour && gameIsFinished == false)
                 {
                     Thread.Sleep(100); //on temporise 0.1 sec
                     TimeSpan differenceTour = DateTime.Now - HeureDuDebutDeTour; // la diff entre le temps actuel et le début
                     TimeSpan tempsRestantTour = ChronoFinTour - differenceTour; // diff entre temps avant fin du tour et l'écart actuel
-                    Console.SetCursorPosition(0, 6); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre tour : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantTour); Console.ForegroundColor = ConsoleColor.White;// affichage horloge
+                    Console.SetCursorPosition(100, 6); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre tour : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantTour); Console.ForegroundColor = ConsoleColor.White;// affichage horloge
                 }
 
                 // On lance le deuxième tour !
                 if (gameIsFinished == false && DateTime.Now-HeureDuDebutDeJeu< ChronoFinJeu && DateTime.Now - HeureDuDebutDeTour < ChronoFinTour){ 
 
                     do
-                    { 
-                        
+                    {
+                        Console.SetCursorPosition(0, 38);
                         Console.WriteLine(InstanceDeJeu.Joueur2.nom + " , merci de rentrer votre mot !");
+                        Console.SetCursorPosition(0, 39);
                         player2Word = Console.ReadLine().ToLower(); //blindage pour éviter les erreurs de frappe
 
 

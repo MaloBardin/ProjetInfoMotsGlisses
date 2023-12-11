@@ -93,17 +93,17 @@ namespace ProjetInfoMotsCroises
 
 
             //AFFICHAGE
+            string chaine = "\t\t\t\t\t\t\t\t";
             Console.SetCursorPosition(0, 10);
             for (int u = 0; u < tailleY; u++)
             {
                 
-                Console.Write("- - "); // Pour la beauté du plateau
+                chaine+=("- - "); // Pour la beauté du plateau
             }
-            Console.WriteLine();
+            Console.WriteLine(chaine);
 
+            chaine = "\t\t\t\t\t\t\t\t";
 
-
-            
             for (int i = 0; i < tailleX; i++) // affichage des caractère
             {
 
@@ -117,39 +117,41 @@ namespace ProjetInfoMotsCroises
                     {
                         Console.ForegroundColor = ConsoleColor.Red; // couleur rouge pour signaler la dernière ligne, celle d'on on peux faire partir les mots
                     }
+
                     if (plateau[i, j] == '#')
                     {
-                        Console.Write(" ");
+                        chaine+=" ";
                         // ON AFFICHE RIEN CAR CARACTERE NUL
                     }
                     else
                     {
-                        Console.Write(plateau[i, j]); // on affiche le vértiable caractère
+                        chaine += plateau[i,j]; // on affiche le vértiable caractère
                     }
 
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write(" | "); // petite séparation entre les lettres 
+                    chaine+=" | "; // petite séparation entre les lettres 
                 }
-                Console.WriteLine("");
+                Console.WriteLine(chaine);
+                chaine = "\t\t\t\t\t\t\t\t";
                 if (i < tailleX - 1)
                 {
                     for (int u = 0; u < tailleY; u++)
                     {
-                        Console.Write("- + "); // uniquement pour les lignes entre deux lignes de lettre
+                        chaine+=("- + "); // uniquement pour les lignes entre deux lignes de lettre
                     }
-                    Console.WriteLine();
+                    Console.WriteLine(chaine);
                 }
 
-
+                chaine = "\t\t\t\t\t\t\t\t";
 
             }
-
+            chaine = "\t\t\t\t\t\t\t\t";
             //Console.SetCursorPosition(65, 10+tailleY+1);
             for (int u = 0; u < tailleY; u++)
             {
-                Console.Write("- - "); // ligne de fin pour fermer la matrice
+                chaine+=("- - "); // ligne de fin pour fermer la matrice
             }
-            Console.WriteLine();
+            Console.WriteLine(chaine);
 
             
 
