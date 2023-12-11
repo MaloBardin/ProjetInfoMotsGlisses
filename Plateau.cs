@@ -69,21 +69,29 @@ namespace ProjetInfoMotsCroises
         /// </summary>
         public void AffichageConsole()
         {
-            
-            
+
+
             //AFFICHAGE
+            Console.SetCursorPosition(0, 10);
             for (int u = 0; u < tailleY; u++)
             {
+                
                 Console.Write("- - "); // Pour la beauté du plateau
             }
             Console.WriteLine();
 
+
+
+            
             for (int i = 0; i < tailleX; i++) // affichage des caractère
             {
 
 
                 for (int j = 0; j < tailleY; j++)
                 {
+
+                    
+                   
                     if (i == tailleX - 1) // on regarde si on est sur la dernière ligne
                     {
                         Console.ForegroundColor = ConsoleColor.Red; // couleur rouge pour signaler la dernière ligne, celle d'on on peux faire partir les mots
@@ -115,7 +123,7 @@ namespace ProjetInfoMotsCroises
 
             }
 
-
+            //Console.SetCursorPosition(65, 10+tailleY+1);
             for (int u = 0; u < tailleY; u++)
             {
                 Console.Write("- - "); // ligne de fin pour fermer la matrice
@@ -280,7 +288,12 @@ namespace ProjetInfoMotsCroises
 
             catch (FileNotFoundException f) // on catch le fait que le fichier n'existe pas
             {
+                Console.SetCursorPosition(10, 0);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("/!| Erreur /!|");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Le fichier n'existe pas " + f.Message);
+                Console.SetCursorPosition(55, 1);
                 Console.WriteLine("Nous allons procéder à la génération aléatoire pondérée du plateau");
                 RandomGen(); // nous procédons à la génération finale du tableau
 
@@ -331,6 +344,11 @@ namespace ProjetInfoMotsCroises
             if (indiceX == -5 && indiceY == -5)
             {
                 wordPos = new int[word.Length, 2]; // a l'init on créé un tableau du nombre de colonne du mot et de 2 lignes car il y aura que deux coordonées / lettre (x et y)
+                for (int i = 0; i < word.Length; i++)// init a -10, des indices impossible pour éviter d'avoir des problèmes futurs lors du background check( si on avait pas initialisé, on aurait eu 0,0 partout et donc probleme sur la lettre 0 0 (trouvée avec beaucoup de back testing ))
+                {
+                    wordPos[i, 0] = -10;
+                    wordPos[i, 0] = -10;
+                }
             }
 
             //condition d'arret : quand notre indice qui parcours le mot arrive a la taille du tableau de coordonée (chaque lettre possède son couple de coordonées)
@@ -538,7 +556,7 @@ namespace ProjetInfoMotsCroises
             }
 
         }
-
+        
 
         //FONCTION NON UTILISéE MAIS UTILE POUR MIEUX COMPRENDRE NOTRE RECURSIVITEE
         public bool SearchWord(string word, int indiceX = 10, int indiceY = 10, int indiceMot = 0)//init a 10 pour montrer que c'est le start

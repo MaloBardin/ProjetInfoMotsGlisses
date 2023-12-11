@@ -16,6 +16,8 @@ namespace ProjetInfoMotsCroises
         Dictionnaire dico;
         Joueur joueur1;
         Joueur joueur2;
+        string FILEname;
+        bool sound;
 
         /// <summary>
         /// Le constructeur du jeu qui permet de créer un jeu, un plateau, une instance de dico 
@@ -28,6 +30,10 @@ namespace ProjetInfoMotsCroises
             this.dico = dico;
             Plateau plateauDeJeu = new Plateau(filename);
             this.plateau = plateauDeJeu;
+            this.joueur1 = new Joueur();
+            this.Joueur2 = new Joueur();
+            
+            this.sound = true; //son de base activé
             
         }
 

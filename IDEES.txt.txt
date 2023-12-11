@@ -3,9 +3,13 @@
 -> Ecrire la valeur de lettre a droite du plateau
 
 
--> TIMER
+-> TIMER !!
 
--> PARAMETRE
+-> TO FILE !!
+
+-> PARAMETRE !
+
+
 
 -> COMMENTAIRES
 

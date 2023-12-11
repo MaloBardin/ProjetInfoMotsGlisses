@@ -21,9 +21,9 @@ namespace ProjetInfoMotsCroises
         /// Voici le constructeur d'un joueur, défini par son nom, son score et la liste constituée par les mùots qu'il a déjà trouvé 
         /// </summary>
         /// <param name="nom">nom du joueur</param>
-        public Joueur(string nom)
+        public Joueur()
         {
-            this.nom = nom;
+            
             this.score = 0;
             this.mots = new List<string>();
         }

@@ -8,69 +8,110 @@
     using NAudio.Wave;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Runtime.CompilerServices;
+    
 
     internal class Program
     {
         
-        bool sound = true;
 
 
-        static void Settings()
+
+        static string Settings(string fileName)
         {
+                       
+            Console.Clear();
+            Console.SetCursorPosition(55, 12);
+            Console.Write("Travail effectué par ");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write("Pierre-Antoine");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(" et ");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write("Malo !");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.SetCursorPosition(57, 17);
+            Console.Write("Le fichier actuel de la matrice est "+fileName);
+            Console.SetCursorPosition(35, 18);
+            Console.Write("Quel est le chemin de votre fichier matrice ? (un .csv sera ajouté à la fin de votre fichier)");
+            Console.SetCursorPosition(55, 19);
+            fileName = Console.ReadLine();
 
 
-
-
-
+            Console.SetCursorPosition(57, 22);
+            Console.WriteLine("Voulez-vous activer le son ? 1=Oui 2=Non");
+            Console.SetCursorPosition(57, 23);
+            int tempoSound = int.Parse(Console.ReadLine());
+            bool sound;
+            if (tempoSound == 1)
+            {
+                 sound = true;
+            } else
+            {
+                 sound = false;
+            }
+            Console.Clear();
+            Play(fileName,sound);
+            return fileName;
         }
 
 
 
-        static void Play(string fileName)
+        static void Play(string fileName, bool sound)
         {
 
-            
-            
-          
+
+
+
+
+
 
             Jeu InstanceDeJeu = new Jeu(fileName); // création du jeu
 
             
 
-            Console.SetCursorPosition(40, 20);
+            Console.SetCursorPosition(60, 20);
             Console.WriteLine("Comment s'appellera le premier joueur ?");
-            Console.SetCursorPosition(40, 21);
+            Console.SetCursorPosition(60, 21);
             string namePlayer1 = Console.ReadLine();
-            Console.SetCursorPosition(40, 22);
+            Console.SetCursorPosition(60, 22);
             Console.WriteLine("Et quel est le nom du second protagoniste ?");
-            Console.SetCursorPosition(40, 23);
+            Console.SetCursorPosition(60, 23);
             string namePlayer2 = Console.ReadLine();
 
             Random random = new Random();
             int randomPlayer = random.Next(1, 3);
 
-            Joueur joueur1;
-            Joueur joueur2;
+            
 
            
             if (randomPlayer == 1) //permet de savoir qui va commencer a jouer de façon aléatoire
             {
-                 joueur1 = new Joueur(namePlayer1);
-                 joueur2 = new Joueur(namePlayer2);
+                 InstanceDeJeu.Joueur1.nom = namePlayer1;
+                 InstanceDeJeu.Joueur2.nom = namePlayer2;
             } else
             {
-                 joueur1 = new Joueur(namePlayer2);
-                 joueur2 = new Joueur(namePlayer1);
+                InstanceDeJeu.Joueur1.nom = namePlayer2;
+                InstanceDeJeu.Joueur2.nom = namePlayer1;
             }
 
             Console.WriteLine("Vous êtes fin prêt à débuter la partie ! Que le grand jeu commence !");
 
-            bool gameIsFinished = false;
 
-            while (gameIsFinished == false)
+
+
+            DateTime HeureDuDebutDeJeu = DateTime.Now;
+            TimeSpan ChronoFinJeu = TimeSpan.FromMinutes(1); // 10 MINUTES
+            DateTime HeureDuDebutDeTour = DateTime.Now;
+
+
+            bool gameIsFinished = false;
+            
+            while (gameIsFinished == false && DateTime.Now - HeureDuDebutDeJeu < ChronoFinJeu) // CONDITIONS
             {
                 
-
+                TimeSpan ChronoFinTour = TimeSpan.FromSeconds(10);
 
                 //verif qu'il existe au moins 1 mot dans la matrice
 
@@ -80,15 +121,51 @@
 
                 gameIsFinished = InstanceDeJeu.PlateauDeJeu.IsTabEmpty();
                 Console.Clear();
-                InstanceDeJeu.PlateauDeJeu.AffichageConsole();
 
-                if (gameIsFinished == false)//on verifie si le tab n'est pas vide !
+                if (DateTime.Now - HeureDuDebutDeTour > ChronoFinTour)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.SetCursorPosition(0, 2);
+                    Console.Write("Votre temps a été écoulé ! C'est à " + InstanceDeJeu.Joueur1.nom + " de jouer !");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+
+                Console.SetCursorPosition(0, 5);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Le score de " + InstanceDeJeu.Joueur1.nom + " est de : ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(InstanceDeJeu.Joueur1.score);
+                Console.SetCursorPosition(0, 6);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Le score de " + InstanceDeJeu.Joueur2.nom + " est de : ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(InstanceDeJeu.Joueur2.score);
+                Console.ForegroundColor = ConsoleColor.White;
+
+
+
+                HeureDuDebutDeTour = DateTime.Now;
+
+
+                InstanceDeJeu.PlateauDeJeu.AffichageConsole();
+                Console.WriteLine("");
+                Console.WriteLine("C'est à " + InstanceDeJeu.Joueur1.nom + " de jouer !");
+
+
+                while (Console.KeyAvailable==false && DateTime.Now -HeureDuDebutDeTour < ChronoFinTour)
+                {
+                    Thread.Sleep(100); //on temporise 0.1 sec
+                    
+                }
+                if (gameIsFinished == false && DateTime.Now - HeureDuDebutDeJeu < ChronoFinJeu && DateTime.Now - HeureDuDebutDeTour < ChronoFinTour)//on verifie si le tab n'est pas vide !
+                {
+                    
                     do
                     {
+                       
 
-
-                        Console.WriteLine(joueur1.nom + " , merci de rentrer votre mot !");
+                        Console.WriteLine(InstanceDeJeu.Joueur1.nom + " , merci de rentrer votre mot !");
                         player1Word = Console.ReadLine();
 
 
@@ -97,7 +174,7 @@
                         {
                             Console.WriteLine("Votre mot n'est ni dans le plateau ni dans le dictionnaire c'est pitoyable");
                         }
-                        else if (joueur1.Contient(player1Word) == true)
+                        else if (InstanceDeJeu.Joueur1.Contient(player1Word) == true)
                         {
                             Console.WriteLine("Vous avez déja joué le mot : " + player1Word + ", merci de jouer un autre mot");
                         }
@@ -110,10 +187,10 @@
                             Console.WriteLine(player1Word + " n'est pas dans le jeu !");
                         } 
 
-                    } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) != true || joueur1.Contient(player1Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player1Word) != true);//bouger la detection de la matrice en bas
+                    } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) != true || InstanceDeJeu.Joueur1.Contient(player1Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player1Word) != true);//bouger la detection de la matrice en bas
 
-                    joueur1.CalculScore(player1Word);
-                    joueur1.Add_Mot(player1Word);
+                    InstanceDeJeu.Joueur1.CalculScore(player1Word);
+                    InstanceDeJeu.Joueur1.Add_Mot(player1Word);
 
 
                     string mp3FilePathClapping = "clap.mp3";
@@ -121,29 +198,64 @@
                     using (var outputDevice = new WaveOutEvent())
                     {
                         outputDevice.Init(audioFile);
-                        Console.WriteLine("Mot validé votre score est désormais de : " + joueur1.score + " !");
-                        outputDevice.Play();
+                        Console.WriteLine("Mot validé votre score est désormais de : " + InstanceDeJeu.Joueur1.score + " !");
+                        if (sound == true)
+                        {
+                            outputDevice.Play();
+                        }
+                    
                         Thread.Sleep(1000);
 
                     }
 
                 }
 
+                Console.Clear();
+
+                if (DateTime.Now - HeureDuDebutDeTour > ChronoFinTour)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.SetCursorPosition(0, 2);
+                    Console.Write("Votre temps a été écoulé ! C'est à " + InstanceDeJeu.Joueur2.nom + " de jouer !");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+                Console.SetCursorPosition(0, 5);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Le score de " + InstanceDeJeu.Joueur1.nom + " est de : ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(InstanceDeJeu.Joueur1.score);
+                Console.SetCursorPosition(0, 6);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Le score de " + InstanceDeJeu.Joueur2.nom + " est de : ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(InstanceDeJeu.Joueur2.score);
+                Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.White;
 
 
 
 
                 //TOUR DU JOUEUR 2
-                gameIsFinished = InstanceDeJeu.PlateauDeJeu.IsTabEmpty();
-                Console.Clear();
-                InstanceDeJeu.PlateauDeJeu.AffichageConsole();
 
-                if (gameIsFinished == false){ //on verifie si le tab n'est pas vide !
+
+                gameIsFinished = InstanceDeJeu.PlateauDeJeu.IsTabEmpty();
+                HeureDuDebutDeTour = DateTime.Now;
+                InstanceDeJeu.PlateauDeJeu.AffichageConsole();
+                Console.WriteLine("\n");
+                Console.WriteLine("C'est à " + InstanceDeJeu.Joueur2.nom + " de jouer !");
+                while (Console.KeyAvailable == false && DateTime.Now - HeureDuDebutDeTour < ChronoFinTour)
+                {
+                    Thread.Sleep(100); //on temporise 0.1 sec
+
+                }
+
+                if (gameIsFinished == false && DateTime.Now-HeureDuDebutDeJeu< ChronoFinJeu && DateTime.Now - HeureDuDebutDeTour < ChronoFinTour){ //on verifie si le tab n'est pas vide !
                     do
                     {
 
-
-                        Console.WriteLine(joueur2.nom + ", merci de rentrer votre mot !");
+                        
+                        Console.WriteLine(InstanceDeJeu.Joueur2.nom + ", merci de rentrer votre mot !");
                         player2Word = Console.ReadLine();
 
 
@@ -151,7 +263,7 @@
                         {
                             Console.WriteLine("Votre mot n'est ni dans le plateau ni dans le dictionnaire c'est pitoyable");
                         }
-                        else if (joueur2.Contient(player2Word) == true)
+                        else if (InstanceDeJeu.Joueur2.Contient(player2Word) == true)
                         {
                             Console.WriteLine("Vous avez déja joué le mot : " + player2Word + ", merci de jouer un autre mot");
                         }
@@ -164,18 +276,21 @@
                             Console.WriteLine(player2Word + " n'est pas dans le jeu !");
                         } 
 
-                    } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player2Word) != true || joueur2.Contient(player2Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player2Word) != true);//bouger la detection de la matrice en bas
+                    } while (InstanceDeJeu.Dico.RechercheDichoRecursif(player2Word) != true || InstanceDeJeu.Joueur2.Contient(player2Word) != false || InstanceDeJeu.PlateauDeJeu.Recherche_Mot(player2Word) != true);//bouger la detection de la matrice en bas
 
-                    joueur2.CalculScore(player2Word);
-                    joueur2.Add_Mot(player2Word);
+                    InstanceDeJeu.Joueur2.CalculScore(player2Word);
+                    InstanceDeJeu.Joueur2.Add_Mot(player2Word);
 
                     string mp3FilePathClapping = "clap.mp3";
                     using (var audioFile = new AudioFileReader(mp3FilePathClapping))
                     using (var outputDevice = new WaveOutEvent())
                     {
                         outputDevice.Init(audioFile);
-                        Console.WriteLine("Mot validé votre score est désormais de : " + joueur2.score + " !");
-                        outputDevice.Play();
+                        Console.WriteLine("Mot validé votre score est désormais de : " + InstanceDeJeu.Joueur2.score + " !");
+                        if (sound == true)
+                        {
+                            outputDevice.Play();
+                        }
                         Thread.Sleep(1000);
 
                     }
@@ -201,12 +316,12 @@
             Console.Write("\r\n ▄▄▄▄    ██▀███   ▄▄▄    ██▒   █▓ ▒█████                                 ▐██▌ \r\n▓█████▄ ▓██ ▒ ██▒▒████▄ ▓██░   █▒▒██▒  ██▒                               ▐██▌ \r\n▒██▒ ▄██▓██ ░▄█ ▒▒██  ▀█▄▓██  █▒░▒██░  ██▒                               ▐██▌ \r\n▒██░█▀  ▒██▀▀█▄  ░██▄▄▄▄██▒██ █░░▒██   ██░                               ▓██▒ \r\n░▓█  ▀█▓░██▓ ▒██▒ ▓█   ▓██▒▒▀█░  ░ ████▓▒░                               ▒▄▄  \r\n░▒▓███▀▒░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ▐░  ░ ▒░▒░▒░                                ░▀▀▒ \r\n▒░▒   ░   ░▒ ░ ▒░  ▒   ▒▒ ░░ ░░    ░ ▒ ▒░                                ░  ░ \r\n ░    ░   ░░   ░   ░   ▒     ░░  ░ ░ ░ ▒                                    ░ \r\n ░         ░           ░  ░   ░      ░ ░                                 ░    \r\n      ░                      ░                                                \r\n");
             Console.ForegroundColor= ConsoleColor.White;
             Console.SetCursorPosition(10, 20);
-            if (joueur1.score > joueur2.score)
+            if (InstanceDeJeu.Joueur1.score > InstanceDeJeu.Joueur2.score)
             {
-                Console.WriteLine("Le gagnant de cette glaciale partie est : " + joueur1.nom + " et son score est de : " + joueur1.score);
+                Console.WriteLine("Le gagnant de cette glaciale partie est : " + InstanceDeJeu.Joueur1.nom + " et son score est de : " + InstanceDeJeu.Joueur1.score);
             } else
             {
-                Console.WriteLine("Le gagnant de cette glaciale partie est : " + joueur2.nom + " et son score est de : " + joueur2.score);
+                Console.WriteLine("Le gagnant de cette glaciale partie est : " + InstanceDeJeu.Joueur2.nom + " et son score est de : " + InstanceDeJeu.Joueur2.score);
             }
 
             Console.SetCursorPosition(10, 25);
@@ -218,7 +333,7 @@
             if (selectionReturn == 1)
             {
                 Console.Clear();
-                Play(fileName);
+                Play(fileName,sound);
             } else
             {
                 Console.Clear();
@@ -228,6 +343,7 @@
 
         static void Quit()
         {
+
             Environment.Exit(0);
         }
 
@@ -236,14 +352,15 @@
         static void Main(string[] args)
         {
 
-
-            string fileName = "Test2";
+            //Console.SetWindowSize(1880, 1020);
+            string fileName = "Test1";
             Console.SetCursorPosition(10, 20);
             Console.WriteLine("Ce jeu est jouable à deux, munissez vous d'un compère et préparez vos dictionnaires avant de mener une bataille sanglante pour la victoire !");
             Console.SetCursorPosition(10, 21);
             Console.WriteLine("N'oubliez pas que certains paramètres sont disponible dans la section PARAMETRES du menu principal ! Bon jeu !");
             Console.SetCursorPosition(30, 24);
             Console.WriteLine("Merci d'appuyer sur une touche une fois la lecture des règles terminées.");
+            Console.SetCursorPosition(30, 26);
             Console.ReadKey();
 
             Console.Clear();
@@ -253,13 +370,13 @@
             Console.SetCursorPosition(0, 10);
             Console.WriteLine(" ███▄ ▄███▓ ▒█████  ▄▄▄█████▓  ██████                  ▄████  ██▓    ▄▄▄       ▄████▄   ██▓ ▄▄▄       ██▓ ██▀███  ▓█████   ██████    \r\n▓██▒▀█▀ ██▒▒██▒  ██▒▓  ██▒ ▓▒▒██    ▒                 ██▒ ▀█▒▓██▒   ▒████▄    ▒██▀ ▀█  ▓██▒▒████▄    ▓██▒▓██ ▒ ██▒▓█   ▀ ▒██    ▒    \r\n▓██    ▓██░▒██░  ██▒▒ ▓██░ ▒░░ ▓██▄                  ▒██░▄▄▄░▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▒██▒▒██  ▀█▄  ▒██▒▓██ ░▄█ ▒▒███   ░ ▓██▄      \r\n▒██    ▒██ ▒██   ██░░ ▓██▓ ░   ▒   ██▒               ░▓█  ██▓▒██░   ░██▄▄▄▄██ ▒▓▓▄ ▄██▒░██░░██▄▄▄▄██ ░██░▒██▀▀█▄  ▒▓█  ▄   ▒   ██▒   \r\n▒██▒   ░██▒░ ████▓▒░  ▒██▒ ░ ▒██████▒▒               ░▒▓███▀▒░██████▒▓█   ▓██▒▒ ▓███▀ ░░██░ ▓█   ▓██▒░██░░██▓ ▒██▒░▒████▒▒██████▒▒   \r\n░ ▒░   ░  ░░ ▒░▒░▒░   ▒ ░░   ▒ ▒▓▒ ▒ ░                ░▒   ▒ ░ ▒░▓  ░▒▒   ▓▒█░░ ░▒ ▒  ░░▓   ▒▒   ▓▒█░░▓  ░ ▒▓ ░▒▓░░░ ▒░ ░▒ ▒▓▒ ▒ ░   \r\n░  ░      ░  ░ ▒ ▒░     ░    ░ ░▒  ░ ░                 ░   ░ ░ ░ ▒  ░ ▒   ▒▒ ░  ░  ▒    ▒ ░  ▒   ▒▒ ░ ▒ ░  ░▒ ░ ▒░ ░ ░  ░░ ░▒  ░ ░   \r\n░      ░   ░ ░ ░ ▒    ░      ░  ░  ░                 ░ ░   ░   ░ ░    ░   ▒   ░         ▒ ░  ░   ▒    ▒ ░  ░░   ░    ░   ░  ░  ░     \r\n       ░       ░ ░                 ░                       ░     ░  ░     ░  ░░ ░       ░        ░  ░ ░     ░        ░  ░      ░     \r\n                                                                              ░                                                      ");
             Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n\n");
 
-
-            Console.SetCursorPosition(40, 20);
+            Console.SetCursorPosition(60, 22);
             Console.WriteLine("1)    JOUER ");
-            Console.SetCursorPosition(40, 22);
+            Console.SetCursorPosition(60, 24);
             Console.WriteLine("2)    PARAMETRES ");
-            Console.SetCursorPosition(40, 24);
+            Console.SetCursorPosition(60, 26);
             Console.WriteLine("3)    QUITTER ");
 
 
@@ -276,15 +393,15 @@
 
                 do
                 {
-                    Console.SetCursorPosition(40, 28);
+                    Console.SetCursorPosition(60, 30);
                     Console.WriteLine("Dans quel menu voulez-vous aller ?");
 
-                    Console.SetCursorPosition(40, 30);
+                    Console.SetCursorPosition(60, 32);
                     selection = Console.ReadLine();
 
                     if (selection != "1" && selection != "2" && selection != "3")
                     {
-                        Console.SetCursorPosition(40, 32);
+                        Console.SetCursorPosition(60, 34);
                         Console.WriteLine("Saisie incorrecte. Veuillez entrer 1, 2 ou 3.");
                     }
 
@@ -294,12 +411,12 @@
                 {
                     case "1":
                         Console.Clear();
-                        Play(fileName);
+                        Play(fileName,true); // le son est activé par défaut
                         break;
 
                     case "2":
                         Console.Clear();
-                        Settings();
+                        fileName=Settings(fileName);
                         break;
 
                     case "3":
