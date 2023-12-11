@@ -51,14 +51,25 @@
             {
                  sound = false;
             }
+
+            Console.SetCursorPosition(57, 24);
+            Console.WriteLine("Quel est le temps maximum que peut durer une partie ? (en minutes)");
+            Console.SetCursorPosition(57, 25);
+            int tempoTimeGame = int.Parse(Console.ReadLine());
+            Console.SetCursorPosition(57, 26);
+            Console.Write("Combien de temps dispose chaque joueur pour jouer son tour ? "); Console.ForegroundColor = ConsoleColor.DarkRed;Console.Write("( en secondes ) "); Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(57, 27);
+            int tempoTimeTour = int.Parse(Console.ReadLine());
+
+
             Console.Clear();
-            Play(fileName,sound);
+            Play(fileName,sound, tempoTimeGame, tempoTimeTour);
             return fileName;
         }
 
 
 
-        static void Play(string fileName, bool sound)
+        static void Play(string fileName, bool sound,int tempoTimeGame, int tempoTimeTour)
         {
 
 
@@ -102,7 +113,7 @@
 
 
             DateTime HeureDuDebutDeJeu = DateTime.Now;
-            TimeSpan ChronoFinJeu = TimeSpan.FromMinutes(1); // 10 MINUTES
+            TimeSpan ChronoFinJeu = TimeSpan.FromMinutes(tempoTimeGame); // 10 MINUTES DE BASE
             DateTime HeureDuDebutDeTour = DateTime.Now;
 
 
@@ -111,7 +122,7 @@
             while (gameIsFinished == false && DateTime.Now - HeureDuDebutDeJeu < ChronoFinJeu) // CONDITIONS
             {
                 
-                TimeSpan ChronoFinTour = TimeSpan.FromSeconds(10);
+                TimeSpan ChronoFinTour = TimeSpan.FromSeconds(tempoTimeTour); // 60sec de BASE
 
                 //verif qu'il existe au moins 1 mot dans la matrice
 
@@ -151,6 +162,7 @@
                 InstanceDeJeu.PlateauDeJeu.AffichageConsole();
                 Console.WriteLine("");
                 Console.WriteLine("C'est à " + InstanceDeJeu.Joueur1.nom + " de jouer !");
+                InstanceDeJeu.PlateauDeJeu.ToFile("coucou");
 
 
                 while (Console.KeyAvailable==false && DateTime.Now -HeureDuDebutDeTour < ChronoFinTour)
@@ -166,8 +178,8 @@
                        
 
                         Console.WriteLine(InstanceDeJeu.Joueur1.nom + " , merci de rentrer votre mot !");
-                        player1Word = Console.ReadLine();
-
+                        player1Word = Console.ReadLine().ToLower();
+                        
 
 
                         if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player1Word) == null && InstanceDeJeu.Dico.RechercheDichoRecursif(player1Word) == false)
@@ -256,7 +268,7 @@
 
                         
                         Console.WriteLine(InstanceDeJeu.Joueur2.nom + ", merci de rentrer votre mot !");
-                        player2Word = Console.ReadLine();
+                        player2Word = Console.ReadLine().ToLower();
 
 
                         if (InstanceDeJeu.PlateauDeJeu.SearchWordTab(player2Word) == null && InstanceDeJeu.Dico.RechercheDichoRecursif(player2Word) == false)
@@ -326,15 +338,19 @@
 
             Console.SetCursorPosition(10, 25);
 
-            Console.WriteLine("Voulez-vous rejouer ? 1 = Oui |  2 = Non");
+            Console.WriteLine("Voulez-vous rejouer ? 1 = Oui |  2 = Parametre | 3 = Non");
 
             Console.SetCursorPosition(10, 27);
             int selectionReturn = int.Parse(Console.ReadLine());
             if (selectionReturn == 1)
             {
                 Console.Clear();
-                Play(fileName,sound);
-            } else
+                Play(fileName,sound, tempoTimeGame, tempoTimeTour); // 10 et 60 de base
+            } else if (selectionReturn == 2)
+            {
+                Console.Clear();
+                Settings(fileName);
+            } else 
             {
                 Console.Clear();
                 Quit();
@@ -411,7 +427,7 @@
                 {
                     case "1":
                         Console.Clear();
-                        Play(fileName,true); // le son est activé par défaut
+                        Play(fileName,true,10,60); // le son est activé par défaut
                         break;
 
                     case "2":

@@ -30,6 +30,27 @@ namespace ProjetInfoMotsCroises
         }
 
         /// <summary>
+        /// ToFile permet de sauvegarder une matrice plateau dans un fichier afin qu'il puisse être lu plus tard ou utilisé pour une autre partie
+        /// </summary>
+        /// <param name="SaveFileName">Le string pour le fichier /!\ doit déja exister !</param>
+        public void ToFile(string SaveFileName)
+        {
+
+            using (StreamWriter writer = new StreamWriter(SaveFileName+".txt"))
+
+            for (int i=0;i < plateau.GetLength(0); i++)
+                    {
+                for (int j=0;j < plateau.GetLength(1); j++)
+                {
+                        Console.WriteLine("oui");
+                    writer.Write(plateau[i, j]+";");
+                }
+                writer.WriteLine();
+            }
+        }
+
+
+        /// <summary>
         /// Permet de résumer le plateau en un string
         /// </summary>
         /// <returns>string décrivant la matrice</returns>
