@@ -28,7 +28,7 @@
             Console.Clear(); Console.SetCursorPosition(55, 12); Console.Write("Travail effectué par "); Console.ForegroundColor = ConsoleColor.DarkGreen; Console.Write("Pierre-Antoine"); Console.ForegroundColor = ConsoleColor.White; Console.Write(" et "); Console.ForegroundColor = ConsoleColor.DarkGreen; Console.Write("Malo !");  Console.ForegroundColor = ConsoleColor.White;
 
             //Affichage du fichier actuel matrice + pour changer le chemin
-            Console.SetCursorPosition(57, 17); Console.Write("Le fichier actuel de la matrice est "+fileName); Console.SetCursorPosition(0, 18); Console.Write("Quel est le chemin de votre fichier matrice ? (un .csv sera ajouté à la fin, si vous souhaitez une génération aléatoire, merci de simplement mettre n'importe quoi)"); Console.SetCursorPosition(55, 19);
+            Console.SetCursorPosition(57, 17); Console.Write("Le fichier actuel de la matrice est "+fileName); Console.SetCursorPosition(0, 18); Console.Write("Quel est le chemin de votre fichier matrice ? (un .csv sera ajouté à la fin, si vous souhaitez une génération aléatoire, merci simplement mettre une lettre)"); Console.SetCursorPosition(55, 19);
             fileName = Console.ReadLine();
 
             //Son !
@@ -449,10 +449,20 @@
             //Console.SetWindowSize(1880, 1020);
             string fileName = "Test1"; // par défaut
 
-            //Règles
-            Console.SetCursorPosition(10, 20); Console.WriteLine("Ce jeu est jouable à deux, munissez vous d'un compère et préparez vos dictionnaires avant de mener une bataille sanglante pour la victoire !"); Console.SetCursorPosition(10, 21); Console.WriteLine("N'oubliez pas que certains paramètres sont disponible dans la section PARAMETRES du menu principal !"); Console.SetCursorPosition(10, 22);Console.WriteLine("Si a un moment de la partie vous êtes bloqué, merci de rentrer le mot 'QUIT' ! Bon jeu !"); Console.SetCursorPosition(30, 24);
-            Console.WriteLine("Merci d'appuyer sur une touche une fois la lecture des règles terminées."); Console.SetCursorPosition(30, 26); Console.ReadKey();
 
+            string mp3FilePathClapping = "brr.mp3";
+            using (var audioFile = new AudioFileReader(mp3FilePathClapping))
+            using (var outputDevice = new WaveOutEvent())
+            {
+                outputDevice.Init(audioFile);
+                outputDevice.Play();
+                //Règles
+                Console.SetCursorPosition(10, 20); Console.WriteLine("Ce jeu est jouable à deux, munissez vous d'un compère et préparez vos dictionnaires avant de mener une bataille sanglante pour la victoire !"); Console.SetCursorPosition(10, 21); Console.WriteLine("N'oubliez pas que certains paramètres sont disponible dans la section PARAMETRES du menu principal !"); Console.SetCursorPosition(10, 22); Console.WriteLine("Si a un moment de la partie vous êtes bloqué, merci de rentrer le mot 'QUIT' ! Bon jeu !"); Console.SetCursorPosition(30, 24);
+                Console.WriteLine("Merci d'appuyer sur une touche une fois la lecture des règles terminées."); Console.SetCursorPosition(30, 26); Console.ReadKey();
+
+            }
+
+            
 
             //Nom du jeu en ASCII
             Console.Clear();
