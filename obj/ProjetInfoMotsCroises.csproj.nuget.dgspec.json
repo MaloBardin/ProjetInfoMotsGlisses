@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Malob\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj": {}
+    "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\projet info\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Malob\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj": {
+    "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\projet info\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Malob\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
+        "projectUniqueName": "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\projet info\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
         "projectName": "ProjetInfoMotsCroises",
-        "projectPath": "C:\\Users\\Malob\\Documents\\GitHub\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
-        "packagesPath": "C:\\Users\\Malob\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Malob\\Documents\\GitHub\\ProjetInfoMotsGlisses\\obj\\",
+        "projectPath": "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\projet info\\ProjetInfoMotsGlisses\\ProjetInfoMotsCroises.csproj",
+        "packagesPath": "C:\\Users\\Pierre-Antoine\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pierre-Antoine\\OneDrive - De Vinci\\Bureau\\projet info\\ProjetInfoMotsGlisses\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Malob\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pierre-Antoine\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

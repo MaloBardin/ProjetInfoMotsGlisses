@@ -523,7 +523,7 @@ namespace ProjetInfoMotsCroises
                 for (int i = 0; i < MatriceCoords.GetLength(0); i++) // on se balade dans la matrice pour chaque lettre
                 {
 
-                    plateau[MatriceCoords[i, 0], MatriceCoords[i, 1]] = 'ç'; //et pour chaque coordonée d'une lettre ud mot, on la remplace par ç, un caractère temporaire traité plus tard 
+                    plateau[MatriceCoords[i, 0], MatriceCoords[i, 1]] = 'ç'; //et pour chaque coordonée d'une lettre du mot, on la remplace par ç, un caractère temporaire traité plus tard 
 
 
                 }
