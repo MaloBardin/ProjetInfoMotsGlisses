@@ -329,7 +329,7 @@ namespace ProjetInfoMotsCroises
 
 
         /// <summary>
-        /// Cette fonction qui peut paraitre inutile est enfait très important, elle permet d'éviter de repasser sur une lettre déja existante !
+        /// Cette fonction qui peut paraitre inutile est en fait très importante, elle permet d'éviter de repasser sur une lettre déja existante !
         /// Par exemple si nous avions : 
         ///     n 
         ///     a m         Notre code sans cette fonction trouverait le mot maman en utilisant deux fois le a, avec l'appel de celle-ci c'est désormais impossible !
@@ -338,7 +338,7 @@ namespace ProjetInfoMotsCroises
         /// <param name="WordTab">Le tableau de coordonnée de mot</param>
         /// <param name="posXVisée">La position X visée</param>
         /// <param name="posYVisée">La position Y visée</param>
-        /// <returns>un bool, true si jamais il y a un conflit de position (on s'apprete à réutiliser une lettre déja utilisée précédemmet) et false dans le cas contraire</returns>
+        /// <returns>un bool, true si jamais il y a un conflit de position (on s'apprete à réutiliser une lettre déja utilisée précédemment) et false dans le cas contraire</returns>
         public bool BackGroundCheck(int[,] WordTab, int posXVisée, int posYVisée)
         {
             for (int i=0;i<WordTab.GetLength(0);i++) // on parcours l'ensemble des lettres du mot
@@ -353,7 +353,7 @@ namespace ProjetInfoMotsCroises
         }
 
         /// <summary>
-        /// Cette fonction permet, a partir d'un mot en entrée, de vérifier récursivement si il existe dans notre matrice plateau
+        /// Cette fonction permet, à partir d'un mot en entrée, de vérifier récursivement si il existe dans notre matrice plateau
         /// </summary>
         /// <param name="word">le mot recherché</param>
         /// <param name="indiceX">la positionX dans le plateau</param>

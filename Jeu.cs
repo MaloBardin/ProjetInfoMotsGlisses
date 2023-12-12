@@ -32,7 +32,7 @@ namespace ProjetInfoMotsCroises
             this.plateau = plateauDeJeu;
             this.joueur1 = new Joueur();
             this.Joueur2 = new Joueur();
-            
+
             this.sound = true; //son de base activé
             
         }

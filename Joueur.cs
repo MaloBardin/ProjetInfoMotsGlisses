@@ -113,7 +113,7 @@ namespace ProjetInfoMotsCroises
                 {
                     score += tabponderation[mot[i] - 97]; 
                 }
-                Console.WriteLine(score + " scoreeee but");
+                
                 Add_Score((score*mot.Length)/3); // formule pour le calcul du score
                 return ((score * mot.Length)/ 3);
             }

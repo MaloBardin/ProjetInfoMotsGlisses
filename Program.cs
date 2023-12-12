@@ -142,7 +142,7 @@
                 TimeSpan differenceJeu = DateTime.Now - HeureDuDebutDeJeu; // la diff entre le temps actuel et le début
                 TimeSpan tempsRestantJeu = ChronoFinJeu - differenceJeu; // diff entre temps avant fin du tour et l'écart actuel
                 Console.SetCursorPosition(100, 4); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre jeu : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantJeu); Console.ForegroundColor = ConsoleColor.White;
-
+                
                 
                 //permet de vérifier et de compter le temps
                 while (Console.KeyAvailable==false && DateTime.Now -HeureDuDebutDeTour < ChronoFinTour && gameIsFinished==false)
@@ -168,7 +168,11 @@
 
                         //Le tour commence et le joueur1 commence a rentrer son mot
                         Console.SetCursorPosition(0, 38);
+                        Console.Write("                                                                                  "); //pour vider l'emplacement précédent et eviter d'avoir des problemes de texte sur texte
+                        Console.SetCursorPosition(0, 38);
                         Console.WriteLine(InstanceDeJeu.Joueur1.nom + " , merci de rentrer votre mot !");
+                        Console.SetCursorPosition(0, 39);
+                        Console.Write("                                                                                  ");//pour vider l'emplacement précédent et eviter d'avoir des problemes de texte sur texte
                         Console.SetCursorPosition(0, 39);
                         player1Word = Console.ReadLine().ToLower(); //blindage pour éviter les erreurs de frappe avec le ToLower()
                         
@@ -202,6 +206,7 @@
                         {
                             Console.WriteLine("Temps écoulé");
                             sortieImmediate = true;
+                          
                             break;
                         }
 
@@ -215,7 +220,7 @@
                     {
                         //on ajoute les mots et on ajoute le score
                         InstanceDeJeu.Joueur1.CalculScore(player1Word); InstanceDeJeu.Joueur1.Add_Mot(player1Word);
-
+                        
                         //Partie son !
                         string mp3FilePathClapping = "clap.mp3";
                         using (var audioFile = new AudioFileReader(mp3FilePathClapping))
@@ -280,8 +285,9 @@
                     Console.SetCursorPosition(100, 6); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre tour : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantTour); Console.ForegroundColor = ConsoleColor.White;// affichage horloge
                 }
 
-                // On lance le deuxième tour !
-                if (gameIsFinished == false && DateTime.Now-HeureDuDebutDeJeu< ChronoFinJeu && DateTime.Now - HeureDuDebutDeTour < ChronoFinTour){ 
+
+                    // On lance le deuxième tour !
+                    if (gameIsFinished == false && DateTime.Now-HeureDuDebutDeJeu< ChronoFinJeu && DateTime.Now - HeureDuDebutDeTour < ChronoFinTour){ 
 
                     do
                     {
@@ -289,7 +295,11 @@
                         TimeSpan tempsRestantTour = ChronoFinTour - differenceTour; // diff entre temps avant fin du tour et l'écart actuel
                         Console.SetCursorPosition(100, 6); Console.ForegroundColor = ConsoleColor.White; Console.Write("Temps restant pour votre tour : "); Console.ForegroundColor = ConsoleColor.Red; Console.Write(tempsRestantTour); Console.ForegroundColor = ConsoleColor.White;// affichage horloge
                         Console.SetCursorPosition(0, 38);
+                        Console.Write("                                                                                  ");//pour vider l'emplacement précédent et eviter d'avoir des problemes de texte sur texte
+                        Console.SetCursorPosition(0, 38);
                         Console.WriteLine(InstanceDeJeu.Joueur2.nom + " , merci de rentrer votre mot !");
+                        Console.SetCursorPosition(0, 39);
+                        Console.Write("                                                                                  ");//pour vider l'emplacement précédent et eviter d'avoir des problemes de texte sur texte
                         Console.SetCursorPosition(0, 39);
                         player2Word = Console.ReadLine().ToLower(); //blindage pour éviter les erreurs de frappe
 
@@ -333,7 +343,6 @@
                     {
                         InstanceDeJeu.Joueur2.CalculScore(player2Word);
                         InstanceDeJeu.Joueur2.Add_Mot(player2Word);
-
                         //Le son !
                         string mp3FilePathClapping = "clap.mp3";
                         using (var audioFile = new AudioFileReader(mp3FilePathClapping))
@@ -391,8 +400,12 @@
             {
                 Console.SetCursorPosition(50, 30);
                 Console.WriteLine("Le gagnant de cette glaciale partie est : " + InstanceDeJeu.Joueur1.nom + " et son score est de : " + InstanceDeJeu.Joueur1.score);
-            } else
+            }
+            else if (InstanceDeJeu.Joueur1.score == InstanceDeJeu.Joueur2.score)
             {
+                Console.SetCursorPosition(50, 30);
+                Console.WriteLine(InstanceDeJeu.Joueur1.nom + " et " + InstanceDeJeu.Joueur2.nom + " sont à égalité avec un score de : " + InstanceDeJeu.Joueur1.score);
+            } else {                     
                 Console.SetCursorPosition(50, 30);
                 Console.WriteLine("Le gagnant de cette glaciale partie est : " + InstanceDeJeu.Joueur2.nom + " et son score est de : " + InstanceDeJeu.Joueur2.score);
             }
