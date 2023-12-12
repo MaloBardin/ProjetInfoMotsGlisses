@@ -32,17 +32,92 @@
             fileName = Console.ReadLine();
 
             //Son !
-            Console.SetCursorPosition(57, 22); Console.WriteLine("Voulez-vous activer le son ? 1=Oui 2=Non");Console.SetCursorPosition(57, 23);
-            int tempoSound = int.Parse(Console.ReadLine());
-            bool sound;
-            if (tempoSound == 1){sound = true;} else{sound = false;} // condition true/false pour régler le son
+            bool sound = true;
+            string selection = "";
+
+            //selection avec un blindage
+            do
+            {
+                Console.SetCursorPosition(57, 22); Console.Write("                                                                          ");
+                Console.SetCursorPosition(57, 22); Console.WriteLine("Voulez-vous activer le son ? 1=Oui 2=Non"); Console.SetCursorPosition(57, 23);
+
+                Console.SetCursorPosition(57, 23); Console.Write("                                                                          ");
+                Console.SetCursorPosition(57, 23);
+                selection = Console.ReadLine();
+
+                if (selection != "1" && selection != "2")
+                {
+
+                    Console.SetCursorPosition(57, 24);
+                    Console.WriteLine("Saisie incorrecte. Veuillez entrer 1 ou 2");
+                }
+
+            } while (selection != "1" && selection != "2");
+
+            switch (selection)
+            {
+                case "1":
+                    sound = true;
+                    break;
+
+                case "2":
+                    sound = false;
+                    break;
+
+            }
+
+
+
+
+            Console.SetCursorPosition(57, 24); Console.Write("                                                                          ");
+
+
+
 
             //Temps partie & tour
-            Console.SetCursorPosition(57, 24); Console.Write("Quel est le temps maximum que peut durer une partie ? "); Console.ForegroundColor = ConsoleColor.DarkRed; Console.Write("( en minutes )"); Console.ForegroundColor = ConsoleColor.White; 
-            Console.SetCursorPosition(57, 25); int tempoTimeGame = int.Parse(Console.ReadLine());
-            Console.SetCursorPosition(57, 26); Console.Write("Combien de temps dispose chaque joueur pour jouer son tour ? "); Console.ForegroundColor = ConsoleColor.DarkRed;Console.Write("( en secondes ) "); Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(57, 27); int tempoTimeTour = int.Parse(Console.ReadLine());
-
+            Console.SetCursorPosition(57, 24); Console.Write("Quel est le temps maximum que peut durer une partie ? "); Console.ForegroundColor = ConsoleColor.DarkRed; Console.Write("( en minutes )"); Console.ForegroundColor = ConsoleColor.White;
+            int tempoTimeGame;
+            while (1==1) //boucle infinie pour demander tant que c'est pas un int
+            {
+                try
+                {
+                    Console.SetCursorPosition(57, 25);//pour vider si jamais il y a eu un texte avant
+                    Console.Write("                                                                             ");
+                    Console.SetCursorPosition(57, 25);
+                    tempoTimeGame = int.Parse(Console.ReadLine());
+                    break;//on sors du while
+                }
+                catch (FormatException) // si jamais c'est pas un int
+                {
+                    Console.SetCursorPosition(57, 25);//pour vider si jamais il y a eu un texte avant
+                    Console.Write("                                                                             ");
+                    Console.SetCursorPosition(57, 26);
+                    Console.Write("Entrée invalide. Veuillez entrer un nombre entier.");
+                }
+            }
+            Console.SetCursorPosition(57, 26);//pour vider si jamais il y a eu un texte avant
+            Console.Write("                                                                             ");
+            Console.SetCursorPosition(57, 26); Console.Write("Combien de temps dispose chaque joueur pour jouer son tour ? "); Console.ForegroundColor = ConsoleColor.DarkRed; Console.Write("( en secondes ) "); Console.ForegroundColor = ConsoleColor.White;
+            int tempoTimeTour;
+            while (1==1) //boucle infinie pour avoir un int 
+            {
+                try
+                {
+                    Console.SetCursorPosition(57, 27);//pour vider si jamais il y a eu un texte avant
+                    Console.Write("                                                                             ");
+                    Console.SetCursorPosition(57, 27);
+                    tempoTimeTour = int.Parse(Console.ReadLine());
+                    break;
+                }
+                catch (FormatException) //on catch si c'est pas un int
+                {
+                    Console.SetCursorPosition(57, 27);//pour vider si jamais il y a eu un texte avant
+                    Console.Write("                                                                             ");
+                    Console.SetCursorPosition(57, 28);
+                    Console.Write("Entrée invalide. Veuillez entrer un nombre entier.");
+                }
+            }
+            
             //on clear et on lance la partie
             Console.Clear();
             Play(fileName,sound, tempoTimeGame, tempoTimeTour);
@@ -512,7 +587,8 @@
                 {
                     Console.SetCursorPosition(62, 30);
                     Console.WriteLine("Dans quel menu voulez-vous aller ?");
-
+                    Console.SetCursorPosition(65, 32);
+                    Console.Write("                                ");
                     Console.SetCursorPosition(65, 32);
                     selection = Console.ReadLine();
 
