@@ -20,3 +20,4 @@
 => Formule pour le calcul du score = SommeLettre*Mot.Length/3
 
 
+=>  EXO AEQUO !!

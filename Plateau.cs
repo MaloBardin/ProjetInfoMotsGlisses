@@ -128,10 +128,11 @@ namespace ProjetInfoMotsCroises
                         chaine += plateau[i,j]; // on affiche le vértiable caractère
                     }
 
-                    Console.ForegroundColor = ConsoleColor.White;
+                   
                     chaine+=" | "; // petite séparation entre les lettres 
                 }
                 Console.WriteLine(chaine);
+                Console.ForegroundColor = ConsoleColor.White;
                 chaine = "\t\t\t\t\t\t\t\t";
                 if (i < tailleX - 1)
                 {
